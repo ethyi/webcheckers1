@@ -9,7 +9,6 @@ a web micro-framework.
 - Tony Jiang
 - Aubrey Tarmu
 - Ethan Yi
-- MEMBER4
 
 
 ## Prerequisites
