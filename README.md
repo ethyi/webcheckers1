@@ -6,9 +6,9 @@ a web micro-framework.
 
 ## Team
 
-- MEMBER1
-- MEMBER2
-- MEMBER3
+- Tony Jiang
+- Aubrey Tarmu
+- Ethan Yi
 - MEMBER4
 
 
