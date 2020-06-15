@@ -7,7 +7,7 @@ a web micro-framework.
 ## Team
 
 - Ethan Yi
-- Member 2
+- Tony Jiang
 - Member 3
 
 ## Prerequisites
