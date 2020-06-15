@@ -6,7 +6,7 @@ a web micro-framework.
 
 ## Team
 
-- Member 1
+- Ethan Yi
 - Member 2
 - Member 3
 
