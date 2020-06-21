@@ -5,8 +5,14 @@ import spark.*;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+
+/**
+ * The UI Controller to GET the Sign in page.
+ *
+ * @author Ethan Yi ehy5032@rit.edu
+ */
 public class GetSigninRoute implements Route {
-    private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
 
     public GetSigninRoute(final TemplateEngine templateEngine){

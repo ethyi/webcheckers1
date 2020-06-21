@@ -2,6 +2,7 @@ package com.webcheckers.model;
 
 /**
  * Player entity that holds player name
+ * @Ethan Yi ehy5032@rit.edu
  */
 public class Player {
 
