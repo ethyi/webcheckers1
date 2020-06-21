@@ -36,7 +36,6 @@ public class GetSigninRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("GetSigninRoute is invoked.");
 
-
         // render the View
         return templateEngine.render(new ModelAndView(null , "signin.ftl"));
     }
