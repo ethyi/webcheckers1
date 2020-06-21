@@ -7,30 +7,21 @@ public class Player {
 
     // Attributes
 
-    private String playerUser;
-    private String playerPass;
+    private String playerName;
 
     /**
-     * Create Player with username and password
+     * Create Player with username
      * @param user username
-     * @param pass password
      */
-    public Player(String user, String pass){
-        this.playerUser = user;
-        this.playerPass = pass;
+    public Player(String user){
+        this.playerName = user;
     }
 
     /**
      * Return username
      */
     public String getPlayerUser() {
-        return playerUser;
+        return playerName;
     }
 
-    /**
-     * Return password
-     */
-    public String getPlayerPass() {
-        return playerPass;
-    }
 }
