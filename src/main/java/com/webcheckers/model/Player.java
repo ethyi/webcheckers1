@@ -21,7 +21,7 @@ public class Player {
     /**
      * Return username
      */
-    public String getPlayerName() {
+    public String name() {
         return name;
     }
 

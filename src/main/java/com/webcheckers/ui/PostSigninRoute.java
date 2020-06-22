@@ -14,9 +14,11 @@ import java.util.logging.Logger;
 public class PostSigninRoute implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
+    private final PlayerLobby lobby;
 
-    public PostSigninRoute(TemplateEngine templateEngine) {
+    public PostSigninRoute(TemplateEngine templateEngine, PlayerLobby lobby) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        this.lobby = lobby;
         LOG.config("PostSigninRoute is initialized.");
     }
 
@@ -42,10 +44,13 @@ public class PostSigninRoute implements Route {
             vm.put("message", quote_error);
             return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
         }
-
+        Session session = request.session();
+        lobby.storeCurrentPlayer(username, session);
         vm.put("title", "Welcome "+username+"!");
         vm.put("message", Message.info("Welcome to the world of online Checkers."));
+        vm.put("names", session.attribute("names"));
         vm.put("currentUser", username);
+
         return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 }

@@ -20,6 +20,16 @@
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
 
+    <#if names??>
+        <ol>
+        <#list names as n>
+            <li>${n}</li>
+        </#list>
+        </ol>
+    </#if>
+
+
+
     <!-- TODO: future content on the Home:
             to start games,
             spectating active games,
