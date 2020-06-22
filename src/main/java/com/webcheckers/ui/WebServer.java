@@ -154,6 +154,7 @@ public class WebServer {
 
     post(SIGNOUT_URL, new GetSignoutRoute(templateEngine,lobby));
     //
+
     LOG.config("WebServer is initialized.");
   }
 
