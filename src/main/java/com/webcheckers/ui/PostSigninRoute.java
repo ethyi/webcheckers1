@@ -4,7 +4,7 @@ import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
-import sun.text.normalizer.NormalizerBase;
+//import sun.text.normalizer.NormalizerBase;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -151,7 +151,7 @@ public class WebServer {
     get(SIGNIN_URL, new GetSigninRoute(templateEngine));
     get(GAME_URL, new GetSigninRoute(templateEngine));
     post(SIGNIN_URL, new PostSigninRoute(templateEngine));
-    get(SIGNOUT_URL, new GetSignoutRoute(templateEngine));
+    post(SIGNOUT_URL, new GetSignoutRoute(templateEngine));
     //
     LOG.config("WebServer is initialized.");
   }

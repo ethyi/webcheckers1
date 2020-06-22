@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.model.Player;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -47,13 +48,14 @@ public class GetGameRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         LOG.finer("GetHomeRoute is invoked.");
+        Player player = new Player("t");
         //
         Map<String, Object> vm = new HashMap<>();
         vm.put("title", "Welcome!");
 
         // display a user message in the Home page
         vm.put("message", WELCOME_MSG);
-
+        vm.put("currentUser", player);
         // render the View
         return templateEngine.render(new ModelAndView(vm , "game.ftl"));
     }

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
  * The UI Controller to GET the Sign in page.
  *
  * @author Ethan Yi ehy5032@rit.edu
+ * @author Tony Jiang tj2561@rit.edu
  */
 public class GetSigninRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());
