@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class PlayerLobby {
-    private Player currentUser;
     private List playerList;
+    private int numPlayers;
 
 
     public PlayerLobby(){
@@ -21,18 +21,36 @@ public class PlayerLobby {
     public void storeCurrentPlayer(String name, Session session) {
         session.attribute("currentUser", new Player(name));
         List<String> names = session.attribute("names");
-        this.playerList = names;
         if (names == null) {
             names = new ArrayList<>();
-            session.attribute("names", names);
         }
         names.add(name);
+        session.attribute("names", names);
+
+        this.playerList = session.attribute("names");
+
         if (session.attribute("numPlayers") != null) {
             int numPlayers = session.attribute("numPlayers");
-            numPlayers += 1;
+            session.attribute("numPlayers", numPlayers+1);
         } else {
-            session.attribute("numPlayers", 0);
+            session.attribute("numPlayers", 1);
         }
+        this.numPlayers = session.attribute("numPlayers");
+    }
+
+    public void removeCurrentPlayer(Session session){
+        Player player = session.attribute("currentUser");
+        session.removeAttribute("currentUser");
+        List<String> names = session.attribute("names");
+        names.remove(player.name());
+        session.attribute("names", names);
+
+        int numPlayers = session.attribute("numPlayers");
+        numPlayers-=1;
+        session.attribute("numPlayers", numPlayers);
+
+        this.playerList = session.attribute("names");
+        this.numPlayers = session.attribute("numPlayers");
     }
 
     public boolean contains(String name) {
@@ -45,7 +63,9 @@ public class PlayerLobby {
     }
 
 
-
+    public int getNumPlayers(){
+        return this.numPlayers;
+    }
 
 
 }

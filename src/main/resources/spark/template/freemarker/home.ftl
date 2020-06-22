@@ -28,6 +28,9 @@
         </ol>
     </#if>
 
+    <#if numPlayers??>
+        ${numPlayers}
+    </#if>
 
 
 

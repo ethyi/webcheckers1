@@ -52,7 +52,7 @@ public class PostSigninRoute implements Route {
         lobby.storeCurrentPlayer(username, session);
 
 
-        vm.put("title", "Welcome "+username+"!");
+        vm.put("title", "Welcome!");
         vm.put("message", Message.info("Welcome to the world of online Checkers."));
         vm.put("names", session.attribute("names"));
         vm.put("currentUser", username);
