@@ -27,6 +27,7 @@ public class GetSignoutRoute implements Route {
 
     }
 
+
     /**
      * Render the WebCheckers Sign out page.
      *
