@@ -34,18 +34,24 @@ public class PostSigninRoute implements Route {
         LOG.finer("PostSigninRoute is invoked.");
         final String username = request.queryParams("username");
 
-        //if (playerLobby.validSignin(username)){
-        //    return templateEngine.render(new ModelAndView(null, "game.ftl"));
-        //}
-
         Map<String, Object> vm = new HashMap<>();
+        Session session = request.session();
+
         if (username.contains("\"")){
             Message quote_error = Message.error("Double quote is not a valid character in a Player's name.");
             vm.put("message", quote_error);
             return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
         }
-        Session session = request.session();
+
+        else if (lobby.contains(username)){
+            Message quote_error = Message.error("Username is in use.");
+            vm.put("message", quote_error);
+            return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        }
+
         lobby.storeCurrentPlayer(username, session);
+
+
         vm.put("title", "Welcome "+username+"!");
         vm.put("message", Message.info("Welcome to the world of online Checkers."));
         vm.put("names", session.attribute("names"));

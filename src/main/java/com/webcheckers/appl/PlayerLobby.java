@@ -12,27 +12,39 @@ import java.util.Map;
 
 public class PlayerLobby {
     private Player currentUser;
+    private List playerList;
+
 
     public PlayerLobby(){
     }
 
-    public void storeCurrentPlayer(String name, Session session){
+    public void storeCurrentPlayer(String name, Session session) {
         session.attribute("currentUser", new Player(name));
         List<String> names = session.attribute("names");
-        if (names ==null){
+        this.playerList = names;
+        if (names == null) {
             names = new ArrayList<>();
-            session.attribute("names",names);
+            session.attribute("names", names);
         }
         names.add(name);
-        if (session.attribute("numPlayers")!=null){
+        if (session.attribute("numPlayers") != null) {
             int numPlayers = session.attribute("numPlayers");
-            numPlayers+=1;
+            numPlayers += 1;
+        } else {
+            session.attribute("numPlayers", 0);
         }
-        else{
-            session.attribute("numPlayers",0);
-        }
-
     }
+
+    public boolean contains(String name) {
+        if (playerList == null) {
+            return false;
+        } else if (playerList.contains(name)) {
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 
