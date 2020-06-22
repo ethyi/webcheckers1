@@ -8,6 +8,7 @@
                 <input type="text" name="username"></input>
             </p>
             <input type="submit" value = "Submit"/>
+            <#include "message.ftl" />
         </form>
     </body>
 </html>

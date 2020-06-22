@@ -1,18 +1,23 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Player;
+import com.webcheckers.util.Message;
 import spark.*;
+import sun.text.normalizer.NormalizerBase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
 public class PostSigninRoute implements Route {
-    private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.GetSigninRoute.class.getName());
+    private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
 
-    public PostSigninRoute(final TemplateEngine templateEngine) {
-        Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-        this.templateEngine = templateEngine;
-        LOG.config("GetSigninRoute is initialized.");
+    public PostSigninRoute(TemplateEngine templateEngine) {
+        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        LOG.config("PostSigninRoute is initialized.");
     }
 
     /**
@@ -24,10 +29,23 @@ public class PostSigninRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) {
-        LOG.finer("GetSigninRoute is invoked.");
+        LOG.finer("PostSigninRoute is invoked.");
+        final String username = request.queryParams("username");
 
+        //if (playerLobby.validSignin(username)){
+        //    return templateEngine.render(new ModelAndView(null, "game.ftl"));
+        //}
 
-        // render the View
-        return templateEngine.render(new ModelAndView(null, "game.ftl"));
+        Map<String, Object> vm = new HashMap<>();
+        if (username.contains("\"")){
+            Message quote_error = Message.error("Double quote is not a valid character in a Player's name.");
+            vm.put("message", quote_error);
+            return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        }
+
+        vm.put("title", "Welcome "+username+"!");
+        vm.put("message", Message.info("Welcome to the world of online Checkers."));
+        vm.put("currentUser", username);
+        return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
 }
