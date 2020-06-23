@@ -17,9 +17,19 @@ public class GameView implements Iterable<Row>{
         setupBoard();
     }
     public void setupBoard() {
-        boolean valid = true;
-        for(int i =0; i<8; i++) {
-            board.add(new Row(i, valid));
+        boolean valid = false;
+        for(int i =0; i<3; i++) {
+            board.add(new Row(i, valid, Piece.Color.WHITE));
+            valid = !valid;
+        }
+
+        for(int j = 3; j < 5; j++) {
+            board.add(new Row(j, valid));
+            valid = !valid;
+        }
+
+        for(int i =5; i<8; i++) {
+            board.add(new Row(i, valid, Piece.Color.RED));
             valid = !valid;
         }
     }

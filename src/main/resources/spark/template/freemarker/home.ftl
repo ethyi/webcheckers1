@@ -25,9 +25,11 @@
         <form action ="/game" method="POST">
             <p>Who do you wish to challenge?</p>
             <#list names as n>
+                <#if n !=currentUser>
                 <p>
                     <input type = "radio" name="challenger" value="${n}">${n}</input>
                 </p>
+                </#if>
             </#list>
             <input type="submit" value ="Submit" />
         </form>

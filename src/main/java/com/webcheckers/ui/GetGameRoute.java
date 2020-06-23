@@ -54,7 +54,7 @@ public class GetGameRoute implements Route {
 
 
 
-    final       Player player = httpSession.attribute(GetHomeRoute.CURRENT_PLAYER);
+        final Player player = httpSession.attribute(GetHomeRoute.CURRENT_PLAYER);
         final Player otherPlayer = lobby.getPlayer("dsa");
 //     final    Player otherPlayer = httpSession.attribute("dsa");
         //final    Player otherPlayer = lobby.getPlayer("dsa");
