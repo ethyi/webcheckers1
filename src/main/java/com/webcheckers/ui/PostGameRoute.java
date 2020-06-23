@@ -49,14 +49,13 @@ public class PostGameRoute implements Route {
         final Player otherPlayer = lobby.getPlayer(otherString);
 
 
-        Map<String, Object> vm = new HashMap<>();
-
         if (!otherPlayer.inGame()) {
             otherPlayer.setChallenged(true, player);
             player.setGame(true);
             otherPlayer.setGame(true);
 
             GameView board =new GameView(player, otherPlayer);
+            Map<String, Object> vm = new HashMap<>();
             vm.put("board", board);
 
             vm.put("currentUser",player);
@@ -71,7 +70,12 @@ public class PostGameRoute implements Route {
 
         } else {
             Message quote_error = Message.error("That person is already in a game. Choose someone else.");
+            Map<String, Object> vm = new HashMap<>();
+            vm.put("title", "Welcome!");
+            vm.put("numPlayers", lobby.getNumPlayers());
             vm.put("message", quote_error);
+            vm.put("names", lobby.getPlayers().keySet());
+            vm.put("currentUser", player);
             return templateEngine.render(new ModelAndView(vm, "home.ftl"));
         }
 
