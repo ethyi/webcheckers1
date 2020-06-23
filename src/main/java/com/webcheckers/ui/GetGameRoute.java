@@ -52,10 +52,12 @@ public class GetGameRoute implements Route {
 
         final Session httpSession = request.session();
 
-    final       Player player = httpSession.attribute(GetHomeRoute.CURRENT_PLAYER);
 
+
+    final       Player player = httpSession.attribute(GetHomeRoute.CURRENT_PLAYER);
+        final Player otherPlayer = lobby.getPlayer("dsa");
 //     final    Player otherPlayer = httpSession.attribute("dsa");
-        final    Player otherPlayer = lobby.getPlayer("dsa");
+        //final    Player otherPlayer = lobby.getPlayer("dsa");
         otherPlayer.setChallenged(true);
         Map<String, Object> vm = new HashMap<>();
         GameView board =new GameView(player, otherPlayer);

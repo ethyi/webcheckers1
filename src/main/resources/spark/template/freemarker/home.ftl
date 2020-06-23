@@ -21,13 +21,17 @@
     <#include "message.ftl" />
 
     <#if names??>
-        <ol>
-        <#list names as n>
-            <form id="challenge" action="/game" method="GET">
-            <button name="challenge ${n}">I challenge ${n}</button>
-            </form>
-        </#list>
-        </ol>
+
+        <form action ="/game" method="POST">
+            <p>Who do you wish to challenge?</p>
+            <#list names as n>
+                <p>
+                    <input type = "radio" name="challenger" value="${n}">${n}</input>
+                </p>
+            </#list>
+            <input type="submit" value ="Submit" />
+        </form>
+
     </#if>
 
     <#if numPlayers??>
