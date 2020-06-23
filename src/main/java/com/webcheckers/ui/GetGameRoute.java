@@ -22,6 +22,12 @@ public class GetGameRoute implements Route {
 
     private final TemplateEngine templateEngine;
 
+    private enum mode {
+        PLAY,
+        SPECTATOR,
+        REPLAY
+    }
+
     /**
      * Create the Spark Route (UI controller) to handle all {@code GET /} HTTP requests.
      *
@@ -69,7 +75,7 @@ public class GetGameRoute implements Route {
         vm.put("redPlayer",player);
         vm.put("whitePlayer",otherPlayer);
         vm.put("activeColor","red");
-        vm.put("viewMode","player");
+        vm.put("viewMode",mode.PLAY);
 
 
 

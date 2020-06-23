@@ -32,6 +32,11 @@ public class PostGameRoute implements Route {
         LOG.config("PostGameRoute is initialized.");
     }
 
+    private enum mode {
+        PLAY,
+        SPECTATOR,
+        REPLAY
+    }
     /**
      * Render the WebCheckers Game page.
      *
@@ -64,7 +69,7 @@ public class PostGameRoute implements Route {
             vm.put("redPlayer",player);
             vm.put("whitePlayer",otherPlayer);
             vm.put("activeColor","red");
-            vm.put("viewMode","player");
+            vm.put("viewMode",mode.PLAY);
 
             return templateEngine.render(new ModelAndView(vm , "game.ftl"));
 

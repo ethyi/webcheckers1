@@ -45,6 +45,12 @@ public class GetHomeRoute implements Route {
     LOG.config("GetHomeRoute is initialized.");
   }
 
+  private enum mode {
+    PLAY,
+    SPECTATOR,
+    REPLAY
+  }
+
   /**
    * Render the WebCheckers Home page.
    *
@@ -89,7 +95,7 @@ public class GetHomeRoute implements Route {
       map.put("redPlayer",challenger);
       map.put("whitePlayer",player);
       map.put("activeColor","white");
-      map.put("viewMode","player");
+      map.put("viewMode",mode.PLAY);
 
       return templateEngine.render(new ModelAndView(map , "game.ftl"));
     }

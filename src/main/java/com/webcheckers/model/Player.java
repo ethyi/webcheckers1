@@ -12,6 +12,7 @@ public class Player {
     private String name;
     private Player challenger;
     private boolean inGame;
+    private boolean isP1;
 
     /**
      * Create Player with username
@@ -20,8 +21,16 @@ public class Player {
     public Player(String name){
         this.name = name;
         this.inGame = false;
+        this.isP1 = false;
     }
 
+    public void setP1() {
+        this.isP1 = true;
+    }
+
+    public boolean isP1() {
+        return this.isP1;
+    }
     /**
      * Return username
      */

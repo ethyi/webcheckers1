@@ -16,6 +16,8 @@ public class GameView implements Iterable<Row>{
         this.p1 = p1;
         this.p2 = p2;
         this.board = new ArrayList<>();
+        this.p1board = new ArrayList<>();
+        this.p2board = new ArrayList<>();
 
         setupBoard();
     }
