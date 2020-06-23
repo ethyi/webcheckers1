@@ -58,7 +58,7 @@ public class GetGameRoute implements Route {
         final Player otherPlayer = lobby.getPlayer("dsa");
 //     final    Player otherPlayer = httpSession.attribute("dsa");
         //final    Player otherPlayer = lobby.getPlayer("dsa");
-        otherPlayer.setChallenged(true);
+        otherPlayer.setChallenged(true, player);
         Map<String, Object> vm = new HashMap<>();
         GameView board =new GameView(player, otherPlayer);
         vm.put("board", board);

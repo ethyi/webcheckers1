@@ -34,13 +34,11 @@ public class PostGameRoute implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("PostGameRoute is invoked.");
         String otherString = request.queryParams("challenger");
-        System.out.println(otherString);
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
         final Player otherPlayer = lobby.getPlayer(otherString);
-//     final    Player otherPlayer = httpSession.attribute("dsa");
-        //final    Player otherPlayer = lobby.getPlayer("dsa");
-        otherPlayer.setChallenged(true);
+
+        otherPlayer.setChallenged(true, player);
         Map<String, Object> vm = new HashMap<>();
         GameView board =new GameView(player, otherPlayer);
         vm.put("board", board);

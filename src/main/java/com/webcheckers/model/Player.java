@@ -10,6 +10,7 @@ public class Player {
     // Attributes
 
     private String name;
+    private Player challenger;
 
     /**
      * Create Player with username
@@ -24,6 +25,19 @@ public class Player {
      */
     public String getName() {
         return name;
+    }
+
+    public void setChallenged(boolean challenged, Player challenger) {
+        this.isChallenged = challenged;
+        this.challenger = challenger;
+    }
+
+    public boolean isChallenged() {
+        return this.isChallenged;
+    }
+
+    public Player getChallenger(){
+        return this.challenger;
     }
 
     @Override
@@ -48,11 +62,5 @@ public class Player {
         return name.hashCode();
     }
 
-    public boolean isChallenged() {
-        return isChallenged;
-    }
 
-    public void setChallenged(boolean challenged) {
-        isChallenged = challenged;
-    }
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.model.GameView;
 import com.webcheckers.model.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.*;
@@ -67,13 +68,26 @@ public class GetHomeRoute implements Route {
         vm.put("message", OTHER_PLAYERS_MSG);
         vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
         vm.put("currentUser", player);
-        System.out.println(player.getName());
 
     } else {
       vm.put("message", WELCOME_MSG);
     }
     if(player!=null&&player.isChallenged()){
-      response.redirect("/game");
+
+      Map<String, Object> map = new HashMap<>();
+      Player challenger = player.getChallenger();
+      GameView board =new GameView(challenger, player);
+      map.put("board", board);
+
+      map.put("currentUser",player);
+      map.put("title", "Checkers");
+      map.put("gameID","1");
+      map.put("redPlayer",challenger);
+      map.put("whitePlayer",player);
+      map.put("activeColor","white");
+      map.put("viewMode","player");
+
+      return templateEngine.render(new ModelAndView(map , "game.ftl"));
     }
     // render the View
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
