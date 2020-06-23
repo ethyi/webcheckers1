@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.*;
 
@@ -20,9 +20,12 @@ public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+  private static final Message OTHER_PLAYERS_MSG = Message.info("Select a player to start a game");
+
+  static final String CURRENT_PLAYER = "currentPlayer";
+  private final String OTHER_PLAYERS = "names";
 
   private final TemplateEngine templateEngine;
-
   private final PlayerLobby lobby;
 
   /**
@@ -52,19 +55,25 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
     //
+    final Session session = request.session();
+
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", "Welcome!");
-    final Session session = request.session();
-    final Player player = session.attribute("currentUser");
-    if(player!=null){
-      final  String username = player.name();
-      vm.put("currentUser", username);
+
+    vm.put("numPlayers", lobby.getNumPlayers());
+
+    if(session.attribute(CURRENT_PLAYER) != null) {
+        final Player player = session.attribute(CURRENT_PLAYER);
+        vm.remove("message", WELCOME_MSG);
+        vm.put("message", OTHER_PLAYERS_MSG);
+        vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
+        vm.put("currentUser", player);
+
+
+    } else {
+      vm.put("message", WELCOME_MSG);
     }
-    // display a user message in the Home page
-    vm.put("message", WELCOME_MSG);
-    vm.put("names", session.attribute("names"));
-    String numString = lobby.getNumPlayers() + " players online.";
-    vm.put("numPlayers", numString);
+
     // render the View
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
   }

@@ -21,7 +21,7 @@ public class Player {
     /**
      * Return username
      */
-    public String name() {
+    public String getName() {
         return name;
     }
 
@@ -35,6 +35,11 @@ public class Player {
         }
         final Player object = (Player) obj;
         return this.name.equals(object.name);
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 
     @Override

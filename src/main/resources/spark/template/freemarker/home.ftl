@@ -29,7 +29,7 @@
     </#if>
 
     <#if numPlayers??>
-        ${numPlayers}
+        Current Players: ${numPlayers}
     </#if>
 
 

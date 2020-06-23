@@ -1,11 +1,14 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.model.Player;
 import spark.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
+
+import static spark.Spark.halt;
 
 
 /**
@@ -36,11 +39,21 @@ public class GetSigninRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) {
+        final Session httpSession = request.session();
         LOG.finer("GetSigninRoute is invoked.");
-
         Map<String, Object> vm = new HashMap<>();
+        Player player = httpSession.attribute(GetHomeRoute.CURRENT_PLAYER);
+
+        vm.put("title", "Sign In");
+
+        if(player == null) {
+            return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
+        } else {
+            response.redirect(WebServer.HOME_URL);
+            halt();
+            return null;
+        }
 
         // render the View
-        return templateEngine.render(new ModelAndView(null , "signin.ftl"));
     }
 }
