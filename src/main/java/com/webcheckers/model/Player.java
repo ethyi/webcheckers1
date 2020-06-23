@@ -11,6 +11,7 @@ public class Player {
 
     private String name;
     private Player challenger;
+    private boolean inGame;
 
     /**
      * Create Player with username
@@ -18,6 +19,7 @@ public class Player {
      */
     public Player(String name){
         this.name = name;
+        this.inGame = false;
     }
 
     /**
@@ -25,6 +27,14 @@ public class Player {
      */
     public String getName() {
         return name;
+    }
+
+    public boolean inGame() {
+        return this.inGame;
+    }
+
+    public void setGame(boolean status) {
+        this.inGame = status;
     }
 
     public void setChallenged(boolean challenged, Player challenger) {

@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.model.*;
+import com.webcheckers.util.Message;
 import spark.*;
 
 import java.util.HashMap;
@@ -9,6 +10,8 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
+
+import static spark.Spark.halt;
 
 
 public class PostGameRoute implements Route {
@@ -38,22 +41,32 @@ public class PostGameRoute implements Route {
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
         final Player otherPlayer = lobby.getPlayer(otherString);
 
-        otherPlayer.setChallenged(true, player);
+
         Map<String, Object> vm = new HashMap<>();
-        GameView board =new GameView(player, otherPlayer);
-        vm.put("board", board);
 
-        vm.put("currentUser",player);
-        vm.put("title", "Checkers");
-        vm.put("gameID","1");
-        vm.put("redPlayer",player);
-        vm.put("whitePlayer",otherPlayer);
-        vm.put("activeColor","red");
-        vm.put("viewMode","player");
+        if (!otherPlayer.inGame()) {
+            otherPlayer.setChallenged(true, player);
+            player.setGame(true);
+            otherPlayer.setGame(true);
 
+            GameView board =new GameView(player, otherPlayer);
+            vm.put("board", board);
 
+            vm.put("currentUser",player);
+            vm.put("title", "Checkers");
+            vm.put("gameID","1");
+            vm.put("redPlayer",player);
+            vm.put("whitePlayer",otherPlayer);
+            vm.put("activeColor","red");
+            vm.put("viewMode","player");
 
-        return templateEngine.render(new ModelAndView(vm , "game.ftl"));
+            return templateEngine.render(new ModelAndView(vm , "game.ftl"));
+
+        } else {
+            Message quote_error = Message.error("That person is already in a game. Choose someone else.");
+            vm.put("message", quote_error);
+            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        }
 
     }
 }
