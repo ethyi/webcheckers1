@@ -23,7 +23,7 @@
     <#if names??>
         <ol>
         <#list names as n>
-            <li>${n}</li>
+            <button class="challenge ${n}">I challenge ${n}</button>
         </#list>
         </ol>
     </#if>
