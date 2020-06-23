@@ -1,8 +1,10 @@
 package com.webcheckers.model;
 
 /**
- * Player entity that holds player name
- * @Ethan Yi ehy5032@rit.edu
+ * Player entity that holds each player's data
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
  */
 public class Player {
     private boolean isChallenged;
@@ -24,10 +26,15 @@ public class Player {
         this.isP1 = false;
     }
 
+    /**
+     * Set if player is first player
+     */
     public void setP1() {
         this.isP1 = true;
     }
-
+    /**
+     * Return if first player
+     */
     public boolean isP1() {
         return this.isP1;
     }
@@ -37,24 +44,34 @@ public class Player {
     public String getName() {
         return name;
     }
-
+    /**
+     * Return if in game
+     */
     public boolean inGame() {
         return this.inGame;
     }
-
+    /**
+     * Set player game state
+     */
     public void setGame(boolean status) {
         this.inGame = status;
     }
-
+    /**
+     * Set player challenge state and challenger
+     */
     public void setChallenged(boolean challenged, Player challenger) {
         this.isChallenged = challenged;
         this.challenger = challenger;
     }
-
+    /**
+     * Return if challenged
+     */
     public boolean isChallenged() {
         return this.isChallenged;
     }
-
+    /**
+     * Return challenger
+     */
     public Player getChallenger(){
         return this.challenger;
     }

@@ -1,7 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.model.Player;
-import com.webcheckers.model.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.util.Message;
 import spark.*;
 //import sun.text.normalizer.NormalizerBase;
@@ -47,6 +47,7 @@ public class PostSigninRoute implements Route {
         vm.put("title", "Sign In");
         final Session session = request.session();
         Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
+
         if (player == null) {
             String username = request.queryParams("username");
             if (username.contains("\"")) {

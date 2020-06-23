@@ -1,5 +1,12 @@
 package com.webcheckers.model;
 
+/**
+ * Space entity that holds space data in game board.
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ *
+ */
 public class Space {
     private int cellIdx;
     private Piece piece;

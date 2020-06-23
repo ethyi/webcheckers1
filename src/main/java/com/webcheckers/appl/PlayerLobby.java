@@ -1,9 +1,15 @@
-package com.webcheckers.model;
+package com.webcheckers.appl;
 
 import com.webcheckers.model.Player;
 
 import java.util.HashMap;
-
+/**
+ * Application tier Player Lobby that holds a database of all players and their attributes.
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ *
+ */
 public class PlayerLobby{
     // list of all players signed in
     private HashMap<String, Player> players;
@@ -33,6 +39,10 @@ public class PlayerLobby{
         players.remove(name);
     }
 
+    /**
+     * Creates new Player object with username and puts into hashmap with username as key.
+     * @param username player name to be added
+     */
     public synchronized void addPlayer(String username){
         Player newPlayer = new Player(username);
         this.players.put(username, newPlayer);

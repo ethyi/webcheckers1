@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.model.GameView;
-import com.webcheckers.model.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
 import spark.*;
 
@@ -73,7 +73,8 @@ public class GetHomeRoute implements Route {
 
     vm.put("numPlayers", lobby.getNumPlayers());
     final Player player = session.attribute(CURRENT_PLAYER);
-    if(player != null) {
+
+    if(player != null) { // displays opponents
         vm.remove("message", WELCOME_MSG);
         vm.put("message", OTHER_PLAYERS_MSG);
         vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
@@ -82,7 +83,8 @@ public class GetHomeRoute implements Route {
     } else {
       vm.put("message", WELCOME_MSG);
     }
-    if(player!=null&&player.isChallenged()){
+
+    if(player!=null&&player.isChallenged()){ // if challenged, render gameboard
 
       Map<String, Object> map = new HashMap<>();
       Player challenger = player.getChallenger();

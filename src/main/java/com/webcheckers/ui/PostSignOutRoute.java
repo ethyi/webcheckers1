@@ -1,7 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.model.Player;
-import com.webcheckers.model.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby;
 import spark.*;
 
 import java.util.HashMap;
@@ -37,6 +37,14 @@ public class PostSignOutRoute implements Route {
 
     }
 
+
+    /**
+     * Render the WebCheckers Sign Out page.
+     *
+     * @param request  the HTTP request
+     * @param response the HTTP response
+     * @return the rendered HTML for the Sign out page
+     */
     @Override
     public Object handle(Request request, Response response){
 

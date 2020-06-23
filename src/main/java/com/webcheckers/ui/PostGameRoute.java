@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 import com.webcheckers.model.Player;
-import com.webcheckers.model.PlayerLobby;
+import com.webcheckers.appl.PlayerLobby;
 
 import static spark.Spark.halt;
 

@@ -4,13 +4,20 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * GameBoard entity that holds board data.
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ *
+ */
 public class GameView implements Iterable<Row>{
     private Player p1;
     private Player p2;
     private List<Row> board;
     private List<Row> p1board;
     private List<Row> p2board;
+
 
     public GameView(Player p1, Player p2) {
         this.p1 = p1;

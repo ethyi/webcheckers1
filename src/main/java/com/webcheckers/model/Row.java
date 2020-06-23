@@ -3,7 +3,13 @@ package com.webcheckers.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * Row entity that helps GameView store data
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ *
+ */
 public class Row implements Iterable<Space> {
     private int index;
     private List<Space> space;
