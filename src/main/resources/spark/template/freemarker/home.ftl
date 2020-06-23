@@ -24,7 +24,7 @@
         <ol>
         <#list names as n>
             <form id="challenge" action="/game" method="GET">
-            <button class="challenge ${n}">I challenge ${n}</button>
+            <button name="challenge ${n}">I challenge ${n}</button>
             </form>
         </#list>
         </ol>

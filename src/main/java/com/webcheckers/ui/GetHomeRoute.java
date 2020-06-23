@@ -61,19 +61,20 @@ public class GetHomeRoute implements Route {
     vm.put("title", "Welcome!");
 
     vm.put("numPlayers", lobby.getNumPlayers());
-
-    if(session.attribute(CURRENT_PLAYER) != null) {
-        final Player player = session.attribute(CURRENT_PLAYER);
+    final Player player = session.attribute(CURRENT_PLAYER);
+    if(player != null) {
         vm.remove("message", WELCOME_MSG);
         vm.put("message", OTHER_PLAYERS_MSG);
         vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
         vm.put("currentUser", player);
-
+        System.out.println(player.getName());
 
     } else {
       vm.put("message", WELCOME_MSG);
     }
-
+    if(player!=null&&player.isChallenged()){
+      response.redirect("/game");
+    }
     // render the View
     return templateEngine.render(new ModelAndView(vm , "home.ftl"));
   }

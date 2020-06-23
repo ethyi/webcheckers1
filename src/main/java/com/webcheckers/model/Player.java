@@ -5,6 +5,7 @@ package com.webcheckers.model;
  * @Ethan Yi ehy5032@rit.edu
  */
 public class Player {
+    private boolean isChallenged;
 
     // Attributes
 
@@ -45,5 +46,13 @@ public class Player {
     @Override
     public int hashCode(){
         return name.hashCode();
+    }
+
+    public boolean isChallenged() {
+        return isChallenged;
+    }
+
+    public void setChallenged(boolean challenged) {
+        isChallenged = challenged;
     }
 }
