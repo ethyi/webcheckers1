@@ -11,6 +11,14 @@ import java.util.logging.Logger;
 
 import static spark.Spark.halt;
 
+/**
+ * The UI controller to post the signout.
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ *
+ */
+
 public class PostSignOutRoute implements Route {
 
     private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());

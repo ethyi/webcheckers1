@@ -16,6 +16,7 @@ import static spark.Spark.halt;
  *
  * @author Ethan Yi ehy5032@rit.edu
  * @author Tony Jiang tj2561@rit.edu
+ * @author Aubrey Tarmu
  */
 public class GetSigninRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());

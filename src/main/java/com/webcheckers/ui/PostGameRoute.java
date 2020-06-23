@@ -13,6 +13,13 @@ import com.webcheckers.model.PlayerLobby;
 
 import static spark.Spark.halt;
 
+/**
+ *The UI controller to post the game route.
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ *
+ */
 
 public class PostGameRoute implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
