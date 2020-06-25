@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.webcheckers.model.GameView;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import spark.*;
 
@@ -88,7 +89,9 @@ public class GetHomeRoute implements Route {
 
       Map<String, Object> map = new HashMap<>();
       Player challenger = player.getChallenger();
-      GameView board =new GameView(challenger, player);
+      GameView board =new GameView(challenger, player, Piece.Color.WHITE);
+      player.setColor(Piece.Color.WHITE);
+
       map.put("board", board);
 
       map.put("currentUser",player);

@@ -15,7 +15,7 @@ public class Player {
     private Player challenger;
     private boolean inGame;
     private boolean isP1;
-
+    private Piece.Color color;
     /**
      * Create Player with username
      * @param name username
@@ -31,6 +31,7 @@ public class Player {
      */
     public void setP1() {
         this.isP1 = true;
+
     }
     /**
      * Return if first player
@@ -44,6 +45,15 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public Piece.Color getColor() {
+        return color;
+    }
+
+    public void setColor(Piece.Color color) {
+        this.color = color;
+    }
+
     /**
      * Return if in game
      */

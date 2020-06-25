@@ -58,8 +58,9 @@ public class PostGameRoute implements Route {
             otherPlayer.setChallenged(true, player);
             player.setGame(true);
             otherPlayer.setGame(true);
-
-            GameView board =new GameView(player, otherPlayer);
+            player.setP1();
+            GameView board =new GameView(player, otherPlayer, Piece.Color.RED);
+            player.setColor(Piece.Color.RED);
             Map<String, Object> vm = new HashMap<>();
             vm.put("board", board);
 
@@ -70,7 +71,6 @@ public class PostGameRoute implements Route {
             vm.put("whitePlayer",otherPlayer);
             vm.put("activeColor","red");
             vm.put("viewMode",mode.PLAY);
-
             return templateEngine.render(new ModelAndView(vm , "game.ftl"));
 
         } else {

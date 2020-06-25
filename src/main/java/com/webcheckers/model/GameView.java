@@ -17,21 +17,35 @@ public class GameView implements Iterable<Row>{
     private List<Row> board;
     private List<Row> p1board;
     private List<Row> p2board;
-
-
-    public GameView(Player p1, Player p2) {
+    private Piece.Color playerColor;
+//    boolean isPlayer1GameView;
+    /**
+     * init gameView, with the two players playing and
+     * @param p1 player 1
+     * @param p2 player 2
+     */
+    public GameView(Player p1, Player p2, Piece.Color playerColor) {
         this.p1 = p1;
         this.p2 = p2;
         this.board = new ArrayList<>();
         this.p1board = new ArrayList<>();
         this.p2board = new ArrayList<>();
-
+        this.playerColor = playerColor;
         setupBoard();
     }
+
+    public Piece.Color getPlayerColor() {
+        return playerColor;
+    }
+
+    /**
+     *
+     */
     public void setupBoard() {
         boolean valid = false;
         for(int i =0; i<3; i++) {
-            board.add(new Row(i, valid, Piece.Color.WHITE));
+
+            board.add(new Row(i, valid, playerColor));
             valid = !valid;
         }
 
@@ -41,7 +55,12 @@ public class GameView implements Iterable<Row>{
         }
 
         for(int i =5; i<8; i++) {
-            board.add(new Row(i, valid, Piece.Color.RED));
+            if(playerColor== Piece.Color.RED){
+                board.add(new Row(i, valid, Piece.Color.WHITE));
+            }
+            else{
+                board.add(new Row(i, valid, Piece.Color.RED));
+            }
             valid = !valid;
         }
     }
