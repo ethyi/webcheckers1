@@ -19,12 +19,9 @@ geometry: margin=1in
 
 Making a checkers game that two or more people that can be played online over the internet, with just a simple login.
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
 > To make a game of checkers that can be easily played over the internet. The user group is people who have interenet excess and an intrest in checkers, the goal is for them to be able to play checkers.
 
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
@@ -58,9 +55,10 @@ This section describes the application domain.
 
 ![The WebCheckers Domain Model](swen261adomain.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+> The domain model shows the relationship between the application domain and player behavior.
+From sign in, the webcheckers mainly revolves around the relationship between the player, server, and the checkerboard.
+As seen from the circular relationship from these 3 entities, player behavior with the gameboard can be easily visualized, until 
+the game ends.
 
 
 ## Architecture and Design
@@ -91,9 +89,9 @@ with the WebCheckers application.
 
 ![The WebCheckers Web Interface Statechart](swen261astatechart.png)
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
-
+> This statechart shows all possible states that the user web interface can be in. From no connection to signin, to playing games,
+the HTTP verbs between states show how each view interacts with eachother. The flow of states clearly indicate predictive and deterministic
+manners of players, accounting for potential errors when navigating the pages.
 
 ### UI Tier
 > _Provide a summary of the Server-side UI tier of your architecture.
