@@ -9,20 +9,19 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: Team A
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Aubrey Tarmu
+  * Ethan Yi
+  * Tony Jiang
 
 ## Executive Summary
 
-This is a summary of the project.
-
+Making a checkers game that two or more people that can be played online over the internet, with just a simple login.
 ### Purpose
 > _Provide a very brief statement about the project and the most
 > important user group and user goals._
+> To make a game of checkers that can be easily played over the internet. The user group is people who have interenet excess and an intrest in checkers, the goal is for them to be able to play checkers.
 
 ### Glossary and Acronyms
 > _Provide a table of terms and acronyms._
@@ -30,6 +29,9 @@ This is a summary of the project.
 | Term | Definition |
 |------|------------|
 | VO | Value Object |
+| VM | View Model |
+| CUT| Component under test  |
+
 
 
 ## Requirements
