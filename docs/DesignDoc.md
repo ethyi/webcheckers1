@@ -56,7 +56,7 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](Swen261DomainAnal5_26.pdf)
+![The WebCheckers Domain Model](swen261adomain.png)
 
 > _Provide a high-level overview of the domain for this application. You
 > can discuss the more important domain entities and their relationship
@@ -89,7 +89,7 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
+![The WebCheckers Web Interface Statechart](swen261astatechart.png)
 
 > _Provide a summary of the application's user interface.  Describe, from
 > the user's perspective, the flow of the pages in the web application._
@@ -130,7 +130,7 @@ with the WebCheckers application.
 > section will follow the same instructions that are given for the UI
 > Tier above._
 
-### Design Improvements
+### Design Improvement
 > _Discuss design improvements that you would make if the project were
 > to continue. These improvement should be based on your direct
 > analysis of where there are problems in the code base which could be
