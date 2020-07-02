@@ -50,10 +50,9 @@ public class GetSigninRouteTester {
 
 
         CuT.handle(request, response);
-
-
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
+        testHelper.assertViewModelAttribute("title", "Sign In");
 
     }
 }

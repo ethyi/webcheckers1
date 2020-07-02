@@ -1,6 +1,6 @@
-/*
-Tests Player model tier class
-@author Ethan Yi ehy5032@rit.edu
+/**
+*Tests Player model tier class
+*@author Ethan Yi ehy5032@rit.edu
  */
 package com.webcheckers.model;
 
