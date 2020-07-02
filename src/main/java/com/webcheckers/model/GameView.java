@@ -65,6 +65,11 @@ public class GameView implements Iterable<Row>{
         }
     }
 
+
+    public List getBoard() {
+        return this.board;
+    }
+
     @Override
     public Iterator<Row> iterator() {
         return board.iterator();
