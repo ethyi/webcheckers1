@@ -25,13 +25,15 @@ import com.webcheckers.util.Message;
 public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-  private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
-  private static final Message OTHER_PLAYERS_MSG = Message.info("Select a player to start a game");
-
+   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+   static final Message OTHER_PLAYERS_MSG = Message.info("Select a player to start a game");
+  static final String VIEW_NAME = "home.ftl";
   static final String CURRENT_PLAYER = "currentPlayer";
-  private final String OTHER_PLAYERS = "names";
+  static final String OTHER_PLAYERS = "names";
 
   private final TemplateEngine templateEngine;
+
+
   private final PlayerLobby lobby;
 
   /**
@@ -46,11 +48,15 @@ public class GetHomeRoute implements Route {
     LOG.config("GetHomeRoute is initialized.");
   }
 
-  private enum mode {
+  public enum mode {
     PLAY,
     SPECTATOR,
     REPLAY
   }
+  public PlayerLobby getLobby() {
+    return lobby;
+  }
+
 
   /**
    * Render the WebCheckers Home page.
@@ -63,6 +69,7 @@ public class GetHomeRoute implements Route {
    * @return
    *   the rendered HTML for the Home page
    */
+
   @Override
   public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
@@ -70,7 +77,7 @@ public class GetHomeRoute implements Route {
     final Session session = request.session();
 
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+    Object title = vm.put("title", "Welcome!");
 
     vm.put("numPlayers", lobby.getNumPlayers());
     final Player player = session.attribute(CURRENT_PLAYER);
@@ -105,6 +112,6 @@ public class GetHomeRoute implements Route {
       return templateEngine.render(new ModelAndView(map , "game.ftl"));
     }
     // render the View
-    return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+    return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }
 }
