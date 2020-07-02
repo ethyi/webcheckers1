@@ -1,11 +1,7 @@
-package com.webcheckers.ui.model;
+package com.webcheckers.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.webcheckers.model.GameView;
-import com.webcheckers.model.Piece;
-import com.webcheckers.model.Player;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -2,10 +2,8 @@
 Tests Player model tier class
 @author Ethan Yi ehy5032@rit.edu
  */
-package com.webcheckers.ui.model;
+package com.webcheckers.model;
 
-import com.webcheckers.model.Piece;
-import com.webcheckers.model.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
