@@ -1,3 +1,4 @@
+
 package com.webcheckers.model;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,8 +11,10 @@ import org.junit.jupiter.api.Test;
  * Tests the Piece Class
  */
 public class PieceTest {
-    final Piece CuT = new Piece(Piece.PieceType.SINGLE, Piece.Color.RED);
-    final Piece white = new Piece(Piece.PieceType.KING, Piece.Color.WHITE);
+    final GameView gameView = new GameView(new Player("1"),new Player("2"), Piece.Color.WHITE);
+    //TODO create mock
+    final Piece CuT = new Piece(Piece.PieceType.SINGLE, Piece.Color.RED,gameView);
+    final Piece white = new Piece(Piece.PieceType.KING, Piece.Color.WHITE,gameView);
 
 
     /**
@@ -43,3 +46,4 @@ public class PieceTest {
 
 
 }
+
