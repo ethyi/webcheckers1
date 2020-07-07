@@ -61,16 +61,21 @@ public class PostSigninRoute implements Route {
                 return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
             } else {
                 lobby.addPlayer(username);
-                vm.put("currentUser", lobby.getPlayer(username));
+                //vm.put("currentUser", lobby.getPlayer(username));
                 session.attribute(GetHomeRoute.CURRENT_PLAYER, lobby.getPlayer(username));
+                /**
                 Player player2 = session.attribute(GetHomeRoute.CURRENT_PLAYER);
                 if (player2 == null) {
                     response.redirect(WebServer.HOME_URL);
                     halt();
                     return null;
                 }
+                 */
             }
-            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+            response.redirect(WebServer.HOME_URL);
+            halt();
+            return null;
+            //return templateEngine.render(new ModelAndView(vm, "home.ftl"));
 
         } else {
             response.redirect(WebServer.HOME_URL);

@@ -2,7 +2,7 @@
 <html>
     <head><title>Sign in</title></head>
     <body>
-        <form action="/" method="POST">
+        <form action="/signin" method="POST">
             <p>Sign in<p>
             <p>
                 <input type="text" name="username"></input>

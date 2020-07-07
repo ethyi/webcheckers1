@@ -27,9 +27,11 @@ public class GetHomeRoute implements Route {
 
    static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
    static final Message OTHER_PLAYERS_MSG = Message.info("Select a player to start a game");
+   static final Message INGAME_MSG = Message.info("The Opponent you selected is already in a game");
   static final String VIEW_NAME = "home.ftl";
   static final String CURRENT_PLAYER = "currentPlayer";
   static final String OTHER_PLAYERS = "names";
+  static final String IN_GAME = "ingame";
 
   private final TemplateEngine templateEngine;
 
@@ -75,41 +77,48 @@ public class GetHomeRoute implements Route {
     LOG.finer("GetHomeRoute is invoked.");
     //
     final Session session = request.session();
-
     Map<String, Object> vm = new HashMap<>();
-    Object title = vm.put("title", "Welcome!");
-
-    vm.put("numPlayers", lobby.getNumPlayers());
     final Player player = session.attribute(CURRENT_PLAYER);
+    String ingame = session.attribute(IN_GAME);
+    vm.put("title", "Welcome!");
 
-    if(player != null) { // displays opponents
-        vm.remove("message", WELCOME_MSG);
-        vm.put("message", OTHER_PLAYERS_MSG);
-        vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
-        vm.put("currentUser", player);
-
-    } else {
+    if (player==null){
       vm.put("message", WELCOME_MSG);
+      vm.put("numPlayers", lobby.getNumPlayers());
     }
 
-    if(player!=null&&player.isChallenged()){ // if challenged, render gameboard
+    else{
+      vm.put("message", OTHER_PLAYERS_MSG);
+      vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet()); // condition when you are only player TODO
+      vm.put("currentUser", player);
 
-      Map<String, Object> map = new HashMap<>();
-      Player challenger = player.getChallenger();
-      GameView board =new GameView(challenger, player, Piece.Color.WHITE);
-      player.setColor(Piece.Color.WHITE);
+      if(ingame!=null){
+        //condition when player challenges an opponent ingame
+        if(ingame.equals("true")){
+          vm.put("message",INGAME_MSG);
+        }
+      }
 
-      map.put("board", board);
+      if(player.isChallenged()){
+        //condition when player is challenged
+        Map<String, Object> map = new HashMap<>();
+        Player challenger = player.getChallenger();
+        GameView board =new GameView(challenger, player, Piece.Color.WHITE);
+        player.setColor(Piece.Color.WHITE);
 
-      map.put("currentUser",player);
-      map.put("title", "Checkers");
-      map.put("gameID","1");
-      map.put("redPlayer",challenger);
-      map.put("whitePlayer",player);
-      map.put("activeColor","white");
-      map.put("viewMode",mode.PLAY);
+        map.put("board", board);
 
-      return templateEngine.render(new ModelAndView(map , "game.ftl"));
+        map.put("currentUser",player);
+        map.put("title", "Checkers");
+        map.put("gameID","1");
+        map.put("redPlayer",challenger);
+        map.put("whitePlayer",player);
+        map.put("activeColor","white");
+        map.put("viewMode",mode.PLAY);
+
+        return templateEngine.render(new ModelAndView(map , "game.ftl"));
+
+      }
     }
     // render the View
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));

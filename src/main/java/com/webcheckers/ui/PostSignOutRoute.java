@@ -50,15 +50,15 @@ public class PostSignOutRoute implements Route {
 
         final Session session = request.session();
 
-        LOG.finer("GetHomeRoute is invoked.");
-        Map<String, Object> vm = new HashMap<>();
+        LOG.finer("GetSignOutRoute is invoked.");
+        //Map<String, Object> vm = new HashMap<>();
 
-        vm.put("title", "Sign Out");
+        //vm.put("title", "Sign Out");
         Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
         session.attribute(GetHomeRoute.CURRENT_PLAYER,null);
         lobby.removePlayer(player.getName());
 
-        vm.put("currentUser",null);
+        //vm.put("currentUser",null);
 
         response.redirect(WebServer.HOME_URL);
         halt();
