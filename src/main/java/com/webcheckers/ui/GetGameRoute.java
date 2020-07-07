@@ -65,7 +65,7 @@ public class GetGameRoute implements Route {
         player.setGame(true);
         otherPlayer.setGame(true);
         player.setP1();
-        GameView board =new GameView(player, otherPlayer, Piece.Color.RED);
+        GameView board =new GameView(player, otherPlayer, Piece.Color.WHITE);
         player.setColor(Piece.Color.RED);
         Map<String, Object> vm = new HashMap<>();
         vm.put("board", board);
