@@ -29,7 +29,7 @@ public class PostSigninRoute implements Route {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.lobby = lobby;
         LOG.config("PostSigninRoute is initialized.");
-        
+
     }
 
     /**
