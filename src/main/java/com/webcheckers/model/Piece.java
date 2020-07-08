@@ -30,20 +30,16 @@ public class Piece {
         this.gameView = gameView;
         board = gameView.getBoard();
     }
-    boolean isAKing(){
+
+    public boolean isAKing(){
         return type==PieceType.KING;
     }
 
-    /**
-     * wheere the move is actually called
-     */
-    void genericMove(){
-
+    public void promote() {
+        this.type = PieceType.KING;
     }
 
-    void takePiece(){
 
-    }
 
     public PieceType getType() {
         return type;
