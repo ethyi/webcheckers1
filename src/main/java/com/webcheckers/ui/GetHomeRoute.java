@@ -88,13 +88,11 @@ public class GetHomeRoute implements Route {
     }
 
     else{
+      vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
+      vm.put("currentUser", player);
+      vm.put("message", OTHER_PLAYERS_MSG);
       if (lobby.getNumPlayers()==1){
         vm.put("message",NO_PLAYERS);
-      }
-      else{
-        vm.put("message", OTHER_PLAYERS_MSG);
-        vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
-        vm.put("currentUser", player);
       }
 
       if(ingame!=null){
@@ -114,11 +112,9 @@ public class GetHomeRoute implements Route {
         map.put("board", board);
 
         map.put("currentUser",player);
-        map.put("title", "Checkers");
-        map.put("gameID","1");
         map.put("redPlayer",challenger);
         map.put("whitePlayer",player);
-        map.put("activeColor","white");
+        map.put("activeColor","RED");
         map.put("viewMode",mode.PLAY);
 
         return templateEngine.render(new ModelAndView(map , "game.ftl"));
