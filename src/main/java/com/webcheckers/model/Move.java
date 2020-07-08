@@ -58,7 +58,7 @@ public class Move {
 
     /**
      * Gets the position of the piece that's jumped in the case of a jump.
-     * @return the position of the captured piece.
+     * @return the position of the captured piece.a
      */
     public Position getMid() {
         if(isJumpMove()) {
