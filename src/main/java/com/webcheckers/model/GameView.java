@@ -13,7 +13,7 @@ import java.util.List;
 public class GameView implements Iterable<Row>{
     private Player redPlayer;
     private Player whitePlayer;
-    private List<Row> board;
+    private static List<Row> board;
 
 
     /**
@@ -24,7 +24,7 @@ public class GameView implements Iterable<Row>{
     public GameView(Player p1, Player p2) {
         this.redPlayer = p1;
         this.whitePlayer = p2;
-        this.board = new ArrayList<>();
+        board = new ArrayList<>();
         setupBoard();
     }
 
@@ -60,8 +60,16 @@ public class GameView implements Iterable<Row>{
      * @param coll
      * @return
      */
-    public  Space getSpace(int row, int coll){
+    public static  Space getSpace(int row, int coll){
        return board.get(row).getASpace(coll);
+    }
+    /**
+     * this will get a piece at a specific row and Coll
+     * @param position
+     * @return
+     */
+    public static  Space getSpace(Position position){
+        return board.get(position.getRow()).getASpace(position.getCell());
     }
 
     /**
@@ -74,17 +82,11 @@ public class GameView implements Iterable<Row>{
    public void movePiece(int cur_row,int cur_coll,int n_row,int n_coll){
        //string of the move
        // json to gson
-
         Piece p = getSpace(cur_row,cur_coll).getPiece();
-        if(p.isMoveValid(n_row,n_coll)){
-            board.get(cur_row).getASpace(cur_coll).setPiece( null);
-            board.get(n_row).getASpace(n_row).setPiece(p);
-        }
-
     }
 
-    public List getBoard() {
-        return this.board;
+    public static List getBoard() {
+        return board;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+//import javafx.geometry.Pos;
+
 import java.util.List;
 
 /**
@@ -40,28 +42,30 @@ public class Piece {
     }
 
 
-    public  void normalMove(Piece piece, Row row,int n_coll){
-        piece.space = row.getASpace(n_coll);
-        if(row.getIndex()==8){
+    public  void normalMove(Position endPos){
+        Space nextSpace =gameView.getSpace(endPos.getRow(),endPos.getCell());
+        space.setSpaceEmpty();
+        nextSpace.setPiece(this);
+        System.out.println(nextSpace.getPiece());
+        if(endPos.getRow()==0){
             promote();
         }
+
     }
 
+    public  void jumpMove(Position endPos,Piece targetPiece){
+        normalMove(endPos);
+        targetPiece.removePiece();
+    }
+    public void removePiece(){
+        space.setPiece(null);
+    }
     public PieceType getType() {
         return type;
     }
 
     public Color getColor() {
         return color;
-    }
-    public boolean isMoveValid(int n_row,int n_coll) {
-        boolean spotIsValid =gameView.getSpace(n_row,n_coll).isValid();
-        boolean spotIsEmpty =gameView.getSpace(n_row,n_coll).getPiece()==null;
-        boolean notMovingToSameRow = n_row!=space.getRow().getIndex();
-        boolean canMoveToRow = isAKing() ?  (space.getRow().getIndex() ==n_row+1 ||
-                space.getRow().getIndex() ==n_row-1) :
-                space.getRow().getIndex() ==n_row+1;
-        return spotIsValid&&spotIsEmpty&&notMovingToSameRow&&canMoveToRow;
     }
 
 }

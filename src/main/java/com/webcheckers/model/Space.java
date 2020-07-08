@@ -16,7 +16,7 @@ public class Space {
         this.cellIdx = cellIdx;
         this.piece = piece;
         this.valid = valid;
-        if(piece!=null)
+        if(this.piece!=null)
             this.piece.space = this;
         this.row = row;
     }
@@ -44,5 +44,8 @@ public class Space {
     public void setPiece(Piece piece){
         this.piece = piece;
         piece.space = this;
+    }
+    void setSpaceEmpty(){
+        this.piece = null;
     }
 }

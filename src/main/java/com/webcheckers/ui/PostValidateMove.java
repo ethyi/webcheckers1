@@ -2,7 +2,9 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.model.GameView;
 import com.webcheckers.model.Move;
+import com.webcheckers.model.Piece;
 import com.webcheckers.util.Message;
 import jdk.nashorn.internal.runtime.JSONFunctions;
 import spark.Request;
@@ -22,6 +24,9 @@ public class PostValidateMove implements Route {
 
         final String data = request.queryParams("actionData");
         Move move = new Move(data);
+        System.out.println(data);
+        Piece piece =GameView.getSpace(move.getStart()).getPiece();
+        piece.normalMove(move.getEnd());
         if (true){
             response.type("INFO");
         }
