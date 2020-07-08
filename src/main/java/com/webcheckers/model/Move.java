@@ -1,6 +1,8 @@
 package com.webcheckers.model;
 
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
+
+import java.util.List;
 
 public class Move {
     private Position start;
@@ -39,7 +41,8 @@ public class Move {
     }
 
     public boolean moveOnBoard() {
-        return this.start.withinBoard() && this.end.withinBoard();
+        return this.start.withinBoard() &&
+                this.end.withinBoard();
     }
 
     public boolean isRegularMove() {
@@ -55,6 +58,7 @@ public class Move {
         return (xshift == yshift && xshift == 2);
 
     }
+
 
     /**
      * Gets the position of the piece that's jumped in the case of a jump.
@@ -76,5 +80,6 @@ public class Move {
         return String.format("Player wants to move piece from (%d, %d) to (%d, %d)", start.getRow(),
                 start.getCell(), end.getRow(), end.getCell());
     }
+
 
 }

@@ -51,7 +51,7 @@ public class GetGameRoute implements Route {
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
 
-        if (player.getCheckers()==null){//make new checkers
+        if (player!=null&&player.getCheckers()==null){//make new checkers
             String otherString = request.queryParams("challenger");
             final Player otherPlayer = lobby.getPlayer(otherString);
             session.attribute(GetHomeRoute.IN_GAME, null);

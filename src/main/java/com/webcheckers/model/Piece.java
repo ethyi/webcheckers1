@@ -40,6 +40,12 @@ public class Piece {
     }
 
 
+    public  void normalMove(Piece piece, Row row,int n_coll){
+        piece.space = row.getASpace(n_coll);
+        if(row.getIndex()==8){
+            promote();
+        }
+    }
 
     public PieceType getType() {
         return type;
