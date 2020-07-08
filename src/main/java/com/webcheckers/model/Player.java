@@ -8,64 +8,19 @@ package com.webcheckers.model;
  */
 public class Player {
     private boolean isChallenged;
-
-    // Attributes
-
     private String name;
     private Player challenger;
-    private boolean inGame;
-    private boolean isP1;
-    private Piece.Color color;
+    private Checkers checkers;
+
     /**
      * Create Player with username
      * @param name username
      */
     public Player(String name){
         this.name = name;
-        this.inGame = false;
-        this.isP1 = false;
+        this.checkers=null;
     }
 
-    /**
-     * Set if player is first player
-     */
-    public void setP1() {
-        this.isP1 = true;
-
-    }
-    /**
-     * Return if first player
-     */
-    public boolean isP1() {
-        return this.isP1;
-    }
-    /**
-     * Return username
-     */
-    public String getName() {
-        return name;
-    }
-
-    public Piece.Color getColor() {
-        return color;
-    }
-
-    public void setColor(Piece.Color color) {
-        this.color = color;
-    }
-
-    /**
-     * Return if in game
-     */
-    public boolean inGame() {
-        return this.inGame;
-    }
-    /**
-     * Set player game state
-     */
-    public void setGame(boolean status) {
-        this.inGame = status;
-    }
     /**
      * Set player challenge state and challenger
      */
@@ -86,6 +41,16 @@ public class Player {
         return this.challenger;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public Checkers getCheckers(){
+        return checkers;
+    }
+    public void updateCheckers(Checkers checkers){
+        this.checkers = checkers;
+    }
     @Override
     public boolean equals( Object obj){
         if(obj==this) {

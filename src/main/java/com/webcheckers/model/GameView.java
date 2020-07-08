@@ -11,40 +11,28 @@ import java.util.List;
  *
  */
 public class GameView implements Iterable<Row>{
-    private Player p1;
-    private Player p2;
+    private Player redPlayer;
+    private Player whitePlayer;
     private List<Row> board;
-//    private List<Row> p1board;
-//    private List<Row> p2board;
-    private Piece.Color playerColor;
-//    boolean isPlayer1GameView;
+
+
     /**
-     * init gameView, with the two players playing and
-     * @param p1 player 1
-     * @param p2 player 2
+     * init gameView, with the two players playing
+     * @param p1 redPlayer
+     * @param p2 whitePlayer
      */
-    public GameView(Player p1, Player p2, Piece.Color playerColor) {
-        this.p1 = p1;
-        this.p2 = p2;
+    public GameView(Player p1, Player p2) {
+        this.redPlayer = p1;
+        this.whitePlayer = p2;
         this.board = new ArrayList<>();
-//        this.p1board = new ArrayList<>();
-//        this.p2board = new ArrayList<>();
-        this.playerColor = playerColor;
         setupBoard();
     }
 
-    public Piece.Color getPlayerColor() {
-        return playerColor;
-    }
-
-    /**
-     *
-     */
     public void setupBoard() {
         boolean valid = false;
         for(int i =0; i<3; i++) {
 
-            board.add(new Row(i, valid, playerColor,this));
+            board.add(new Row(i, valid, Piece.Color.WHITE,this));
             valid = !valid;
         }
 
@@ -54,13 +42,16 @@ public class GameView implements Iterable<Row>{
         }
 
         for(int i =5; i<8; i++) {
+            board.add(new Row(i, valid, Piece.Color.RED,this));
+            valid = !valid;
+            /**
             if(playerColor== Piece.Color.RED){
                 board.add(new Row(i, valid, Piece.Color.WHITE,this));
             }
             else{
                 board.add(new Row(i, valid, Piece.Color.RED,this));
             }
-            valid = !valid;
+             */
         }
     }
     /**

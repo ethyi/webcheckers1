@@ -48,34 +48,35 @@ public class GetGameRoute implements Route {
     @Override
     public Object handle(Request request, Response response) {
         LOG.finer("GetGameRoute is invoked.");
-        String otherString = request.queryParams("challenger");
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
-        final Player otherPlayer = lobby.getPlayer(otherString);
-        session.attribute(GetHomeRoute.IN_GAME, null);
 
-        if (otherPlayer.inGame()){
-            session.attribute(GetHomeRoute.IN_GAME,"true");
-            response.redirect(WebServer.HOME_URL);
-            halt();
-            return null;
+        if (player.getCheckers()==null){//make new checkers
+            String otherString = request.queryParams("challenger");
+            final Player otherPlayer = lobby.getPlayer(otherString);
+            session.attribute(GetHomeRoute.IN_GAME, null);
+            if (otherPlayer.isChallenged()){
+                session.attribute(GetHomeRoute.IN_GAME,"true");
+                response.redirect(WebServer.HOME_URL);
+                halt();
+                return null;
+            }
+            Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
+            player.updateCheckers(temp);
+            otherPlayer.updateCheckers(temp);
+            player.setChallenged(true, otherPlayer);
+            otherPlayer.setChallenged(true,player);
         }
-
-        otherPlayer.setChallenged(true, player);
-        player.setGame(true);
-        otherPlayer.setGame(true);
-        player.setP1();
-        GameView board =new GameView(player, otherPlayer, Piece.Color.WHITE);
-        player.setColor(Piece.Color.RED);
+        final Checkers checkers = player.getCheckers();
         Map<String, Object> vm = new HashMap<>();
-        vm.put("board", board);
-
+        vm.put("title","Checkers");
         vm.put("currentUser",player);
-        vm.put("title", "Checkers");
-        vm.put("redPlayer",player);
-        vm.put("whitePlayer",otherPlayer);
-        vm.put("activeColor","RED");
+        vm.put("board", checkers.getBoard());
         vm.put("viewMode",mode.PLAY);
+        vm.put("redPlayer",checkers.getRedPlayer());
+        vm.put("whitePlayer",checkers.getWhitePlayer());
+        vm.put("activeColor",checkers.getActiveColor());
+
         return templateEngine.render(new ModelAndView(vm , "game.ftl"));
 
     }

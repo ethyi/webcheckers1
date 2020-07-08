@@ -57,11 +57,10 @@ class GetHomeRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        GameView board =new GameView(c, p, Piece.Color.WHITE);
+        GameView board =new GameView(c, p);
         assertNotNull(board);
 
-        p.setColor(Piece.Color.WHITE);
-        assertEquals(p.getColor(), Piece.Color.WHITE);
+
         assertEquals(CuT.getLobby(),playerLobby);
         p= session.attribute(CURRENT_PLAYER);
         testHelper.assertViewModelAttribute("numPlayers",playerLobby.getNumPlayers());

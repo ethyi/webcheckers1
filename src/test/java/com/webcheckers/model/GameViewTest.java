@@ -12,7 +12,7 @@ import java.util.List;
 public class GameViewTest {
     final Player p1 = new Player("p1");
     final Player p2 = new Player("p2");
-    final GameView CuT = new GameView(p1, p2, Piece.Color.RED);
+    final GameView CuT = new GameView(p1, p2);
 
     /**
      * Checks if the board is null
@@ -33,11 +33,4 @@ public class GameViewTest {
 
     }
 
-    /**
-     * Test if the baord recognizes player1's color.
-     */
-    @Test
-    public void testColor() {
-        assertTrue(p1.getColor() == CuT.getPlayerColor());
-    }
 }

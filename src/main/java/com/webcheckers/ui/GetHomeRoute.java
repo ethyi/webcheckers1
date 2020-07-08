@@ -13,6 +13,8 @@ import spark.*;
 
 import com.webcheckers.util.Message;
 
+import static spark.Spark.halt;
+
 /**
  * The UI Controller to GET the Home page.
  *
@@ -104,21 +106,9 @@ public class GetHomeRoute implements Route {
 
       if(player.isChallenged()){
         //condition when player is challenged
-        Map<String, Object> map = new HashMap<>();
-        Player challenger = player.getChallenger();
-        GameView board =new GameView(challenger, player, Piece.Color.WHITE);
-        player.setColor(Piece.Color.WHITE);
-
-        map.put("board", board);
-
-        map.put("currentUser",player);
-        map.put("redPlayer",challenger);
-        map.put("whitePlayer",player);
-        map.put("activeColor","RED");
-        map.put("viewMode",mode.PLAY);
-
-        return templateEngine.render(new ModelAndView(map , "game.ftl"));
-
+        response.redirect(WebServer.GAME_URL);
+        halt();
+        return null;
       }
     }
     // render the View

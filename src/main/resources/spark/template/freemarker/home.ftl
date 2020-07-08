@@ -23,7 +23,7 @@
     <#if names??>
 
         <form action ="/game" method="GET">
-            <p>Who do you wish to challenge?</p>
+
             <#list names as n>
                 <#if n !=currentUser>
                 <p>
