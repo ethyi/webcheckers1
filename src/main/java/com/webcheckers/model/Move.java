@@ -11,9 +11,14 @@ public class Move {
     private Piece.Color color;
     private Player player;
 
-    public Move(Position start, Position end) {
-        this.start = start;
-        this.end = end;
+    public Move(String data) {
+        String[] temp = data.split(":");
+        int start_row = Character.getNumericValue(temp[2].charAt(0));
+        int start_col = Character.getNumericValue(temp[3].charAt(0));
+        int end_row = Character.getNumericValue(temp[5].charAt(0));
+        int end_col = Character.getNumericValue(temp[6].charAt(0));
+        this.start = new Position(start_row,start_col);
+        this.end = new Position(end_row,end_col);
     }
 
     public Position getStart() {
