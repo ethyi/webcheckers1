@@ -24,10 +24,10 @@ import com.webcheckers.util.Message;
  */
 public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
-
-   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
-   static final Message OTHER_PLAYERS_MSG = Message.info("Select a player to start a game");
-   static final Message INGAME_MSG = Message.info("The Opponent you selected is already in a game");
+  static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+  static final Message OTHER_PLAYERS_MSG = Message.info("Select a player to start a game");
+  static final Message INGAME_MSG = Message.info("The Opponent you selected is already in a game");
+  static final Message NO_PLAYERS = Message.info("There are no players to challenge");
   static final String VIEW_NAME = "home.ftl";
   static final String CURRENT_PLAYER = "currentPlayer";
   static final String OTHER_PLAYERS = "names";
@@ -88,9 +88,14 @@ public class GetHomeRoute implements Route {
     }
 
     else{
-      vm.put("message", OTHER_PLAYERS_MSG);
-      vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet()); // condition when you are only player TODO
-      vm.put("currentUser", player);
+      if (lobby.getNumPlayers()==1){
+        vm.put("message",NO_PLAYERS);
+      }
+      else{
+        vm.put("message", OTHER_PLAYERS_MSG);
+        vm.put(OTHER_PLAYERS, lobby.getPlayers().keySet());
+        vm.put("currentUser", player);
+      }
 
       if(ingame!=null){
         //condition when player challenges an opponent ingame
