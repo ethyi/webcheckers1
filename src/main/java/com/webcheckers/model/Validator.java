@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 public class Validator {
     public static final Logger LOG = Logger.getLogger(Validator.class.getName());
 
-    public static boolean hasPiecesLeft(ArrayList<Row> board, Piece.Color color) {
+    public static boolean hasPiecesLeft(List<Row> board, Piece.Color color) {
         for (int i = 0; i <= 7; i++) {
             for (int j = 0; j <= 7; j++) {
                 if (!board.get(i).getSpaces().get(j).isEmpty() && board.get(i)

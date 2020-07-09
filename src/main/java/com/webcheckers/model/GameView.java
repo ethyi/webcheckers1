@@ -15,7 +15,7 @@ public class GameView implements Iterable<Row>{
     private Piece.Color bottomColor;
 
     public GameView(Piece.Color bottomColor) {
-        board = new ArrayList<>();
+        board = new ArrayList<Row>();
         this.bottomColor = bottomColor;
         setupBoard();
     }
@@ -80,5 +80,8 @@ public class GameView implements Iterable<Row>{
     @Override
     public Iterator<Row> iterator() {
         return board.iterator();
+    }
+
+    public void putPiece() {
     }
 }

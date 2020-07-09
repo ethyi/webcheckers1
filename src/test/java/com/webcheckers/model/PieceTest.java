@@ -3,8 +3,6 @@ package com.webcheckers.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
-import javafx.geometry.Pos;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
