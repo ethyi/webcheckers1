@@ -94,29 +94,7 @@ the HTTP verbs between states show how each view interacts with eachother. The f
 manners of players, accounting for potential errors when navigating the pages.
 
 ### UI Tier
-> _Provide a summary of the Server-side UI tier of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
-
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class structure or object diagrams) with some
-> details such as critical attributes and methods._
-
-> _You must also provide any dynamic models, such as statechart and
-> sequence diagrams, as is relevant to a particular aspect of the design
-> that you are describing.  For example, in WebCheckers you might create
-> a sequence diagram of the `POST /validateMove` HTTP request processing
-> or you might show a statechart diagram if the Game component uses a
-> state machine to manage the game._
-
-> _If a dynamic model, such as a statechart describes a feature that is
-> not mostly in this tier and cuts across multiple tiers, you can
-> consider placing the narrative description of that feature in a
-> separate section for describing significant features. Place this after
-> you describe the design of the three tiers._
-
-> The UI tier is majorly comprised of routes and their functionality dependent on the route handlers. 
+The UI tier is majorly comprised of routes and their functionality dependent on the route handlers. 
 The majority of the time spent in the application will be on the Gethomeroute which handles situations where the home page is triggered.
 From homepage, getsigninroute will render a sign in page with a text prompt which is sent to postsigninroute to see if user successfully logged
 in or needs to input a different user depending on error. If successful, the home page is rendered again, this time with a user identity.
@@ -126,36 +104,24 @@ This is what has been properly implemented so far, the rest will be finished in 
 
 
 ### Application Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
-> 
+Currently the only application tier component is PlayerLobby which is a class that holds all players logged in. Since many routes use the lobby data
+for challenging others and displaying the number of people online, PlayerLobby is instantiated in webserver, and is passed into all routes so that its data
+can persist throughout the UI. We plan to implement a gamecenter for more sitewide statistics.
 
 ### Model Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+There are numerous model tier classes, many of which are required for the sake of the checkers game. Player is the only essential model tier classes needed for signin and game, as it holds a unique identifier and is essential for knowing if a playing is being challenged. Aside from player, GameView creates a board which relies on Row, which relies on space, and is needed to display the gameboard to the user. Move is created to parse user input on the board and is essential for checking for validity because it is passed into the Validator.
+We plan to implement a piece class for when we implement King piece functionality.
 
 ### Design Improvement
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements. After completion of the Code metrics exercise, you
-> will also discuss the resutling metric measurements.  Indicate the
-> hot spots the metrics identified in your code base, and your
-> suggested design improvements to address those hot spots._
+The most important design improvement we need to make is to have lower coupling. There are too many dependencies between classes especially in the model tier.
+Too many higher level classes are being passed in the constructor of lower level classes. If a more rigid hierarchy is established, there will be lower coupling,
+and more classes with higher cohesion. 
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+Currently 4 stories have been completed with acceptance testing. A 3 of sprint 2 stories have not had testing since not all of the solution tasks have been
+completed.
 
 ### Unit Testing and Code Coverage
 > _Discuss your unit testing strategy. Report on the code coverage
