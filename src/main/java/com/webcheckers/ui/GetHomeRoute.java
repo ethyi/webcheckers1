@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.model.GameView;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
@@ -36,7 +35,7 @@ public class GetHomeRoute implements Route {
   static final String IN_GAME = "ingame";
 
   private final TemplateEngine templateEngine;
-
+  private Player player;
 
   private final PlayerLobby lobby;
 
@@ -61,6 +60,9 @@ public class GetHomeRoute implements Route {
     return lobby;
   }
 
+  public Player getPlayer() {
+    return player;
+  }
 
   /**
    * Render the WebCheckers Home page.
@@ -80,7 +82,7 @@ public class GetHomeRoute implements Route {
     //
     final Session session = request.session();
     Map<String, Object> vm = new HashMap<>();
-    final Player player = session.attribute(CURRENT_PLAYER);
+    player = session.attribute(CURRENT_PLAYER);
     String ingame = session.attribute(IN_GAME);
     vm.put("title", "Welcome!");
 

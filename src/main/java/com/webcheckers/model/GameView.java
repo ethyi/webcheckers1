@@ -11,29 +11,21 @@ import java.util.List;
  *
  */
 public class GameView implements Iterable<Row>{
-    private Player redPlayer;
-    private Player whitePlayer;
     private static List<Row> board;
+    private Piece.Color bottomColor;
 
-
-    /**
-     * init gameView, with the two players playing
-     * @param p1 redPlayer
-     * @param p2 whitePlayer
-     */
-    public GameView(Player p1, Player p2) {
-        this.redPlayer = p1;
-        this.whitePlayer = p2;
+    public GameView(Piece.Color bottomColor) {
         board = new ArrayList<>();
+        this.bottomColor = bottomColor;
         setupBoard();
     }
 
     public void setupBoard() {
         boolean valid = false;
         for(int i =0; i<3; i++) {
-
-            board.add(new Row(i, valid, Piece.Color.WHITE,this));
+            board.add(new Row(i, valid,bottomColor == Piece.Color.RED? Piece.Color.WHITE: Piece.Color.RED, this));
             valid = !valid;
+
         }
 
         for(int j = 3; j < 5; j++) {
@@ -42,7 +34,7 @@ public class GameView implements Iterable<Row>{
         }
 
         for(int i =5; i<8; i++) {
-            board.add(new Row(i, valid, Piece.Color.RED,this));
+            board.add(new Row(i, valid, bottomColor,this));
             valid = !valid;
             /**
             if(playerColor== Piece.Color.RED){
@@ -63,6 +55,15 @@ public class GameView implements Iterable<Row>{
     public static  Space getSpace(int row, int coll){
        return board.get(row).getASpace(coll);
     }
+
+    public Piece.Color getBottomColor() {
+        return bottomColor;
+    }
+
+    public void setBottomColor(Piece.Color bottomColor) {
+        this.bottomColor = bottomColor;
+    }
+
     /**
      * this will get a piece at a specific row and Coll
      * @param position

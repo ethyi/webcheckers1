@@ -32,7 +32,7 @@ public class GetGameRoute implements Route {
         LOG.config("GetGameRoute is initialized.");
     }
 
-    private enum mode {
+    public enum mode {
         PLAY,
         SPECTATOR,
         REPLAY
@@ -50,6 +50,7 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked.");
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
+        GameView gameView = new GameView(Piece.Color.WHITE);
 
         if (player!=null&&player.getCheckers()==null){//make new checkers
             String otherString = request.queryParams("challenger");
@@ -62,16 +63,21 @@ public class GetGameRoute implements Route {
                 return null;
             }
             Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
+            System.out.println("sdfs sinsdfgsdfg");
+            gameView = new GameView(Piece.Color.RED);
+
             player.updateCheckers(temp);
             otherPlayer.updateCheckers(temp);
             player.setChallenged(true, otherPlayer);
             otherPlayer.setChallenged(true,player);
+
         }
+
         final Checkers checkers = player.getCheckers();
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
         vm.put("currentUser",player);
-        vm.put("board", checkers.getBoard());
+        vm.put("board", gameView);
         vm.put("viewMode",mode.PLAY);
         vm.put("redPlayer",checkers.getRedPlayer());
         vm.put("whitePlayer",checkers.getWhitePlayer());

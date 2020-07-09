@@ -11,7 +11,7 @@ public class Player {
     private String name;
     private Player challenger;
     private Checkers checkers;
-
+    boolean isChallenger;
     /**
      * Create Player with username
      * @param name username
@@ -28,6 +28,7 @@ public class Player {
         this.isChallenged = challenged;
         this.challenger = challenger;
     }
+
     /**
      * Return if challenged
      */

@@ -9,21 +9,20 @@ public class Checkers {
     private Player redPlayer;
     private Player whitePlayer;
     private Piece.Color activeColor;
-    private GameView board;
 
     /**
      * Create checkers data object
      * @param id game id
      * @param red red Player
      * @param white white Player
-     * @param color current turn color
+     * @param activeColor current turn color
+//     * @param bottomColor color that wil be at the bottom of this board
      */
-    public Checkers(String id, Player red, Player white, Piece.Color color){
+    public Checkers(String id, Player red, Player white, Piece.Color activeColor){
         this.id = id;
         this.redPlayer = red;
         this.whitePlayer = white;
-        this.activeColor = color;
-        board = new GameView(redPlayer, whitePlayer);
+        this.activeColor = activeColor;
     }
 
     public Player getRedPlayer(){
@@ -47,13 +46,6 @@ public class Checkers {
         }
     }
 
-    public void updateBoard(GameView board){
-        this.board = board;
-    }
-
-    public GameView getBoard() {
-        return board;
-    }
 
     @Override
     public boolean equals( Object obj){
