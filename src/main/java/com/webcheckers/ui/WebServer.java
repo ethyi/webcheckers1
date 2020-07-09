@@ -160,9 +160,12 @@ public class WebServer {
     post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,lobby));
     get(GAME_URL, new GetGameRoute(templateEngine,lobby));
     post(VALIDATE_URL, new PostValidateMove(gson));
-    post(SUBMIT_URL, new PostSubmitTurn(gson));
-    post(BACKUP_URL, new PostBackupMove(gson));
     post(RESIGN_URL, new PostResignGame(gson));
+
+    post(SUBMIT_URL, new PostSubmitTurn(gson,templateEngine));
+//    post("/checkTurn", new PostCheckTurn(gson));
+
+    post(BACKUP_URL, new PostBackupMove(gson));
 
     LOG.config("WebServer is initialized.");
   }
