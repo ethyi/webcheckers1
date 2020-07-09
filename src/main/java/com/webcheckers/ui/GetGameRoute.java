@@ -50,7 +50,7 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked.");
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
-        GameView gameView = new GameView(Piece.Color.WHITE);
+        GameView gameView = new GameView(Piece.Color.RED);
 
         if (player!=null&&player.getCheckers()==null){//make new checkers
             String otherString = request.queryParams("challenger");
@@ -64,7 +64,7 @@ public class GetGameRoute implements Route {
             }
             Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
             System.out.println("sdfs sinsdfgsdfg");
-            gameView = new GameView(Piece.Color.RED);
+            gameView = new GameView(Piece.Color.WHITE);
 
             player.updateCheckers(temp);
             otherPlayer.updateCheckers(temp);
