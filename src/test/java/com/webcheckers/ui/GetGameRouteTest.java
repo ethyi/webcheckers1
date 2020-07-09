@@ -10,19 +10,18 @@ import spark.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-class GetHomeRouteTest {
-
+class GetGameRouteTest {
     private Request request;
     private Session session;
     private TemplateEngine engine;
     private Response response;
     private PlayerLobby playerLobby;
-    private GetHomeRoute CuT;
+    private GetGameRoute CuT;
     static final String CURRENT_PLAYER = "currentPlayer";
+    Player currentPlayer;
 
     @BeforeEach
     void setup() {
@@ -34,22 +33,27 @@ class GetHomeRouteTest {
         playerLobby = new PlayerLobby();
         playerLobby.addPlayer("p");
         playerLobby.addPlayer("c");
-        CuT = new GetHomeRoute(engine,playerLobby);
+        currentPlayer=  request.session().attribute(GetHomeRoute.CURRENT_PLAYER);
+        currentPlayer = new Player("x");
+//        request.session().attribute(GetHomeRoute.CURRENT_PLAYER,currentPlayer);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine,playerLobby);
+
+        getHomeRoute.handle(request,response);
+
+        Player c =session.attribute(CURRENT_PLAYER);
+
+
+        System.out.println(c);
+        CuT = new GetGameRoute(engine,playerLobby);
         assertEquals(request.session(),session);
 
     }
-    @Test
-    void getLobby(){
-        assertNotNull(CuT.getLobby());
-    }
-    @Test
-    void getPlayer(){
-        assertNull(CuT.getPlayer());
-    }
+
     @Test
     public void newSession(){
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
+//
 
         CuT.handle(request, response);
         Player p =playerLobby.getPlayer("p");
@@ -65,34 +69,32 @@ class GetHomeRouteTest {
         assertNotNull(board);
 
 
-        assertEquals(CuT.getLobby(),playerLobby);
+//        assertEquals(CuT.getLobby(),playerLobby);
         p= session.attribute(CURRENT_PLAYER);
-        testHelper.assertViewModelAttribute("numPlayers",playerLobby.getNumPlayers());
-        assertEquals(GetHomeRoute.mode.PLAY, GetHomeRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.PLAY)));
-        assertEquals(GetHomeRoute.mode.SPECTATOR,GetHomeRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.SPECTATOR)));
-        assertEquals(GetHomeRoute.mode.REPLAY,GetHomeRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.REPLAY)));
-
-
-        // Analyze the results:
-        //   * model is a non-null Map
+        testHelper.assertViewModelAttribute("currentPlayer",p);
+        assertEquals(GetGameRoute.mode.PLAY, GetGameRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.PLAY)));
+        assertEquals(GetGameRoute.mode.SPECTATOR,GetGameRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.SPECTATOR)));
+        assertEquals(GetGameRoute.mode.REPLAY,GetGameRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.REPLAY)));
+//
+//
+//        // Analyze the results:
+//        //   * model is a non-null Map
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
-        //   * model contains all necessary View-Model data
+//        //   * model contains all necessary View-Model data
         testHelper.assertViewModelAttribute("title", "Welcome!");
-        testHelper.assertViewModelAttribute("message", GetHomeRoute.WELCOME_MSG);
         if(p!=null&&p.isChallenged()){
-        testHelper.assertViewModelAttribute("board",board);
+            testHelper.assertViewModelAttribute("board",board);
 
-        testHelper.assertViewModelAttribute("gameID", "1");
-        testHelper.assertViewModelAttribute("currentUser", p);
-        testHelper.assertViewModelAttribute("redPlayer", c);
-        testHelper.assertViewModelAttribute("activeColor", "white");
+            testHelper.assertViewModelAttribute("gameID", "1");
+            testHelper.assertViewModelAttribute("currentUser", p);
+            testHelper.assertViewModelAttribute("redPlayer", c);
+            testHelper.assertViewModelAttribute("activeColor", "white");
 
-        testHelper.assertViewModelAttribute("viewMode", GetHomeRoute.mode.PLAY);
-        testHelper.assertViewName("game.ftl");
+            testHelper.assertViewModelAttribute("viewMode", GetGameRoute.mode.PLAY);
+            testHelper.assertViewName("game.ftl");
 
         }
-        testHelper.assertViewName(GetHomeRoute.VIEW_NAME);
 
     }
 }
