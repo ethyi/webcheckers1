@@ -6,7 +6,6 @@ import com.webcheckers.model.GameView;
 import com.webcheckers.model.Move;
 import com.webcheckers.model.Piece;
 import com.webcheckers.util.Message;
-import jdk.nashorn.internal.runtime.JSONFunctions;
 import spark.Request;
 import spark.Response;
 import spark.Route;

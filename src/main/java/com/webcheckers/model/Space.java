@@ -12,6 +12,7 @@ public class Space {
     private Piece piece;
     private boolean valid;
     private Row row;
+
     public Space(int cellIdx,Piece piece,boolean valid,Row row) {
         this.cellIdx = cellIdx;
         this.piece = piece;
@@ -31,6 +32,10 @@ public class Space {
 
     public Piece getPiece() {
         return piece;
+    }
+
+    public boolean isEmpty() {
+        return this.piece ==  null;
     }
 
     public Row getRow() {

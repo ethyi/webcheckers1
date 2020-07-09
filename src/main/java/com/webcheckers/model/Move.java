@@ -69,7 +69,7 @@ public class Move {
      * Gets the position of the piece that's jumped in the case of a jump.
      * @return the position of the captured piece.a
      */
-    public Position getMid() {
+    public Position getJumped() {
         if(isJumpMove()) {
             int midRow = start.getRow() + (end.getRow() - start.getRow())/2;
             int midCell = start.getCell() + (end.getCell() - start.getCell())/2;
