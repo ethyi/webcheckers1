@@ -3,11 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
 * Team name: Team A
 * Team members
@@ -16,10 +11,10 @@ geometry: margin=1in
   * Tony Jiang
 
 ## Executive Summary
+> Web-Checkers is a web based checkers game that can be played by two separate users through a server. The user interface of the checkers game supports browser drag and drop functionality. This application is a Java based web server and utilizes the Spark web micro framework and the FreeMarker template engine. Beyond implementing a a basic checkers game, we have plans to create some more additional features to enhance user experience.
 
-Making a checkers game that two or more people that can be played online over the internet, with just a simple login.
 ### Purpose
-> To make a game of checkers that can be easily played over the internet. The user group is people who have interenet excess and an intrest in checkers, the goal is for them to be able to play checkers.
+> The purpose is to make a game of checkers that can be easily played over the internet. The user group is people who have internet excess and an interest in checkers, the goal is for them to be able to play checkers.
 
 ### Glossary and Acronyms
 
@@ -35,18 +30,23 @@ Making a checkers game that two or more people that can be played online over th
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+> The minimum viable product is a product that should be able to allow players to sign in and sign out. 
+And once they are signed in, they should be able to challenge and play and American game of checkers with an opponent.
+Players may resign, or forfeit, if they wish to.
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+> The highest level features of this product include Signing in, starting a game, and updating board through turns.
+Sign in functionality helps the user create his/her unique identifier so that someone else can challenge them once they are online.
+Starting a game overviews the process of challenging a user and creating a game for both players, unless they are already ingame.
+Updating board covers how the gameboard updates after submitting each turn.
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
+> Possible enhancements include:
+Creating a spectator mode, where others can spectate other ongoing games.
+Creating a replay mode, where players can replay previous matches.
+Creating a turn timer, where players must finish their turn in an alloted time.
 
 
 ## Application Domain
@@ -116,12 +116,20 @@ manners of players, accounting for potential errors when navigating the pages.
 > separate section for describing significant features. Place this after
 > you describe the design of the three tiers._
 
+> The UI tier is majorly comprised of routes and their functionality dependent on the route handlers. 
+The majority of the time spent in the application will be on the Gethomeroute which handles situations where the home page is triggered.
+From homepage, getsigninroute will render a sign in page with a text prompt which is sent to postsigninroute to see if user successfully logged
+in or needs to input a different user depending on error. If successful, the home page is rendered again, this time with a user identity.
+From here, challenging an opponent will trigger getgameroute, with a queryparams stating who the opponent is. If the opponent is challenged, they
+will be redirected to getgameroute as well. 
+This is what has been properly implemented so far, the rest will be finished in the next sprint.
+
 
 ### Application Tier
 > _Provide a summary of the Application tier of your architecture. This
 > section will follow the same instructions that are given for the UI
 > Tier above._
-
+> 
 
 ### Model Tier
 > _Provide a summary of the Application tier of your architecture. This
