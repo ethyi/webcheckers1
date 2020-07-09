@@ -12,7 +12,7 @@ import java.util.List;
 public class GameViewTest {
     final Player p1 = new Player("p1");
     final Player p2 = new Player("p2");
-    final GameView CuT = new GameView(p1, p2);
+    final GameView CuT = new GameView(Piece.Color.RED);
 
     /**
      * Checks if the board is null

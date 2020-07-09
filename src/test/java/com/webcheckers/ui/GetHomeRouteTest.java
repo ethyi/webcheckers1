@@ -57,7 +57,7 @@ class GetHomeRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        GameView board =new GameView(c, p);
+        GameView board =new GameView(Piece.Color.RED);
         assertNotNull(board);
 
 

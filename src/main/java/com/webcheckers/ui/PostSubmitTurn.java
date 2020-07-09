@@ -18,12 +18,9 @@ import static spark.Spark.halt;
 public class PostSubmitTurn implements Route {
 
     private final Gson gson;
-    private final TemplateEngine templateEngine;
 
-    public PostSubmitTurn(final Gson gson,final TemplateEngine templateEngine){
+    public PostSubmitTurn(final Gson gson){
         this.gson = gson;
-        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-
     }
 
     @Override
