@@ -57,9 +57,6 @@ public class Player {
         if(obj==this) {
             return true;
         }
-        if(!(obj instanceof Player)){
-            return false;
-        }
         final Player object = (Player) obj;
         return this.name.equals(object.name);
     }

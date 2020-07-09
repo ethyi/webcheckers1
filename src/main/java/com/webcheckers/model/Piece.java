@@ -22,7 +22,7 @@ public class Piece {
     }
     private Color color;
     private PieceType type;
-    Space space;
+    private Space space;
     private List<Row> board;
     GameView gameView;
     private List<Row> validSpaces;
@@ -53,12 +53,20 @@ public class Piece {
 
     }
 
-    public  void jumpMove(Position endPos,Piece targetPiece){
+    public Space getSpace() {
+        return space;
+    }
+
+    public void setSpace(Space space) {
+        this.space = space;
+    }
+
+    public  void jumpMove(Position endPos, Piece targetPiece){
         normalMove(endPos);
         targetPiece.removePiece();
     }
     public void removePiece(){
-        space.setPiece(null);
+        space.setSpaceEmpty();
     }
     public PieceType getType() {
         return type;

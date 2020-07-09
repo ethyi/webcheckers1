@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
      * Unit test for model tier Player component
      */
 public class PlayerTester {
-
+    Player Cut = new Player("x");
     @Test
     public void test_ctor_withArg(){
         final Player ctor_withARG = new Player("name");
@@ -23,6 +23,10 @@ public class PlayerTester {
         final Player p1 = new Player("swen");
         final Player p2 = new Player("swen");
         assertEquals(p1,p2);
+        Player p3 = new Player("y");
+        assertNotEquals(p3,p1);
+
+
     }
     @Test
     public void test_attributes(){
@@ -33,5 +37,18 @@ public class PlayerTester {
         assertTrue(p1.isChallenged());
         assertEquals(p1.getChallenger(), p2);
     }
+    @Test
+    public void getName(){
+        assertEquals("x",Cut.getName());
+    }
+    @Test
+    public  void getCheckers(){
+        Cut.updateCheckers(new Checkers("1",new Player("r"),new Player("w"), Piece.Color.RED));
+        assertNotNull(Cut.getCheckers());
+    }
 
+    @Test
+    public void hashCodeTest(){
+        assertEquals("x".hashCode(),Cut.hashCode());
+    }
 }
