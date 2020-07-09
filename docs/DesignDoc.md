@@ -124,11 +124,7 @@ Currently 4 stories have been completed with acceptance testing. A 3 of sprint 2
 completed.
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
 For each class in each of the tiers, we created unit tests. Each of these tests have seams and mock dependencies so that the unit tests could be written 
 without having to instantiate many new objects. 
 Unfortunately because we didn't have a clear idea of how some of the classes functioned, our unit tests were hard to write since it was difficult to understand
