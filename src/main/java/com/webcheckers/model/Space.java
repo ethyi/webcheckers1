@@ -18,7 +18,7 @@ public class Space {
         this.piece = piece;
         this.valid = valid;
         if(this.piece!=null)
-            this.piece.space = this;
+            this.piece.setSpace(this);
         this.row = row;
     }
 
@@ -48,7 +48,7 @@ public class Space {
      */
     public void setPiece(Piece piece){
         this.piece = piece;
-        piece.space = this;
+        piece.setSpace(this);
     }
     void setSpaceEmpty(){
         this.piece = null;
