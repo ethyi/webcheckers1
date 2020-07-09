@@ -162,7 +162,7 @@ public class WebServer {
     post(VALIDATE_URL, new PostValidateMove(gson));
     post(RESIGN_URL, new PostResignGame(gson));
 
-    post(SUBMIT_URL, new PostSubmitTurn(gson,templateEngine));
+    post(SUBMIT_URL, new PostSubmitTurn(gson));
 //    post("/checkTurn", new PostCheckTurn(gson));
 
     post(BACKUP_URL, new PostBackupMove(gson));
