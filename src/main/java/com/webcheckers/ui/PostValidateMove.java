@@ -26,14 +26,16 @@ public class PostValidateMove implements Route {
         System.out.println(data);
         Piece piece =GameView.getSpace(move.getStart()).getPiece();
         piece.normalMove(move.getEnd());
+        Message m = Message.info("SHREK IS LOVE, SHREK IS LIFE");
+
         if (true){
-            response.type("INFO");
+
         }
         else{
             response.type("ERROR");
             response.body("TODO INVALID MOVE REASON");
         }
-        return gson.toJson(data);
+        return gson.toJson(m);
 
 
     }
