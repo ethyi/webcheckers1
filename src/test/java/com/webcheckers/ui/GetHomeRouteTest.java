@@ -8,9 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -57,7 +54,7 @@ class GetHomeRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        GameView board =new GameView(c, p);
+        GameView board =new GameView(Piece.Color.RED);
         assertNotNull(board);
 
 

@@ -73,19 +73,6 @@ public class GameView implements Iterable<Row>{
         return board.get(position.getRow()).getASpace(position.getCell());
     }
 
-    /**
-     * this will remove a piece at one space then add it back at a new space
-     * @param cur_row row of the piece that is currently selected
-     * @param cur_coll coll of the piece that is currently selected
-     * @param n_row row of the piece that is next
-     * @param n_coll coll of the piece that is next
-     */
-   public void movePiece(int cur_row,int cur_coll,int n_row,int n_coll){
-       //string of the move
-       // json to gson
-        Piece p = getSpace(cur_row,cur_coll).getPiece();
-    }
-
     public static List getBoard() {
         return board;
     }

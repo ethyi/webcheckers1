@@ -38,6 +38,10 @@ public class Row implements Iterable<Space> {
         }
     }
 
+    public Row() {
+
+    }
+
     @Override
     public Iterator<Space> iterator() {
         return space.iterator();
