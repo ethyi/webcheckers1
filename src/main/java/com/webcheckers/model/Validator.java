@@ -28,7 +28,8 @@ public class Validator {
     private static boolean isRightDirection(List<Row> board, Move move) {
         Piece piece = board.get(move.getStart().getRow()).getSpaces().get(move.getStart().getCell()).getPiece();
         boolean valid = false;
-        if(!piece.isAKing()) {
+        //if(!piece.isAKing()) {
+        if(true) {
             int startingRow = move.getStart().getRow();
             int endingRow = move.getEnd().getRow();
 
@@ -59,7 +60,7 @@ public class Validator {
     }
 
     public boolean validateMove(List<Row> board, Move move) {
-        boolean valid = move.moveOnBoard() && isRightDirection(board, move) && isMoveEmptySpace(board, move) &&
+        boolean valid = hasPiecesLeft(board, Piece.Color.RED) && move.moveOnBoard() && isRightDirection(board, move) && isMoveEmptySpace(board, move) &&
                 (move.isRegularMove() || (move.isJumpMove() && isJumpingOpponentPiece(board, move)));
         return valid;
 

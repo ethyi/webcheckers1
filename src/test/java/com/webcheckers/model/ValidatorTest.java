@@ -39,7 +39,7 @@ public class ValidatorTest {
 
     @Test
     public void jumpTest() {
-        assertEquals(validator.validateMove(boardView.getBoard(), badMove), "True");
+        assertEquals(validator.validateMove(boardView.getBoard(), jumpMove), "True");
     }
 
 

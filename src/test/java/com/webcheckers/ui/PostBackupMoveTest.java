@@ -3,7 +3,6 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Player;
-import javafx.geometry.Pos;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.Request;
