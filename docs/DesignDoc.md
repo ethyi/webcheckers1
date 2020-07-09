@@ -129,3 +129,8 @@ completed.
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets. If there are any anomalies, discuss
 > those._
+For each class in each of the tiers, we created unit tests. Each of these tests have seams and mock dependencies so that the unit tests could be written 
+without having to instantiate many new objects. 
+Unfortunately because we didn't have a clear idea of how some of the classes functioned, our unit tests were hard to write since it was difficult to understand
+class behavior. Due to this, our coverage in the UI was poor, likely because that was the focus of sprint 2. Otherwise, model and application tier hit their targets
+of at least 85%.
