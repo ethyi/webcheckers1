@@ -57,8 +57,11 @@ public class Player {
         if(obj==this) {
             return true;
         }
-        final Player object = (Player) obj;
-        return this.name.equals(object.name);
+        else if (obj == null){
+            return false;
+        }
+        Player object = (Player) obj;
+        return getName().equals(object.getName());
     }
 
     @Override
