@@ -2,7 +2,6 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.*;
-import com.webcheckers.util.Message;
 import spark.*;
 
 import java.util.HashMap;
@@ -53,7 +52,6 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked.");
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
-        GameView gameView = new GameView(Piece.Color.WHITE);
 
         if (player!=null&&player.isChallenged()==false){//make new checkers
             String otherString = request.queryParams("challenger");
@@ -67,11 +65,11 @@ public class GetGameRoute implements Route {
                 return null;
             }
 
-            Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
+            Checkers temp = new Checkers("1",player, otherPlayer);
             gameCenter.addGame(temp);
-            gameView = new GameView(Piece.Color.RED);
-        //TODO implement gameView within checkers, and a board
+
             //TODO make gameView synchronous, figure out iterator
+            //TODO parse new Move into Board
             player.setID("1");
             otherPlayer.setID("1");
             player.setChallenged(true, otherPlayer);
@@ -83,7 +81,7 @@ public class GetGameRoute implements Route {
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
         vm.put("currentUser",player);
-        vm.put("board", gameView);
+        vm.put("board", checkers.getBoardView());
         vm.put("viewMode",mode.PLAY);
         vm.put("redPlayer",checkers.getRedPlayer());
         vm.put("whitePlayer",checkers.getWhitePlayer());

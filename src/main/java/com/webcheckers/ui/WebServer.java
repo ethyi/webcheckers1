@@ -69,6 +69,8 @@ public class WebServer {
 
   public static final String BACKUP_URL = "/backupMove";
 
+  public static final String CHECK_TURN_URL = "/checkTurn";
+
   public static final String RESIGN_URL = "/resignGame";
 
   //
@@ -161,12 +163,10 @@ public class WebServer {
     post(SIGNIN_URL, new PostSigninRoute(templateEngine, gameCenter));
     post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,gameCenter));
     get(GAME_URL, new GetGameRoute(templateEngine,gameCenter));
-    post(VALIDATE_URL, new PostValidateMove(gson));
+    post(VALIDATE_URL, new PostValidateMove(gson, gameCenter));
     post(RESIGN_URL, new PostResignGame(gson));
-
-    post(SUBMIT_URL, new PostSubmitTurn(gson));
-//    post("/checkTurn", new PostCheckTurn(gson));
-
+    post(SUBMIT_URL, new PostSubmitTurn(gson, gameCenter));
+    post(CHECK_TURN_URL, new PostCheckTurn(gson,gameCenter));
     post(BACKUP_URL, new PostBackupMove(gson));
 
     LOG.config("WebServer is initialized.");

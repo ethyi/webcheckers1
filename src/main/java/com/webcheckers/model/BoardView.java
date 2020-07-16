@@ -10,11 +10,11 @@ import java.util.List;
  * @author Aubrey Tarmu
  *
  */
-public class GameView implements Iterable<Row>{
-    private static List<Row> board;
+public class BoardView implements Iterable<Row>{
+    private List<Row> board;
     private Piece.Color bottomColor;
 
-    public GameView(Piece.Color bottomColor) {
+    public BoardView(Piece.Color bottomColor) {
         board = new ArrayList<Row>();
         this.bottomColor = bottomColor;
         setupBoard();
@@ -49,11 +49,11 @@ public class GameView implements Iterable<Row>{
     /**
      * this will get a piece at a specific row and Coll
      * @param row
-     * @param coll
+     * @param col
      * @return
      */
-    public static  Space getSpace(int row, int coll){
-       return board.get(row).getASpace(coll);
+    public Space getSpace(int row, int col){
+       return board.get(row).getASpace(col);
     }
 
     public Piece.Color getBottomColor() {
@@ -69,12 +69,29 @@ public class GameView implements Iterable<Row>{
      * @param position
      * @return
      */
-    public static  Space getSpace(Position position){
+    public Space getSpace(Position position){
         return board.get(position.getRow()).getASpace(position.getCell());
     }
 
-    public static List getBoard() {
+    /**
+     * returns Iterable board
+     * @return board as List of rows
+     */
+    public List<Row> getBoard() {
         return board;
+    }
+
+    /**
+     * Changes board according to move being made.
+     * @param move Move to be made
+     */
+    public void MovePiece(Move move){
+        Position start = move.getStart();
+        Position end = move.getEnd();
+        Space startSpace = getSpace(start);
+        Space endSpace = getSpace(end);
+        endSpace.setPiece(startSpace.getPiece());
+        startSpace.setSpaceEmpty();
     }
 
     @Override
@@ -82,6 +99,4 @@ public class GameView implements Iterable<Row>{
         return board.iterator();
     }
 
-    public void putPiece() {
-    }
 }

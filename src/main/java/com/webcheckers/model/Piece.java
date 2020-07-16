@@ -24,13 +24,13 @@ public class Piece {
     private PieceType type;
     private Space space;
     private List<Row> board;
-    GameView gameView;
+    BoardView boardView;
     private List<Row> validSpaces;
-    public Piece(PieceType type, Color color, GameView gameView) {
+    public Piece(PieceType type, Color color, BoardView boardView) {
         this.type = type;
         this.color = color;
-        this.gameView = gameView;
-        board = gameView.getBoard();
+        this.boardView = boardView;
+        board = boardView.getBoard();
     }
 
     public boolean isAKing(){
@@ -43,7 +43,7 @@ public class Piece {
 
 
     public  void normalMove(Position endPos){
-        Space nextSpace =gameView.getSpace(endPos.getRow(),endPos.getCell());
+        Space nextSpace = boardView.getSpace(endPos.getRow(),endPos.getCell());
         space.setSpaceEmpty();
         nextSpace.setPiece(this);
         //  System.out.println(nextSpace.getPiece());

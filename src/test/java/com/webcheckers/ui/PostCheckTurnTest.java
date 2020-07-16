@@ -49,7 +49,7 @@ class PostCheckTurnTest {
 
 
             System.out.println(c);
-            CuT = new PostCheckTurn(gson);
+            CuT = new PostCheckTurn(gson,gameCenter);
             assertEquals(request.session(),session);
 
         }

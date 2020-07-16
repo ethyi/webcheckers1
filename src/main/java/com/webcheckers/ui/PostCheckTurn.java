@@ -1,29 +1,48 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Checkers;
+import com.webcheckers.model.Piece;
+import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.Session;
 
 public class PostCheckTurn implements Route {
-        private final Gson gson;
-        public PostCheckTurn(final Gson gson){
+    private final Gson gson;
+    private final GameCenter gameCenter;
+    public PostCheckTurn(final Gson gson, final GameCenter gameCenter){
             this.gson = gson;
+            this.gameCenter = gameCenter;
         }
 
     @Override
-    public Object handle(Request request, Response response){
-
-        final String data = request.queryParams("actionData");
-//        Move move = new Move(data);
-        if (true){
-            return true;
+    public Object handle(Request request, Response response) {
+        Session session = request.session();
+        Player player = session.attribute("currentPlayer");
+        Checkers game = gameCenter.getGame(player.getGameID());
+        Message m;
+        if(player.equals(game.getRedPlayer())){
+            if(game.getActiveColor().equals(Piece.Color.RED)){
+                m = Message.info("true");
+            }
+            else{
+                m = Message.info("false");
+            }
         }
         else{
-            //TODO Should say why it is invalid, utilize Move class to do this
-            return Message.error("Invalid Move");
+            if(game.getActiveColor().equals(Piece.Color.WHITE)){
+                m = Message.info("true");
+            }
+            else{
+                m = Message.info("false");
+            }
         }
+
+        return gson.toJson(m);
 
     }
 

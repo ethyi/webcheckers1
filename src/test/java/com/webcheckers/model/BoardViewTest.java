@@ -4,16 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import spark.utils.Assert;
 
 import java.util.List;
 
 /**
  * Tests the GameView class
  */
-public class GameViewTest {
+public class BoardViewTest {
     private  final Piece.Color bottomColor = Piece.Color.RED;
-    final GameView CuT = new GameView(bottomColor);
+    final BoardView CuT = new BoardView(bottomColor);
 @BeforeEach
     void setUp(){
         for(int i=0;i<8;i++){
@@ -42,13 +41,13 @@ public class GameViewTest {
 
     }
     @Test
-    public static void getSpaceTest(int row, int coll){
+    public void getSpaceTest(int row, int coll){
 
-         assertNotNull(GameView.getSpace(row,coll));
+         assertNotNull(CuT.getSpace(row,coll));
     }
     @Test
-    static   void  getSpace(Position position){
-        assertNotNull(GameView.getSpace(position));
+    public void  getSpace(Position position){
+        assertNotNull(CuT.getSpace(position));
     }
     @Test
     void getBottomColorTest(){

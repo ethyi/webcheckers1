@@ -49,7 +49,7 @@ class PostValidateMoveTest {
 
 
         System.out.println(c);
-        CuT = new PostValidateMove(gson);
+        CuT = new PostValidateMove(gson,gameCenter);
         assertEquals(request.session(),session);
 
     }

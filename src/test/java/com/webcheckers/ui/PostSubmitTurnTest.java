@@ -49,7 +49,7 @@ class PostSubmitTurnTest {
 
 
         System.out.println(c);
-        CuT = new PostSubmitTurn(gson);
+        CuT = new PostSubmitTurn(gson,gameCenter);
         assertEquals(request.session(),session);
 
     }

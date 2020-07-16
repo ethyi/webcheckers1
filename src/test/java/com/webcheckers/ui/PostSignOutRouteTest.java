@@ -2,7 +2,7 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.GameView;
+import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ class PostSignOutRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        GameView board =new GameView(Piece.Color.RED);
+        BoardView board =new BoardView(Piece.Color.RED);
         assertNotNull(board);
 
 

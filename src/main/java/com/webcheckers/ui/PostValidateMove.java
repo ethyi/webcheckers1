@@ -2,9 +2,8 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 
-import com.webcheckers.model.GameView;
-import com.webcheckers.model.Move;
-import com.webcheckers.model.Piece;
+import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
 import spark.Request;
 import spark.Response;
@@ -14,28 +13,34 @@ import spark.Session;
 public class PostValidateMove implements Route {
 
     private final Gson gson;
-    public PostValidateMove(final Gson gson){
+    private final GameCenter gameCenter;
+
+    public PostValidateMove(final Gson gson, final GameCenter gameCenter){
         this.gson = gson;
+        this.gameCenter = gameCenter;
     }
 
     @Override
     public Object handle(Request request, Response response){
+        Session session = request.session();
+        Player player = session.attribute("currentPlayer");
 
         final String data = request.queryParams("actionData");
         Move move = new Move(data);
 
-        Piece piece =GameView.getSpace(move.getStart()).getPiece();
-        piece.normalMove(move.getEnd());
-        Message m = Message.info("TEST VALIDATE");
+        //Piece piece = BoardView.getSpace(move.getStart()).getPiece();
+        //piece.normalMove(move.getEnd());
 
-        if (true){
+        boolean Validity = true;// pass move into validity object
 
+        if (!Validity){ //invalid cases with appropriate message
+            Message m = Message.error("INVALID MOVE");
+            return gson.toJson(m);
         }
-        else{
-            response.type("ERROR");
-            response.body("TODO INVALID MOVE REASON");
-        }
-        return gson.toJson(m);
+        Checkers game = gameCenter.getGame(player.getGameID());
+        game.getBoardView().MovePiece(move);
+
+        return gson.toJson(Message.info("VALID MOVE"));
 
 
     }

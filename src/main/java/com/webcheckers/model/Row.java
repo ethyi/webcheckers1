@@ -14,12 +14,12 @@ public class Row implements Iterable<Space> {
     private int index;
     private List<Space> space;
 
-    public Row(int index, boolean valid, Piece.Color color,GameView gameView) {
+    public Row(int index, boolean valid, Piece.Color color, BoardView boardView) {
         this.index = index;
         this.space = new ArrayList<>();
         for(int i = 0; i < 8; i++) {
             if(valid) {
-                space.add(new Space(i, new Piece(Piece.PieceType.SINGLE, color,gameView), valid,this));
+                space.add(new Space(i, new Piece(Piece.PieceType.SINGLE, color, boardView), valid,this));
             } else {
                 space.add(new Space(i, null, valid,this));
             }
@@ -28,7 +28,7 @@ public class Row implements Iterable<Space> {
 
     }
 
-    public Row(int index, boolean valid,GameView gameView) {
+    public Row(int index, boolean valid, BoardView boardView) {
         this.index = index;
         this.space = new ArrayList<>();
         for(int i = 0; i < 8; i++) {
@@ -53,7 +53,7 @@ public class Row implements Iterable<Space> {
     public List<Space> getSpaces() {
         return this.space;
     }
-    Space getASpace(int index){
+    public Space getASpace(int index){
         return space.get(index);
     }
 }

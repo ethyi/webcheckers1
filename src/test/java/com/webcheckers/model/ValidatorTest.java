@@ -1,12 +1,11 @@
 package com.webcheckers.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidatorTest {
-    GameView boardView = new GameView(Piece.Color.RED);
+    BoardView boardView = new BoardView(Piece.Color.RED);
 
 
     final Validator validator = new Validator();
