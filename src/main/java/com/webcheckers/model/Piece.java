@@ -46,7 +46,7 @@ public class Piece {
         Space nextSpace =gameView.getSpace(endPos.getRow(),endPos.getCell());
         space.setSpaceEmpty();
         nextSpace.setPiece(this);
-        System.out.println(nextSpace.getPiece());
+        //  System.out.println(nextSpace.getPiece());
         if(endPos.getRow()==0){
             promote();
         }

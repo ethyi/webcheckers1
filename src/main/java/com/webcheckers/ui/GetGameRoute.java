@@ -63,7 +63,6 @@ public class GetGameRoute implements Route {
                 return null;
             }
             Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
-            System.out.println("sdfs sinsdfgsdfg");
             gameView = new GameView(Piece.Color.RED);
 
             player.updateCheckers(temp);

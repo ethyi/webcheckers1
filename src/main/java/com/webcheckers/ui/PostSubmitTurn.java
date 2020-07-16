@@ -27,13 +27,7 @@ public class PostSubmitTurn implements Route {
     public Object handle(Request request, Response response){
         //TODO
 
-        System.out.println("PORNOGRAPHY");
-        System.out.println("here lies the body : " +request.body());
-        System.out.println("here lies the request : " +request.contentType());
-
-        System.out.println(response.type());
-        System.out.println(response.body());
-        Message m = Message.info("SHREK IS LOVE, SHREK IS LIFE");
+        Message m = Message.info("TEST SUBMIT");
 
         return gson.toJson(m);
     }

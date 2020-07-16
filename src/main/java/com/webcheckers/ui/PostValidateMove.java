@@ -23,10 +23,10 @@ public class PostValidateMove implements Route {
 
         final String data = request.queryParams("actionData");
         Move move = new Move(data);
-        System.out.println(data);
+
         Piece piece =GameView.getSpace(move.getStart()).getPiece();
         piece.normalMove(move.getEnd());
-        Message m = Message.info("SHREK IS LOVE, SHREK IS LIFE");
+        Message m = Message.info("TEST VALIDATE");
 
         if (true){
 
