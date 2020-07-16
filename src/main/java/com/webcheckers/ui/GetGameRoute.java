@@ -28,10 +28,10 @@ public class GetGameRoute implements Route {
     private final PlayerLobby lobby;
     private final GameCenter gameCenter;
 
-    public GetGameRoute(TemplateEngine templateEngine, PlayerLobby lobby, GameCenter gameCenter) {
+    public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-        this.lobby = lobby;
         this.gameCenter = gameCenter;
+        this.lobby = gameCenter.getLobby();
         LOG.config("GetGameRoute is initialized.");
     }
 

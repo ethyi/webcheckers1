@@ -39,7 +39,7 @@ class GetGameRouteTest {
         currentPlayer=  request.session().attribute(GetHomeRoute.CURRENT_PLAYER);
         currentPlayer = new Player("x");
 //        request.session().attribute(GetHomeRoute.CURRENT_PLAYER,currentPlayer);
-        GetHomeRoute getHomeRoute = new GetHomeRoute(engine,playerLobby);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine,gameCenter);
 
         getHomeRoute.handle(request,response);
 
@@ -47,7 +47,7 @@ class GetGameRouteTest {
 
 
         System.out.println(c);
-        CuT = new GetGameRoute(engine,playerLobby,gameCenter);
+        CuT = new GetGameRoute(engine,gameCenter);
         assertEquals(request.session(),session);
 
     }

@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.appl.PlayerLobby;
 import spark.*;
@@ -24,14 +25,15 @@ public class PostSignOutRoute implements Route {
     private static final Logger LOG = Logger.getLogger(GetSigninRoute.class.getName());
 
     private final TemplateEngine templateEngine;
+    private final GameCenter gameCenter;
     private final PlayerLobby lobby;
 
 
-    public PostSignOutRoute(final TemplateEngine templateEngine, PlayerLobby lobby){
+    public PostSignOutRoute(final TemplateEngine templateEngine, GameCenter gameCenter){
 
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-
-        this.lobby = lobby;
+        this.gameCenter = gameCenter;
+        this.lobby = gameCenter.getLobby();
 
         LOG.config("PostSignOutRoute is initialized.");
 

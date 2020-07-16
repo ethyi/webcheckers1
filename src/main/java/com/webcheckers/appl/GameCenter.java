@@ -14,11 +14,15 @@ import java.util.HashMap;
 public class GameCenter {
 
     private HashMap<String, Checkers> games;
+    private PlayerLobby lobby;
 
     public GameCenter(){
         this.games = new HashMap<>();
+        this.lobby = new PlayerLobby();
     }
-
+    public PlayerLobby getLobby(){
+        return this.lobby;
+    }
     public Checkers getGame(String id){
         return games.get(id);
     }
@@ -46,5 +50,6 @@ public class GameCenter {
     public synchronized void removeGame(String id ){
         games.remove(id);
     }
+
 
 }

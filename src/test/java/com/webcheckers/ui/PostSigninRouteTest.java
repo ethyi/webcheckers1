@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.GameView;
 import com.webcheckers.model.Piece;
@@ -18,6 +19,7 @@ class PostSigninRouteTest {
         private Session session;
         private TemplateEngine engine;
         private Response response;
+        private GameCenter gameCenter;
         private PlayerLobby playerLobby;
         private PostSigninRoute CuT;
         static final String CURRENT_PLAYER = "currentPlayer";
@@ -32,7 +34,7 @@ class PostSigninRouteTest {
             playerLobby = new PlayerLobby();
             playerLobby.addPlayer("p");
             playerLobby.addPlayer("c");
-            CuT = new PostSigninRoute(engine,playerLobby);
+            CuT = new PostSigninRoute(engine,gameCenter);
             assertEquals(request.session(),session);
 
         }

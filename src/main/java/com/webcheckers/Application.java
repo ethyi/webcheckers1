@@ -97,12 +97,10 @@ public final class Application {
     // response to Ajax requests.
     final Gson gson = new Gson();
 
-    final PlayerLobby lobby = new PlayerLobby();
-
     final GameCenter gameCenter = new GameCenter();
 
     // inject the game center and freemarker engine into web server
-    final WebServer webServer = new WebServer(templateEngine, gson, lobby,gameCenter);
+    final WebServer webServer = new WebServer(templateEngine, gson, gameCenter);
 
     // inject web server into application
     final Application app = new Application(webServer);

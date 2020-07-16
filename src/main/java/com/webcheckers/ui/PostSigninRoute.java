@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.util.Message;
@@ -23,13 +24,14 @@ import static spark.Spark.halt;
 public class PostSigninRoute implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
+    private final GameCenter gameCenter;
     private final PlayerLobby lobby;
 
-    public PostSigninRoute(TemplateEngine templateEngine, PlayerLobby lobby) {
+    public PostSigninRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-        this.lobby = lobby;
+        this.gameCenter = gameCenter;
+        this.lobby = gameCenter.getLobby();
         LOG.config("PostSigninRoute is initialized.");
-
     }
 
     /**

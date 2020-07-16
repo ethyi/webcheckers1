@@ -77,7 +77,6 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
-  private final PlayerLobby lobby;
   private final GameCenter gameCenter;
   //
   // Constructor
@@ -94,7 +93,7 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby lobby,
+  public WebServer(final TemplateEngine templateEngine, final Gson gson,
                    final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -102,7 +101,6 @@ public class WebServer {
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
-    this.lobby = lobby;
     this.gameCenter = gameCenter;
   }
 
@@ -158,11 +156,11 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the Checkers game Home page.
-    get(HOME_URL, new GetHomeRoute(templateEngine, lobby));
+    get(HOME_URL, new GetHomeRoute(templateEngine, gameCenter));
     get(SIGNIN_URL, new GetSigninRoute(templateEngine));
-    post(SIGNIN_URL, new PostSigninRoute(templateEngine, lobby));
-    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,lobby));
-    get(GAME_URL, new GetGameRoute(templateEngine,lobby,gameCenter));
+    post(SIGNIN_URL, new PostSigninRoute(templateEngine, gameCenter));
+    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,gameCenter));
+    get(GAME_URL, new GetGameRoute(templateEngine,gameCenter));
     post(VALIDATE_URL, new PostValidateMove(gson));
     post(RESIGN_URL, new PostResignGame(gson));
 
