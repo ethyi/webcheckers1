@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import spark.TemplateEngine;
 
@@ -77,6 +78,7 @@ public class WebServer {
   private final TemplateEngine templateEngine;
   private final Gson gson;
   private final PlayerLobby lobby;
+  private final GameCenter gameCenter;
   //
   // Constructor
   //
@@ -92,7 +94,8 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby lobby) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby lobby,
+                   final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
@@ -100,6 +103,7 @@ public class WebServer {
     this.templateEngine = templateEngine;
     this.gson = gson;
     this.lobby = lobby;
+    this.gameCenter = gameCenter;
   }
 
   //
