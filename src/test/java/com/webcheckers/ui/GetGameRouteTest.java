@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.GameView;
 import com.webcheckers.model.Piece;
@@ -19,6 +20,7 @@ class GetGameRouteTest {
     private TemplateEngine engine;
     private Response response;
     private PlayerLobby playerLobby;
+    private GameCenter gameCenter;
     private GetGameRoute CuT;
     static final String CURRENT_PLAYER = "currentPlayer";
     Player currentPlayer;
@@ -31,6 +33,7 @@ class GetGameRouteTest {
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
         playerLobby = new PlayerLobby();
+        gameCenter = mock(GameCenter.class);
         playerLobby.addPlayer("p");
         playerLobby.addPlayer("c");
         currentPlayer=  request.session().attribute(GetHomeRoute.CURRENT_PLAYER);
@@ -44,7 +47,7 @@ class GetGameRouteTest {
 
 
         System.out.println(c);
-        CuT = new GetGameRoute(engine,playerLobby);
+        CuT = new GetGameRoute(engine,playerLobby,gameCenter);
         assertEquals(request.session(),session);
 
     }

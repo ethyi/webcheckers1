@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -25,10 +26,12 @@ public class GetGameRoute implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby lobby;
+    private final GameCenter gameCenter;
 
-    public GetGameRoute(TemplateEngine templateEngine, PlayerLobby lobby) {
+    public GetGameRoute(TemplateEngine templateEngine, PlayerLobby lobby, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.lobby = lobby;
+        this.gameCenter = gameCenter;
         LOG.config("GetGameRoute is initialized.");
     }
 
@@ -52,27 +55,31 @@ public class GetGameRoute implements Route {
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
         GameView gameView = new GameView(Piece.Color.WHITE);
 
-        if (player!=null&&player.getCheckers()==null){//make new checkers
+        if (player!=null&&player.isChallenged()==false){//make new checkers
             String otherString = request.queryParams("challenger");
             final Player otherPlayer = lobby.getPlayer(otherString);
             session.attribute(GetHomeRoute.IN_GAME, null);
+
             if (otherPlayer.isChallenged()){
                 session.attribute(GetHomeRoute.IN_GAME,"true");
                 response.redirect(WebServer.HOME_URL);
                 halt();
                 return null;
             }
-            Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
-            gameView = new GameView(Piece.Color.RED);
 
-            player.updateCheckers(temp);
-            otherPlayer.updateCheckers(temp);
+            Checkers temp = new Checkers("1",player, otherPlayer, Piece.Color.RED);
+            gameCenter.addGame(temp);
+            gameView = new GameView(Piece.Color.RED);
+        //TODO implement gameView within checkers, and a board
+            //TODO make gameView synchronous, figure out iterator
+            player.setID("1");
+            otherPlayer.setID("1");
             player.setChallenged(true, otherPlayer);
             otherPlayer.setChallenged(true,player);
 
         }
 
-        final Checkers checkers = player.getCheckers();
+        final Checkers checkers = gameCenter.getGame(player.getGameID());
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
         vm.put("currentUser",player);

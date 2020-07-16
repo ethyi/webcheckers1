@@ -41,11 +41,7 @@ public class PlayerTester {
     public void getName(){
         assertEquals("x",Cut.getName());
     }
-    @Test
-    public  void getCheckers(){
-        Cut.updateCheckers(new Checkers("1",new Player("r"),new Player("w"), Piece.Color.RED));
-        assertNotNull(Cut.getCheckers());
-    }
+
 
     @Test
     public void hashCodeTest(){
