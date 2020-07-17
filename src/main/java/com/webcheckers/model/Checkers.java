@@ -9,20 +9,24 @@ public class Checkers {
     private Player redPlayer;
     private Player whitePlayer;
     private Piece.Color activeColor;
-
+    private Board board;
     /**
      * Create checkers data object
      * @param id game id
      * @param red red Player
      * @param white white Player
-     * @param activeColor current turn color
 //     * @param bottomColor color that wil be at the bottom of this board
      */
-    public Checkers(String id, Player red, Player white, Piece.Color activeColor){
+    public Checkers(String id, Player red, Player white){
         this.id = id;
         this.redPlayer = red;
         this.whitePlayer = white;
-        this.activeColor = activeColor;
+        this.activeColor = Piece.Color.RED;
+        this.board = new Board();
+    }
+
+    public Board getBoard(){
+        return board;
     }
 
     public Player getRedPlayer(){

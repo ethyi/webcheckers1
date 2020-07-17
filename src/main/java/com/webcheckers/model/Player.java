@@ -10,15 +10,15 @@ public class Player {
     private boolean isChallenged;
     private String name;
     private Player challenger;
-    private Checkers checkers;
-    boolean isChallenger;
+    private String gameID;
+
     /**
      * Create Player with username
      * @param name username
      */
     public Player(String name){
         this.name = name;
-        this.checkers=null;
+        this.isChallenged = false;
     }
 
     /**
@@ -46,12 +46,14 @@ public class Player {
         return this.name;
     }
 
-    public Checkers getCheckers(){
-        return checkers;
+    public void setID(String ID){
+        this.gameID = ID;
     }
-    public void updateCheckers(Checkers checkers){
-        this.checkers = checkers;
+
+    public String getGameID(){
+        return this.gameID;
     }
+
     @Override
     public boolean equals( Object obj){
         if(obj==this) {

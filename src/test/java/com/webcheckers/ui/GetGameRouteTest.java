@@ -1,7 +1,9 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.GameView;
+import com.webcheckers.model.Board;
+import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +21,7 @@ class GetGameRouteTest {
     private TemplateEngine engine;
     private Response response;
     private PlayerLobby playerLobby;
+    private GameCenter gameCenter;
     private GetGameRoute CuT;
     static final String CURRENT_PLAYER = "currentPlayer";
     Player currentPlayer;
@@ -31,12 +34,13 @@ class GetGameRouteTest {
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
         playerLobby = new PlayerLobby();
+        gameCenter = mock(GameCenter.class);
         playerLobby.addPlayer("p");
         playerLobby.addPlayer("c");
         currentPlayer=  request.session().attribute(GetHomeRoute.CURRENT_PLAYER);
         currentPlayer = new Player("x");
 //        request.session().attribute(GetHomeRoute.CURRENT_PLAYER,currentPlayer);
-        GetHomeRoute getHomeRoute = new GetHomeRoute(engine,playerLobby);
+        GetHomeRoute getHomeRoute = new GetHomeRoute(engine,gameCenter);
 
         getHomeRoute.handle(request,response);
 
@@ -44,7 +48,7 @@ class GetGameRouteTest {
 
 
         System.out.println(c);
-        CuT = new GetGameRoute(engine,playerLobby);
+        CuT = new GetGameRoute(engine,gameCenter);
         assertEquals(request.session(),session);
 
     }
@@ -65,8 +69,8 @@ class GetGameRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        GameView board =new GameView(Piece.Color.RED);
-        assertNotNull(board);
+        BoardView boardView =new BoardView(new Board(),Piece.Color.RED);
+        assertNotNull(boardView);
 
 
 //        assertEquals(CuT.getLobby(),playerLobby);
@@ -84,7 +88,7 @@ class GetGameRouteTest {
 //        //   * model contains all necessary View-Model data
         testHelper.assertViewModelAttribute("title", "Welcome!");
         if(p!=null&&p.isChallenged()){
-            testHelper.assertViewModelAttribute("board",board);
+            testHelper.assertViewModelAttribute("board",boardView);
 
             testHelper.assertViewModelAttribute("gameID", "1");
             testHelper.assertViewModelAttribute("currentUser", p);

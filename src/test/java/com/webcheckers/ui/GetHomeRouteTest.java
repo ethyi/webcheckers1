@@ -1,7 +1,9 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
-import com.webcheckers.model.GameView;
+import com.webcheckers.model.Board;
+import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +22,7 @@ class GetHomeRouteTest {
     private Session session;
     private TemplateEngine engine;
     private Response response;
+    private GameCenter gameCenter;
     private PlayerLobby playerLobby;
     private GetHomeRoute CuT;
     static final String CURRENT_PLAYER = "currentPlayer";
@@ -31,10 +34,11 @@ class GetHomeRouteTest {
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
-        playerLobby = new PlayerLobby();
+        gameCenter = new GameCenter();
+        playerLobby = gameCenter.getLobby();
         playerLobby.addPlayer("p");
         playerLobby.addPlayer("c");
-        CuT = new GetHomeRoute(engine,playerLobby);
+        CuT = new GetHomeRoute(engine,gameCenter);
         assertEquals(request.session(),session);
 
     }
@@ -61,7 +65,7 @@ class GetHomeRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        GameView board =new GameView(Piece.Color.RED);
+        BoardView board =new BoardView(new Board(), Piece.Color.RED);
         assertNotNull(board);
 
 

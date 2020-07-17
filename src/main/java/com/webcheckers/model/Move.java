@@ -54,7 +54,6 @@ public class Move {
         int xshift = Math.abs(this.start.getRow() - this.end.getRow());
         int yshift = Math.abs(this.start.getCell()- this.end.getCell());
         return (xshift == yshift && xshift == 1);
-
     }
 
     public boolean isJumpMove() {

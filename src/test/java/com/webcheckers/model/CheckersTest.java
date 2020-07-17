@@ -15,7 +15,7 @@ class CheckersTest {
     @BeforeEach
     void setUp(){
 
-        checkers = new Checkers(id,redPlayer,whitePlayer,activeColor);
+        checkers = new Checkers(id,redPlayer,whitePlayer);
     }
 
     @Test
@@ -46,10 +46,10 @@ class CheckersTest {
 
     @Test
     void testEquals() {
-        Checkers n_checkers = new Checkers(id,redPlayer,whitePlayer,activeColor);
+        Checkers n_checkers = new Checkers(id,redPlayer,whitePlayer);
         assertTrue(checkers.equals(n_checkers));
-        n_checkers = new Checkers("2",redPlayer,whitePlayer,activeColor);
-
+        n_checkers = new Checkers("2",redPlayer,whitePlayer);
+        assertFalse(checkers.equals(n_checkers));
 
     }
 

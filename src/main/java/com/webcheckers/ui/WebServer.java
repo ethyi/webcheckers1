@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import spark.TemplateEngine;
 
@@ -68,6 +69,8 @@ public class WebServer {
 
   public static final String BACKUP_URL = "/backupMove";
 
+  public static final String CHECK_TURN_URL = "/checkTurn";
+
   public static final String RESIGN_URL = "/resignGame";
 
   //
@@ -76,7 +79,7 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
-  private final PlayerLobby lobby;
+  private final GameCenter gameCenter;
   //
   // Constructor
   //
@@ -92,14 +95,15 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby lobby) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson,
+                   final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
-    this.lobby = lobby;
+    this.gameCenter = gameCenter;
   }
 
   //
@@ -154,17 +158,15 @@ public class WebServer {
     //// code clean; using small classes.
 
     // Shows the Checkers game Home page.
-    get(HOME_URL, new GetHomeRoute(templateEngine, lobby));
+    get(HOME_URL, new GetHomeRoute(templateEngine, gameCenter));
     get(SIGNIN_URL, new GetSigninRoute(templateEngine));
-    post(SIGNIN_URL, new PostSigninRoute(templateEngine, lobby));
-    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,lobby));
-    get(GAME_URL, new GetGameRoute(templateEngine,lobby));
-    post(VALIDATE_URL, new PostValidateMove(gson));
+    post(SIGNIN_URL, new PostSigninRoute(templateEngine, gameCenter));
+    post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,gameCenter));
+    get(GAME_URL, new GetGameRoute(templateEngine,gameCenter));
+    post(VALIDATE_URL, new PostValidateMove(gson, gameCenter));
     post(RESIGN_URL, new PostResignGame(gson));
-
-    post(SUBMIT_URL, new PostSubmitTurn(gson));
-//    post("/checkTurn", new PostCheckTurn(gson));
-
+    post(SUBMIT_URL, new PostSubmitTurn(gson, gameCenter));
+    post(CHECK_TURN_URL, new PostCheckTurn(gson,gameCenter));
     post(BACKUP_URL, new PostBackupMove(gson));
 
     LOG.config("WebServer is initialized.");

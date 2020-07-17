@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
@@ -37,6 +38,7 @@ public class GetHomeRoute implements Route {
   private final TemplateEngine templateEngine;
   private Player player;
 
+  private final GameCenter gameCenter;
   private final PlayerLobby lobby;
 
   /**
@@ -45,9 +47,10 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine, final PlayerLobby lobby) {
+  public GetHomeRoute(final TemplateEngine templateEngine, final GameCenter gameCenter) {
     this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-    this.lobby = lobby;
+    this.gameCenter = gameCenter;
+    this.lobby = gameCenter.getLobby();
     LOG.config("GetHomeRoute is initialized.");
   }
 
