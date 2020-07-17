@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Board;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
@@ -64,7 +65,7 @@ class GetHomeRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        BoardView board =new BoardView(Piece.Color.RED);
+        BoardView board =new BoardView(new Board(), Piece.Color.RED);
         assertNotNull(board);
 
 

@@ -1,10 +1,10 @@
 package com.webcheckers.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.awt.image.AreaAveragingScaleFilter;
+import java.util.*;
+
 /**
- * GameBoard entity that holds board data.
+ * GameBoard entity that holds board view data.\
  * @author Tony Jiang
  * @author Ethan Yi
  * @author Aubrey Tarmu
@@ -14,63 +14,18 @@ public class BoardView implements Iterable<Row>{
     private List<Row> board;
     private Piece.Color bottomColor;
 
-    public BoardView(Piece.Color bottomColor) {
-        board = new ArrayList<Row>();
-        this.bottomColor = bottomColor;
-        setupBoard();
-    }
-
-    public void setupBoard() {
-        boolean valid = false;
-        for(int i =0; i<3; i++) {
-            board.add(new Row(i, valid,bottomColor == Piece.Color.RED? Piece.Color.WHITE: Piece.Color.RED, this));
-            valid = !valid;
-
-        }
-
-        for(int j = 3; j < 5; j++) {
-            board.add(new Row(j, valid,this));
-            valid = !valid;
-        }
-
-        for(int i =5; i<8; i++) {
-            board.add(new Row(i, valid, bottomColor,this));
-            valid = !valid;
-            /**
-            if(playerColor== Piece.Color.RED){
-                board.add(new Row(i, valid, Piece.Color.WHITE,this));
-            }
-            else{
-                board.add(new Row(i, valid, Piece.Color.RED,this));
-            }
-             */
-        }
-    }
     /**
-     * this will get a piece at a specific row and Coll
-     * @param row
-     * @param col
-     * @return
+     * Creates a board that can be iterated through
+     * @param board checkers board
+     * @param bottomColor board perspective
      */
-    public Space getSpace(int row, int col){
-       return board.get(row).getASpace(col);
+    public BoardView(Board board, Piece.Color bottomColor) {
+        this.board = board.getBoard();
+        this.bottomColor = bottomColor;
     }
 
     public Piece.Color getBottomColor() {
         return bottomColor;
-    }
-
-    public void setBottomColor(Piece.Color bottomColor) {
-        this.bottomColor = bottomColor;
-    }
-
-    /**
-     * this will get a piece at a specific row and Coll
-     * @param position
-     * @return
-     */
-    public Space getSpace(Position position){
-        return board.get(position.getRow()).getASpace(position.getCell());
     }
 
     /**
@@ -82,21 +37,33 @@ public class BoardView implements Iterable<Row>{
     }
 
     /**
-     * Changes board according to move being made.
-     * @param move Move to be made
+     * creates an inverse board that maintains row and space indexes
+     * @return inverse board as List of rows
      */
-    public void MovePiece(Move move){
-        Position start = move.getStart();
-        Position end = move.getEnd();
-        Space startSpace = getSpace(start);
-        Space endSpace = getSpace(end);
-        endSpace.setPiece(startSpace.getPiece());
-        startSpace.setSpaceEmpty();
+    public List<Row> inverseBoard(){
+        List<Row> inverseRowList = new ArrayList<>();
+        for (int i = board.size()-1; i>=0; i--){
+            List<Space> SpaceList = board.get(i).getSpaces();
+            List<Space> inverseSpaceList = new ArrayList<>();
+            for (int j = SpaceList.size()-1; j>=0; j--){
+                inverseSpaceList.add(SpaceList.get(j));
+            }
+            Row tempRow = new Row(i, inverseSpaceList);
+            inverseRowList.add(tempRow);
+        }
+
+        return inverseRowList;
     }
 
     @Override
     public Iterator<Row> iterator() {
-        return board.iterator();
+        if (bottomColor.equals(Piece.Color.RED)){
+            return board.iterator();
+        }
+        else{
+            return inverseBoard().iterator();
+        }
+
     }
 
 }

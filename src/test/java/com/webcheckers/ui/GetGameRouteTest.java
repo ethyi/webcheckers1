@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
+import com.webcheckers.model.Board;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
@@ -68,8 +69,8 @@ class GetGameRouteTest {
         c.setChallenged(true,p);
         assertEquals(p.getChallenger(),c);
         assertEquals(c.getChallenger(),p);
-        BoardView board =new BoardView(Piece.Color.RED);
-        assertNotNull(board);
+        BoardView boardView =new BoardView(new Board(),Piece.Color.RED);
+        assertNotNull(boardView);
 
 
 //        assertEquals(CuT.getLobby(),playerLobby);
@@ -87,7 +88,7 @@ class GetGameRouteTest {
 //        //   * model contains all necessary View-Model data
         testHelper.assertViewModelAttribute("title", "Welcome!");
         if(p!=null&&p.isChallenged()){
-            testHelper.assertViewModelAttribute("board",board);
+            testHelper.assertViewModelAttribute("board",boardView);
 
             testHelper.assertViewModelAttribute("gameID", "1");
             testHelper.assertViewModelAttribute("currentUser", p);

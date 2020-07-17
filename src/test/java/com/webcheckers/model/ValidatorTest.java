@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidatorTest {
-    BoardView boardView = new BoardView(Piece.Color.RED);
+    BoardView boardView = new BoardView(new Board(),Piece.Color.RED);
 
 
     final Validator validator = new Validator();

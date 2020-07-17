@@ -51,41 +51,7 @@ class PostSignOutRouteTest {
         if(p!=null){
 
         }
-        Player c =playerLobby.getPlayer("c");
-        p.setChallenged(true,c);
-        c.setChallenged(true,p);
-        assertEquals(p.getChallenger(),c);
-        assertEquals(c.getChallenger(),p);
-        BoardView board =new BoardView(Piece.Color.RED);
-        assertNotNull(board);
 
-
-        p= session.attribute(CURRENT_PLAYER);
-        testHelper.assertViewModelAttribute("numPlayers",playerLobby.getNumPlayers());
-        assertEquals(GetHomeRoute.mode.PLAY, GetHomeRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.PLAY)));
-        assertEquals(GetHomeRoute.mode.SPECTATOR,GetHomeRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.SPECTATOR)));
-        assertEquals(GetHomeRoute.mode.REPLAY,GetHomeRoute.mode.valueOf(String.valueOf(GetHomeRoute.mode.REPLAY)));
-
-
-        // Analyze the results:
-        //   * model is a non-null Map
-        testHelper.assertViewModelExists();
-        testHelper.assertViewModelIsaMap();
-        //   * model contains all necessary View-Model data
-        testHelper.assertViewModelAttribute("title", "Welcome!");
-        testHelper.assertViewModelAttribute("message", GetHomeRoute.WELCOME_MSG);
-        if(p!=null&&p.isChallenged()){
-            testHelper.assertViewModelAttribute("board",board);
-
-            testHelper.assertViewModelAttribute("gameID", "1");
-            testHelper.assertViewModelAttribute("currentUser", p);
-            testHelper.assertViewModelAttribute("redPlayer", c);
-            testHelper.assertViewModelAttribute("activeColor", "white");
-
-            testHelper.assertViewModelAttribute("viewMode", GetHomeRoute.mode.PLAY);
-            testHelper.assertViewName("game.ftl");
-
-        }
         testHelper.assertViewName(GetHomeRoute.VIEW_NAME);
 
     }

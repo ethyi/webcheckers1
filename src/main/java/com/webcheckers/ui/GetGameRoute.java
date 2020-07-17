@@ -26,6 +26,7 @@ public class GetGameRoute implements Route {
     private final TemplateEngine templateEngine;
     private final PlayerLobby lobby;
     private final GameCenter gameCenter;
+    private BoardView boardView;
 
     public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
@@ -69,7 +70,6 @@ public class GetGameRoute implements Route {
             gameCenter.addGame(temp);
 
             //TODO make gameView synchronous, figure out iterator
-            //TODO parse new Move into Board
             player.setID("1");
             otherPlayer.setID("1");
             player.setChallenged(true, otherPlayer);
@@ -78,10 +78,17 @@ public class GetGameRoute implements Route {
         }
 
         final Checkers checkers = gameCenter.getGame(player.getGameID());
+        if (checkers.getRedPlayer().equals(player)){
+            boardView = new BoardView(checkers.getBoard(), Piece.Color.RED);
+        }
+        else{
+            boardView = new BoardView(checkers.getBoard(), Piece.Color.WHITE);
+        }
+
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
         vm.put("currentUser",player);
-        vm.put("board", checkers.getBoardView());
+        vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);
         vm.put("redPlayer",checkers.getRedPlayer());
         vm.put("whitePlayer",checkers.getWhitePlayer());

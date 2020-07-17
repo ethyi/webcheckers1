@@ -9,7 +9,7 @@ public class Checkers {
     private Player redPlayer;
     private Player whitePlayer;
     private Piece.Color activeColor;
-    private BoardView boardView;
+    private Board board;
     /**
      * Create checkers data object
      * @param id game id
@@ -22,11 +22,11 @@ public class Checkers {
         this.redPlayer = red;
         this.whitePlayer = white;
         this.activeColor = Piece.Color.RED;
-        this.boardView = new BoardView(Piece.Color.RED);
+        this.board = new Board();
     }
 
-    public BoardView getBoardView(){
-        return this.boardView;
+    public Board getBoard(){
+        return board;
     }
 
     public Player getRedPlayer(){

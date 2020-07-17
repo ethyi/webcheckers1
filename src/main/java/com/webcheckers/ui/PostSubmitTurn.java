@@ -21,6 +21,8 @@ public class PostSubmitTurn implements Route {
 
     private final Gson gson;
     private final GameCenter gameCenter;
+    private Message m;
+    private boolean turnValidity;
 
     public PostSubmitTurn(final Gson gson, final GameCenter gameCenter){
         this.gson = gson;
@@ -32,10 +34,8 @@ public class PostSubmitTurn implements Route {
         Session session = request.session();
         Player player = session.attribute("currentPlayer");
 
-        boolean Turn_Validity = true;
-        Message m;
-
-        if (Turn_Validity){
+        turnValidity = true;
+        if (turnValidity){
             m = Message.info("VALID TURN");
             Checkers game = gameCenter.getGame(player.getGameID());
             game.switchActiveColor();

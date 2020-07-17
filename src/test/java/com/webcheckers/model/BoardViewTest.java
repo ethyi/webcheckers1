@@ -12,13 +12,8 @@ import java.util.List;
  */
 public class BoardViewTest {
     private  final Piece.Color bottomColor = Piece.Color.RED;
-    final BoardView CuT = new BoardView(bottomColor);
-@BeforeEach
-    void setUp(){
-        for(int i=0;i<8;i++){
-            CuT.setupBoard();
-        }
-    }
+    final BoardView CuT = new BoardView(new Board(),bottomColor);
+
 
     /**
      * Checks if the board is null
@@ -30,25 +25,7 @@ public class BoardViewTest {
     }
 
 
-    /**
-     * Check if the board is properly set up.
-     */
-    @Test
-    public void testSetUp() {
-        CuT.setupBoard();
-        final List board = CuT.getBoard();
-        assertTrue(board.size() != 0);
 
-    }
-    @Test
-    public void getSpaceTest(int row, int coll){
-
-         assertNotNull(CuT.getSpace(row,coll));
-    }
-    @Test
-    public void  getSpace(Position position){
-        assertNotNull(CuT.getSpace(position));
-    }
     @Test
     void getBottomColorTest(){
         assertEquals(Piece.Color.RED, CuT.getBottomColor());

@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
  * Tests the Piece Class
  */
 public class PieceTest {
-    final BoardView boardView = new BoardView(Piece.Color.RED);
+    final Board board = new Board();
     //TODO create mock
-    final Piece CuT = new Piece(Piece.PieceType.SINGLE, Piece.Color.RED, boardView);
-    final Piece white = new Piece(Piece.PieceType.KING, Piece.Color.WHITE, boardView);
+    final Piece CuT = new Piece(Piece.PieceType.SINGLE, Piece.Color.RED, board);
+    final Piece white = new Piece(Piece.PieceType.KING, Piece.Color.WHITE, board);
 
 
     /**
@@ -57,29 +57,29 @@ public class PieceTest {
     @Test
     public void normalMoveTest(){
         Position nextPos = new Position(0,7);
-        boardView.setupBoard();
-        boardView.getSpace(5,5).setPiece(CuT);
+        board.setupBoard();
+        board.getSpace(5,5).setPiece(CuT);
         CuT.normalMove(nextPos);
 
     }
     @Test
     public void getSpace(){
-        boardView.setupBoard();
-        boardView.getSpace(5,5).setPiece(CuT);
-        Space s = boardView.getSpace(5,5);
+        board.setupBoard();
+        board.getSpace(5,5).setPiece(CuT);
+        Space s = board.getSpace(5,5);
         assertEquals(s,CuT.getSpace());
     }
     @Test
     void JumpMoveTest(){
         Position endPos = new Position(0,0);
-        boardView.setupBoard();
-        boardView.getSpace(5,5).setPiece(CuT);
+        board.setupBoard();
+        board.getSpace(5,5).setPiece(CuT);
 
         CuT.normalMove(endPos);
-        Piece targetPiece = new Piece(Piece.PieceType.SINGLE, Piece.Color.WHITE, boardView);
-        boardView.getSpace(5,7).setPiece(targetPiece);
-        System.out.println("SDFSDFSD: "+ boardView.getSpace(5,7).getPiece());
-        System.out.println(boardView.getSpace(5,7).getPiece()==targetPiece);
+        Piece targetPiece = new Piece(Piece.PieceType.SINGLE, Piece.Color.WHITE, board);
+        board.getSpace(5,7).setPiece(targetPiece);
+        System.out.println("SDFSDFSD: "+ board.getSpace(5,7).getPiece());
+        System.out.println(board.getSpace(5,7).getPiece()==targetPiece);
         System.out.println(targetPiece.getSpace());
         targetPiece.removePiece();
     }
