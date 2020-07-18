@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SpaceTest {
-    Row row = new Row();
-    Space CuT= new Space(0,new Piece(Piece.PieceType.SINGLE, Piece.Color.RED,null),false,row);
+    Space CuT= new Space(0,new Piece(Piece.PieceType.SINGLE, Piece.Color.RED),false);
 
     @Test
     void isValid() {
@@ -21,11 +20,6 @@ class SpaceTest {
     @Test
     void isEmpty() {
         assertFalse(CuT.isEmpty());
-    }
-
-    @Test
-    void getRow() {
-    assertEquals(row, CuT.getRow());
     }
 
 

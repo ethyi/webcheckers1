@@ -2,7 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Checkers;
+import com.webcheckers.model.CheckersGame;
 import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
@@ -23,7 +23,7 @@ public class PostCheckTurn implements Route {
     public Object handle(Request request, Response response) {
         Session session = request.session();
         Player player = session.attribute("currentPlayer");
-        Checkers game = gameCenter.getGame(player.getGameID());
+        CheckersGame game = gameCenter.getGame(player.getGameID());
         Message m;
         if(player.equals(game.getRedPlayer())){
             if(game.getActiveColor().equals(Piece.Color.RED)){

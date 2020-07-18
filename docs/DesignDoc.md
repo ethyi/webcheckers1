@@ -11,10 +11,10 @@ geometry: margin=1in
   * Tony Jiang
 
 ## Executive Summary
-> Web-Checkers is a web based checkers game that can be played by two separate users through a server. The user interface of the checkers game supports browser drag and drop functionality. This application is a Java based web server and utilizes the Spark web micro framework and the FreeMarker template engine. Beyond implementing a a basic checkers game, we have plans to create some more additional features to enhance user experience.
+> Web-Checkers is a web based checkersGame game that can be played by two separate users through a server. The user interface of the checkersGame game supports browser drag and drop functionality. This application is a Java based web server and utilizes the Spark web micro framework and the FreeMarker template engine. Beyond implementing a a basic checkersGame game, we have plans to create some more additional features to enhance user experience.
 
 ### Purpose
-> The purpose is to make a game of checkers that can be easily played over the internet. The user group is people who have internet excess and an interest in checkers, the goal is for them to be able to play checkers.
+> The purpose is to make a game of checkersGame that can be easily played over the internet. The user group is people who have internet excess and an interest in checkersGame, the goal is for them to be able to play checkersGame.
 
 ### Glossary and Acronyms
 
@@ -33,7 +33,7 @@ This section describes the features of the application.
 
 ### Definition of MVP
 > The minimum viable product is a product that should be able to allow players to sign in and sign out. 
-And once they are signed in, they should be able to challenge and play and American game of checkers with an opponent.
+And once they are signed in, they should be able to challenge and play and American game of checkersGame with an opponent.
 Players may resign, or forfeit, if they wish to.
 
 ### MVP Features
@@ -109,7 +109,7 @@ for challenging others and displaying the number of people online, PlayerLobby i
 can persist throughout the UI. We plan to implement a gamecenter for more sitewide statistics.
 
 ### Model Tier
-There are numerous model tier classes, many of which are required for the sake of the checkers game. Player is the only essential model tier classes needed for signin and game, as it holds a unique identifier and is essential for knowing if a playing is being challenged. Aside from player, GameView creates a board which relies on Row, which relies on space, and is needed to display the gameboard to the user. Move is created to parse user input on the board and is essential for checking for validity because it is passed into the Validator.
+There are numerous model tier classes, many of which are required for the sake of the checkersGame game. Player is the only essential model tier classes needed for signin and game, as it holds a unique identifier and is essential for knowing if a playing is being challenged. Aside from player, GameView creates a board which relies on Row, which relies on space, and is needed to display the gameboard to the user. Move is created to parse user input on the board and is essential for checking for validity because it is passed into the Validator.
 We plan to implement a piece class for when we implement King piece functionality.
 
 ### Design Improvement

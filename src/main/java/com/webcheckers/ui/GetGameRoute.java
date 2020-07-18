@@ -66,10 +66,10 @@ public class GetGameRoute implements Route {
                 return null;
             }
 
-            Checkers temp = new Checkers("1",player, otherPlayer);
+            CheckersGame temp = new CheckersGame("1",player, otherPlayer);
             gameCenter.addGame(temp);
 
-            //TODO make gameView synchronous, figure out iterator
+            //TODO make unique game IDs
             player.setID("1");
             otherPlayer.setID("1");
             player.setChallenged(true, otherPlayer);
@@ -77,12 +77,12 @@ public class GetGameRoute implements Route {
 
         }
 
-        final Checkers checkers = gameCenter.getGame(player.getGameID());
-        if (checkers.getRedPlayer().equals(player)){
-            boardView = new BoardView(checkers.getBoard(), Piece.Color.RED);
+        final CheckersGame checkersGame = gameCenter.getGame(player.getGameID());
+        if (checkersGame.getRedPlayer().equals(player)){
+            boardView = new BoardView(checkersGame.getBoard(), Piece.Color.RED);
         }
         else{
-            boardView = new BoardView(checkers.getBoard(), Piece.Color.WHITE);
+            boardView = new BoardView(checkersGame.getBoard(), Piece.Color.WHITE);
         }
 
         Map<String, Object> vm = new HashMap<>();
@@ -90,9 +90,9 @@ public class GetGameRoute implements Route {
         vm.put("currentUser",player);
         vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);
-        vm.put("redPlayer",checkers.getRedPlayer());
-        vm.put("whitePlayer",checkers.getWhitePlayer());
-        vm.put("activeColor",checkers.getActiveColor());
+        vm.put("redPlayer", checkersGame.getRedPlayer());
+        vm.put("whitePlayer", checkersGame.getWhitePlayer());
+        vm.put("activeColor", checkersGame.getActiveColor());
 
         return templateEngine.render(new ModelAndView(vm , "game.ftl"));
 

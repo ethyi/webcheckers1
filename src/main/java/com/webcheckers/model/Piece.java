@@ -22,15 +22,23 @@ public class Piece {
     }
     private Color color;
     private PieceType type;
-    private Space space;
-    private Board gameboard;
-    private List<Row> board;
-    private List<Row> validSpaces;
-    public Piece(PieceType type, Color color, Board board) {
+
+    /**
+     * creates a Piece object that holds piece type and color
+     * @param type Piece type (Single, King)
+     * @param color Piece Color (Red, White)
+     */
+    public Piece(PieceType type, Color color) {
         this.type = type;
         this.color = color;
-        this.gameboard = board;
-        this.board = board.getBoard();
+    }
+
+    public PieceType getType() {
+        return type;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public boolean isAKing(){
@@ -41,39 +49,26 @@ public class Piece {
         this.type = PieceType.KING;
     }
 
+    /**
+     public  void jumpMove(Position endPos, Piece targetPiece){
+     normalMove(endPos);
+     targetPiece.removePiece();
+     }
+     */
 
-    public  void normalMove(Position endPos){
-        Space nextSpace = gameboard.getSpace(endPos.getRow(),endPos.getCell());
-        space.setSpaceEmpty();
-        nextSpace.setPiece(this);
-        //  System.out.println(nextSpace.getPiece());
-        if(endPos.getRow()==0){
-            promote();
-        }
+    /**
+     public  void normalMove(Position endPos){
+     Space nextSpace = gameboard.getSpace(endPos.getRow(),endPos.getCell());
+     space.setSpaceEmpty();
+     nextSpace.setPiece(this);
+     //  System.out.println(nextSpace.getPiece());
+     if(endPos.getRow()==0){
+     promote();
+     }
 
-    }
+     }
+     */
 
-    public Space getSpace() {
-        return space;
-    }
 
-    public void setSpace(Space space) {
-        this.space = space;
-    }
-
-    public  void jumpMove(Position endPos, Piece targetPiece){
-        normalMove(endPos);
-        targetPiece.removePiece();
-    }
-    public void removePiece(){
-        space.setSpaceEmpty();
-    }
-    public PieceType getType() {
-        return type;
-    }
-
-    public Color getColor() {
-        return color;
-    }
 
 }

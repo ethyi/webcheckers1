@@ -12,38 +12,52 @@ import java.util.List;
  */
 public class Row implements Iterable<Space> {
     private int index;
-    private List<Space> space;
+    private List<Space> spaceList;
 
-    public Row(int index, boolean valid, Piece.Color color, Board board) {
+    /**
+     * creates a default row with pieces
+     * @param index row index in board
+     * @param valid boolean if first cell is black
+     * @param color color of single piece
+     */
+    public Row(int index, boolean valid, Piece.Color color) {
         this.index = index;
-        this.space = new ArrayList<>();
+        this.spaceList = new ArrayList<>();
         for(int i = 0; i < 8; i++) {
             if(valid) {
-                space.add(new Space(i, new Piece(Piece.PieceType.SINGLE, color, board), valid,this));
-            } else {
-                space.add(new Space(i, null, valid,this));
+                spaceList.add(new Space(i, new Piece(Piece.PieceType.SINGLE, color), valid));
+            }
+            else {
+                spaceList.add(new Space(i, null, valid));
             }
             valid = !valid;
         }
 
     }
 
-    public Row(int index, boolean valid, Board board) {
+    /**
+     * creates a default row without pieces
+     * @param index row index in board
+     * @param valid boolean if first cell is black
+     */
+    public Row(int index, boolean valid) {
         this.index = index;
-        this.space = new ArrayList<>();
+        this.spaceList = new ArrayList<>();
         for(int i = 0; i < 8; i++) {
-            space.add(new Space(i, null, valid,this));
+            spaceList.add(new Space(i, null, valid));
             valid = !valid;
 
         }
     }
 
+    /**
+     * creates a row with given Spaces
+     * @param index row index in board
+     * @param spaces list of spaces
+     */
     public Row(int index, List<Space> spaces){
         this.index = index;
-        this.space = spaces;
-    }
-    public Row(){
-
+        this.spaceList = spaces;
     }
 
     public int getIndex(){
@@ -51,14 +65,14 @@ public class Row implements Iterable<Space> {
     }
 
     public List<Space> getSpaces() {
-        return this.space;
+        return this.spaceList;
     }
 
     public Space getASpace(int index){
-        return space.get(index);
+        return spaceList.get(index);
     }
     @Override
     public Iterator<Space> iterator() {
-        return space.iterator();
+        return spaceList.iterator();
     }
 }
