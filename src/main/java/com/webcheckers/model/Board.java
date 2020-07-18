@@ -1,7 +1,6 @@
 package com.webcheckers.model;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 /**
  * Board entity that holds board data.
@@ -12,6 +11,7 @@ import java.util.List;
  */
 public class Board {
     private List<Row> board;
+    private Move lastMove;
 
     /**
      * creates a new checkers board by calling setupBoard()
@@ -43,16 +43,6 @@ public class Board {
     }
 
     /**
-     * this will get a piece at a specific row and Col
-     * @param row
-     * @param col
-     * @return
-     */
-    public Space getSpace(int row, int col){
-        return board.get(row).getASpace(col);
-    }
-
-    /**
      * this will get a piece at a specific Position
      * @param position
      * @return
@@ -70,10 +60,19 @@ public class Board {
     }
 
     /**
+     * returns the last move made
+     * @return the last move
+     */
+    public Move getLastMove(){
+        return lastMove;
+    }
+
+    /**
      * Changes board according to move being made.
      * @param move Move to be made
      */
     public void MovePiece(Move move){
+        this.lastMove = move;
         Position start = move.getStart();
         Position end = move.getEnd();
         Space startSpace = getSpace(start);

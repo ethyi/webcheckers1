@@ -50,6 +50,12 @@ class MoveTest {
         move.setPlayer(p);
         assertEquals(move.getPlayer(),p);
     }
+    @Test
+    void ReverseMove(){
+        move.reverseMove();
+        assertEquals(move.getStart(), this.end);
+        assertEquals(move.getEnd(), this.start);
+    }
 
     @Test
     void moveOnBoard() {
