@@ -49,6 +49,20 @@ public class Piece {
         this.type = PieceType.KING;
     }
 
+    @Override
+    public boolean equals( Object obj){
+        if(obj==this) {
+            return true;
+        }
+        else if (obj == null){
+            return false;
+        }
+        Piece object = (Piece) obj;
+        Boolean type = (this.type==object.type);
+        Boolean color = (this.color==object.color);
+        return type&&color;
+    }
+
     /**
      public  void jumpMove(Position endPos, Piece targetPiece){
      normalMove(endPos);

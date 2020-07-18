@@ -44,4 +44,24 @@ public class Space {
         this.piece = piece;
     }
 
+    @Override
+    public boolean equals( Object obj){
+        if(obj==this) {
+            return true;
+        }
+        else if (obj == null){
+            return false;
+        }
+        Space object = (Space) obj;
+
+        if (this.piece==null && object.piece==null){
+            return true;
+        }
+
+        Boolean idx = (this.cellIdx ==object.cellIdx);
+        Boolean piece = (this.piece.equals(object.piece));
+        Boolean valid = (this.valid == object.valid);
+
+        return idx && piece && valid;
+    }
 }

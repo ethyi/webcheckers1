@@ -82,5 +82,18 @@ public class Board {
         startSpace.setPiece(null);
     }
 
+    @Override
+    public boolean equals( Object obj){
+        if(obj==this) {
+            return true;
+        }
+        else if (obj == null){
+            return false;
+        }
+        Board object = (Board) obj;
+        Boolean list = (this.board.equals(object.board));
+        return list;
+    }
+
 
 }

@@ -75,4 +75,20 @@ public class Row implements Iterable<Space> {
     public Iterator<Space> iterator() {
         return spaceList.iterator();
     }
+
+    @Override
+    public boolean equals( Object obj){
+        if(obj==this) {
+            return true;
+        }
+        else if (obj == null){
+            return false;
+        }
+        Row object = (Row) obj;
+        Boolean index = (this.index ==object.index);
+        Boolean list = (this.spaceList.equals(object.spaceList));
+
+
+        return index && list;
+    }
 }

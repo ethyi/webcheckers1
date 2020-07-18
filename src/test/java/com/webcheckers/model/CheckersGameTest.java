@@ -11,11 +11,15 @@ class CheckersGameTest {
     Player redPlayer = new Player("y");
     Player whitePlayer = new Player("x");
     Piece.Color activeColor = Piece.Color.RED;
-
+    Board board = new Board();
     @BeforeEach
     void setUp(){
-
         checkersGame = new CheckersGame(id,redPlayer,whitePlayer);
+    }
+
+    @Test
+    void getBoard(){
+        assertEquals(board, checkersGame.getBoard());
     }
 
     @Test
