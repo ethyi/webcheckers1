@@ -3,14 +3,22 @@ package com.webcheckers.model;
 //import javafx.geometry.Pos;
 
 import java.util.List;
-
+/**
+ * Move entity that holds a move being made
+ *  * @author Tony Jiang
+ *  * @author Ethan Yi
+ *  * @author Aubrey Tarmu
+ */
 public class Move {
     private Position start;
     private Position end;
-
     private Piece.Color color;
     private Player player;
 
+    /**
+     * creates positions based on move data by player
+     * @param data move data as a string
+     */
     public Move(String data) {
         String[] temp = data.split(":");
         int start_row = Character.getNumericValue(temp[2].charAt(0));

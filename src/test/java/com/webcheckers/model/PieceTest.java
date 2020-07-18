@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 public class PieceTest {
     final Board board = new Board();
     //TODO create mock
-    final Piece CuT = new Piece(Piece.PieceType.SINGLE, Piece.Color.RED, board);
-    final Piece white = new Piece(Piece.PieceType.KING, Piece.Color.WHITE, board);
+    final Piece CuT = new Piece(Piece.PieceType.SINGLE, Piece.Color.RED);
+    final Piece white = new Piece(Piece.PieceType.KING, Piece.Color.WHITE);
 
 
     /**
@@ -54,22 +54,16 @@ public class PieceTest {
         CuT.promote();
         assertTrue(CuT.isAKing());
     }
-    @Test
+    /*@Test
     public void normalMoveTest(){
         Position nextPos = new Position(0,7);
         board.setupBoard();
         board.getSpace(5,5).setPiece(CuT);
         CuT.normalMove(nextPos);
 
-    }
-    @Test
-    public void getSpace(){
-        board.setupBoard();
-        board.getSpace(5,5).setPiece(CuT);
-        Space s = board.getSpace(5,5);
-        assertEquals(s,CuT.getSpace());
-    }
-    @Test
+    }*/
+
+    /*@Test
     void JumpMoveTest(){
         Position endPos = new Position(0,0);
         board.setupBoard();
@@ -82,7 +76,7 @@ public class PieceTest {
         System.out.println(board.getSpace(5,7).getPiece()==targetPiece);
         System.out.println(targetPiece.getSpace());
         targetPiece.removePiece();
-    }
+    }*/
     @Test
     public void  getType(){
             assertEquals(Piece.PieceType.SINGLE,CuT.getType());

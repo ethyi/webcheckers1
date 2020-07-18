@@ -37,7 +37,7 @@ public class PostValidateMove implements Route {
             Message m = Message.error("INVALID MOVE");
             return gson.toJson(m);
         }
-        Checkers game = gameCenter.getGame(player.getGameID());
+        CheckersGame game = gameCenter.getGame(player.getGameID());
         game.getBoard().MovePiece(move);
 
         return gson.toJson(Message.info("VALID MOVE"));

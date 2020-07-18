@@ -1,6 +1,6 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.Checkers;
+import com.webcheckers.model.CheckersGame;
 
 import java.util.HashMap;
 
@@ -13,9 +13,12 @@ import java.util.HashMap;
  */
 public class GameCenter {
 
-    private HashMap<String, Checkers> games;
+    private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
 
+    /**
+     * Creates gamecenter which holds a map of all games and playerLobby
+     */
     public GameCenter(){
         this.games = new HashMap<>();
         this.lobby = new PlayerLobby();
@@ -23,11 +26,11 @@ public class GameCenter {
     public PlayerLobby getLobby(){
         return this.lobby;
     }
-    public Checkers getGame(String id){
+    public CheckersGame getGame(String id){
         return games.get(id);
     }
 
-    public synchronized   HashMap<String, Checkers> getGames() {
+    public synchronized   HashMap<String, CheckersGame> getGames() {
         return this.games;
     }
 
@@ -39,7 +42,7 @@ public class GameCenter {
      * Puts Checkers game into hashmap into hashmap with id as key.
      * @param game checkers game to be added
      */
-    public synchronized void addGame(Checkers game){
+    public synchronized void addGame(CheckersGame game){
         this.games.put(game.toString(), game);
     }
 
