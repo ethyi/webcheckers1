@@ -16,12 +16,10 @@ public class GameCenter {
 
     private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
-    private Validator validator;
 
     public GameCenter(){
         this.games = new HashMap<>();
         this.lobby = new PlayerLobby();
-        this.validator = new Validator();
     }
     public PlayerLobby getLobby(){
         return this.lobby;
@@ -30,9 +28,6 @@ public class GameCenter {
         return games.get(id);
     }
 
-    public Validator getValidator() {
-        return this.validator;
-    }
 
     public synchronized   HashMap<String, CheckersGame> getGames() {
         return this.games;

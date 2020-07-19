@@ -68,12 +68,21 @@ public class Board {
      * @param move Move to be made
      */
     public void MovePiece(Move move){
+        if(move.isJumpMove()) {
+            removePiece(move.getJumped());
+        }
         Position start = move.getStart();
         Position end = move.getEnd();
         Space startSpace = getSpace(start);
         Space endSpace = getSpace(end);
         endSpace.setPiece(startSpace.getPiece());
         startSpace.setSpaceEmpty();
+    }
+
+    public void removePiece(Position position) {
+        int row = position.getRow();
+        int col = position.getCell();
+        board.get(row).getASpace(col).setSpaceEmpty();
     }
 
 

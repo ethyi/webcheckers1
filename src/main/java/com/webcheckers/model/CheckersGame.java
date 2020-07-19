@@ -10,6 +10,7 @@ public class CheckersGame {
     private Player whitePlayer;
     private Piece.Color activeColor;
     private Board board;
+    private Validator validator;
     /**
      * Create checkers data object
      * @param id game id
@@ -23,8 +24,12 @@ public class CheckersGame {
         this.whitePlayer = white;
         this.activeColor = Piece.Color.RED;
         this.board = new Board();
+        this.validator = new Validator(this.board.getBoard());
     }
 
+    public Validator getValidator() {
+        return this.validator;
+    }
     public Board getBoard(){
         return board;
     }
