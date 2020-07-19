@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CheckersTest {
-    Checkers checkers;
+    CheckersGame checkers;
     String id ="1";
     Player redPlayer = new Player("y");
     Player whitePlayer = new Player("x");
@@ -15,7 +15,7 @@ class CheckersTest {
     @BeforeEach
     void setUp(){
 
-        checkers = new Checkers(id,redPlayer,whitePlayer);
+        checkers = new CheckersGame(id,redPlayer,whitePlayer);
     }
 
     @Test
@@ -46,9 +46,9 @@ class CheckersTest {
 
     @Test
     void testEquals() {
-        Checkers n_checkers = new Checkers(id,redPlayer,whitePlayer);
+        CheckersGame n_checkers = new CheckersGame(id,redPlayer,whitePlayer);
         assertTrue(checkers.equals(n_checkers));
-        n_checkers = new Checkers("2",redPlayer,whitePlayer);
+        n_checkers = new CheckersGame("2",redPlayer,whitePlayer);
         assertFalse(checkers.equals(n_checkers));
 
     }

@@ -3,7 +3,7 @@ package com.webcheckers.model;
 /**
  * Checkers Entity that holds each game session's data
  */
-public class Checkers {
+public class CheckersGame {
 
     private String id;
     private Player redPlayer;
@@ -17,7 +17,7 @@ public class Checkers {
      * @param white white Player
 //     * @param bottomColor color that wil be at the bottom of this board
      */
-    public Checkers(String id, Player red, Player white){
+    public CheckersGame(String id, Player red, Player white){
         this.id = id;
         this.redPlayer = red;
         this.whitePlayer = white;
@@ -56,10 +56,10 @@ public class Checkers {
         if(obj==this) {
             return true;
         }
-        if(!(obj instanceof Checkers)){
+        if(!(obj instanceof CheckersGame)){
             return false;
         }
-        final Checkers object = (Checkers) obj;
+        final CheckersGame object = (CheckersGame) obj;
         return this.id.equals(object.id);
     }
 

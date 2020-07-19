@@ -66,7 +66,7 @@ public class GetGameRoute implements Route {
                 return null;
             }
 
-            Checkers temp = new Checkers("1",player, otherPlayer);
+            CheckersGame temp = new CheckersGame("1",player, otherPlayer);
             gameCenter.addGame(temp);
 
             //TODO make gameView synchronous, figure out iterator
@@ -77,7 +77,7 @@ public class GetGameRoute implements Route {
 
         }
 
-        final Checkers checkers = gameCenter.getGame(player.getGameID());
+        final CheckersGame checkers = gameCenter.getGame(player.getGameID());
         if (checkers.getRedPlayer().equals(player)){
             boardView = new BoardView(checkers.getBoard(), Piece.Color.RED);
         }
@@ -87,6 +87,7 @@ public class GetGameRoute implements Route {
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
+        vm.put("gameID", 1);
         vm.put("currentUser",player);
         vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);

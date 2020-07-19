@@ -3,17 +3,10 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Checkers;
+import com.webcheckers.model.CheckersGame;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
-
-import javax.management.InstanceNotFoundException;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
 
 import static spark.Spark.halt;
 
@@ -37,7 +30,7 @@ public class PostSubmitTurn implements Route {
         turnValidity = true;
         if (turnValidity){
             m = Message.info("VALID TURN");
-            Checkers game = gameCenter.getGame(player.getGameID());
+            CheckersGame game = gameCenter.getGame(player.getGameID());
             game.switchActiveColor();
         }
         else{// more conditions of invalid turns
