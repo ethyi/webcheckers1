@@ -167,7 +167,7 @@ public class WebServer {
     post(RESIGN_URL, new PostResignGame(gson));
     post(SUBMIT_URL, new PostSubmitTurn(gson, gameCenter));
     post(CHECK_TURN_URL, new PostCheckTurn(gson,gameCenter));
-    post(BACKUP_URL, new PostBackupMove(gson));
+    post(BACKUP_URL, new PostBackupMove(gson, gameCenter));
 
     LOG.config("WebServer is initialized.");
   }

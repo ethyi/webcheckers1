@@ -53,6 +53,18 @@ public class Move {
         return this.color;
     }
 
+    /**
+     * reverses the Move by switching start and ending positions
+     */
+    public void reverseMove(){
+        int start_row = this.start.getRow();
+        int start_col = this.start.getCell();
+        int end_row = this.end.getRow();
+        int end_col = this.end.getCell();
+        this.end = new Position(start_row,start_col);
+        this.start = new Position(end_row, end_col);
+    }
+
     public boolean moveOnBoard() {
         return this.start.withinBoard() &&
                 this.end.withinBoard();

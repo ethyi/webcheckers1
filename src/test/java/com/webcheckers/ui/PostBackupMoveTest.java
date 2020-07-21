@@ -49,7 +49,7 @@ class PostBackupMoveTest {
 
 
         System.out.println(c);
-        CuT = new PostBackupMove(gson);
+        CuT = new PostBackupMove(gson,gameCenter);
         assertEquals(request.session(),session);
 
     }
