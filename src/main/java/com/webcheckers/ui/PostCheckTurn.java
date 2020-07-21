@@ -42,6 +42,10 @@ public class PostCheckTurn implements Route {
             }
         }
 
+        if (player.getChallenger().isResign()){
+            m = Message.info("true");
+        }
+
         return gson.toJson(m);
 
     }

@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.*;
+import com.webcheckers.util.Message;
 import spark.*;
 
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import com.webcheckers.model.Player;
 import com.webcheckers.appl.PlayerLobby;
+import com.google.gson.Gson;
 
 import static spark.Spark.halt;
 
@@ -25,11 +27,14 @@ public class GetGameRoute implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
     private final PlayerLobby lobby;
+    private final Gson gson;
     private final GameCenter gameCenter;
+    private final Map<String, Object> modeOptions = new HashMap<>(2);
     private BoardView boardView;
 
-    public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
+    public GetGameRoute(final TemplateEngine templateEngine, final Gson gson, final GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        this.gson = gson;
         this.gameCenter = gameCenter;
         this.lobby = gameCenter.getLobby();
         LOG.config("GetGameRoute is initialized.");
@@ -54,7 +59,7 @@ public class GetGameRoute implements Route {
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
 
-        if (player!=null&&player.isChallenged()==false){//make new checkers
+        if (player!=null&&player.isChallenged()==false){
             String otherString = request.queryParams("challenger");
             final Player otherPlayer = lobby.getPlayer(otherString);
             session.attribute(GetHomeRoute.IN_GAME, null);
@@ -85,11 +90,20 @@ public class GetGameRoute implements Route {
             boardView = new BoardView(checkersGame.getBoard(), Piece.Color.WHITE);
         }
 
+        final Player opponent = player.getChallenger();
+        if (opponent.isResign()) {
+            modeOptions.put("isGameOver", true);
+            modeOptions.put("gameOverMessage", opponent.getName() + " has resigned");
+            opponent.setResign(false);
+            player.setChallenged(false,null);
+        }
+
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
         vm.put("currentUser",player);
         vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);
+        vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
         vm.put("redPlayer", checkersGame.getRedPlayer());
         vm.put("whitePlayer", checkersGame.getWhitePlayer());
         vm.put("activeColor", checkersGame.getActiveColor());

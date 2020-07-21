@@ -103,20 +103,17 @@ public class GetHomeRoute implements Route {
       }
 
       if(ingame!=null){
-        //condition when player challenges an opponent ingame
         if(ingame.equals("true")){
           vm.put("message",INGAME_MSG);
         }
       }
 
       if(player.isChallenged()){
-        //condition when player is challenged
         response.redirect(WebServer.GAME_URL);
         halt();
         return null;
       }
     }
-    // render the View
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }
 }

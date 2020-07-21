@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.appl.PlayerLobby;
 import com.webcheckers.model.Board;
@@ -22,6 +23,7 @@ class GetGameRouteTest {
     private Response response;
     private PlayerLobby playerLobby;
     private GameCenter gameCenter;
+    private Gson gson;
     private GetGameRoute CuT;
     static final String CURRENT_PLAYER = "currentPlayer";
     Player currentPlayer;
@@ -35,6 +37,7 @@ class GetGameRouteTest {
         engine = mock(TemplateEngine.class);
         playerLobby = new PlayerLobby();
         gameCenter = mock(GameCenter.class);
+        gson = mock(Gson.class);
         playerLobby.addPlayer("p");
         playerLobby.addPlayer("c");
         currentPlayer=  request.session().attribute(GetHomeRoute.CURRENT_PLAYER);
@@ -48,7 +51,7 @@ class GetGameRouteTest {
 
 
         System.out.println(c);
-        CuT = new GetGameRoute(engine,gameCenter);
+        CuT = new GetGameRoute(engine,gson, gameCenter);
         assertEquals(request.session(),session);
 
     }
