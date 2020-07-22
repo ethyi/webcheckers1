@@ -94,8 +94,10 @@ public class GetGameRoute implements Route {
         if (opponent.isResign()) {
             modeOptions.put("isGameOver", true);
             modeOptions.put("gameOverMessage", opponent.getName() + " has resigned");
+            gameCenter.removeGame(player.getGameID());
             opponent.setResign(false);
             player.setChallenged(false,null);
+            player.setID(null);
         }
 
         Map<String, Object> vm = new HashMap<>();

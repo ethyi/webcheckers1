@@ -49,7 +49,7 @@ class PostResignGameTest {
 
 
         System.out.println(c);
-        CuT = new PostResignGame(gson);
+        CuT = new PostResignGame(gson, gameCenter);
         assertEquals(request.session(),session);
 
     }

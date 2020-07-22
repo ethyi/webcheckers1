@@ -164,7 +164,7 @@ public class WebServer {
     post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,gameCenter));
     get(GAME_URL, new GetGameRoute(templateEngine, gson, gameCenter));
     post(VALIDATE_URL, new PostValidateMove(gson, gameCenter));
-    post(RESIGN_URL, new PostResignGame(gson));
+    post(RESIGN_URL, new PostResignGame(gson, gameCenter));
     post(SUBMIT_URL, new PostSubmitTurn(gson, gameCenter));
     post(CHECK_TURN_URL, new PostCheckTurn(gson,gameCenter));
     post(BACKUP_URL, new PostBackupMove(gson, gameCenter));
