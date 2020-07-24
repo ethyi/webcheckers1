@@ -8,9 +8,11 @@ package com.webcheckers.model;
  */
 public class Player {
     private boolean isChallenged;
+    private boolean isResign;
     private String name;
     private Player challenger;
     private String gameID;
+
 
     /**
      * Create Player with username
@@ -52,6 +54,14 @@ public class Player {
 
     public String getGameID(){
         return this.gameID;
+    }
+
+    public void setResign(boolean forfeit){
+        this.isResign = forfeit;
+    }
+
+    public boolean isResign(){
+        return this.isResign;
     }
 
     @Override

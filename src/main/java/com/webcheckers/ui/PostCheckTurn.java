@@ -41,6 +41,14 @@ public class PostCheckTurn implements Route {
                 m = Message.info("false");
             }
         }
+        try {
+            if (player.getChallenger().isResign()){
+                m = Message.info("true");
+            }
+        } catch (java.lang.NullPointerException e){
+            m = Message.info("true");
+        }
+
 
         return gson.toJson(m);
 
