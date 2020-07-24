@@ -27,12 +27,18 @@ public class GetGameRoute implements Route {
     private final PlayerLobby lobby;
     private final GameCenter gameCenter;
     private BoardView boardView;
-
+    String gameID;
+    int totalGames;
     public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = gameCenter;
         this.lobby = gameCenter.getLobby();
         LOG.config("GetGameRoute is initialized.");
+        totalGames ++;
+        gameID = Integer.toString(totalGames);
+        System.out.println(gameID);
+        System.out.println(WebServer.loremImpsum);
+
     }
 
     public enum mode {
@@ -53,31 +59,32 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked.");
         final Session session = request.session();
         final Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
-
         if (player!=null&&player.isChallenged()==false){//make new checkers
             String otherString = request.queryParams("challenger");
             final Player otherPlayer = lobby.getPlayer(otherString);
             session.attribute(GetHomeRoute.IN_GAME, null);
 
             if (otherPlayer.isChallenged()){
+                session.attribute("gameId",gameID);
                 session.attribute(GetHomeRoute.IN_GAME,"true");
-                response.redirect(WebServer.HOME_URL);
+                response.redirect(WebServer.SPECTATE_URL);
                 halt();
                 return null;
             }
 
-            CheckersGame temp = new CheckersGame("1",player, otherPlayer);
-            gameCenter.addGame(temp);
+            CheckersGame temp = new CheckersGame(gameID,player, otherPlayer);
 
+            gameCenter.addGame(temp);
+            gameCenter.setGameId(Integer.parseInt(gameID));
             //TODO make gameView synchronous, figure out iterator
-            player.setID("1");
-            otherPlayer.setID("1");
+            player.setID(gameID);
+            otherPlayer.setID(gameID);
             player.setChallenged(true, otherPlayer);
             otherPlayer.setChallenged(true,player);
 
         }
 
-        final CheckersGame checkers = gameCenter.getGame(player.getGameID());
+        final CheckersGame checkers = gameCenter.getGame(gameID);
         if (checkers.getRedPlayer().equals(player)){
             boardView = new BoardView(checkers.getBoard(), Piece.Color.RED);
         }
@@ -87,7 +94,7 @@ public class GetGameRoute implements Route {
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
-        vm.put("gameID", 1);
+        vm.put("gameID", gameID);
         vm.put("currentUser",player);
         vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);

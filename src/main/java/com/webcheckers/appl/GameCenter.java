@@ -16,7 +16,7 @@ public class GameCenter {
 
     private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
-
+    int gameId;
     public GameCenter(){
         this.games = new HashMap<>();
         this.lobby = new PlayerLobby();
@@ -31,6 +31,14 @@ public class GameCenter {
 
     public synchronized   HashMap<String, CheckersGame> getGames() {
         return this.games;
+    }
+
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 
     public synchronized boolean contains(String id) {
