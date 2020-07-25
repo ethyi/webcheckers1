@@ -76,6 +76,7 @@ public class WebServer {
 
   public static final String SPECTATE_CHECKTURN_URL = "/spectator/checkTurn";
   public static  final String loremImpsum ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at eros felis. Suspendisse enim ipsum, semper ac pharetra id, blandit at nulla. Sed et commodo justo, sit amet euismod odio. Mauris nec leo vel nulla egestas congue at id dui. Fusce imperdiet ipsum vitae erat sodales placerat. Morbi consequat non orci at hendrerit. Praesent id euismod felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed urna nulla, gravida ut enim vel, gravida placerat ipsum. Sed metus sem, porttitor eu sem eu, bibendum lobortis enim.";
+  private static final String EXIT_URL = "/spectator/stopWatching";
   //
   // Attributes
   //
@@ -172,6 +173,7 @@ public class WebServer {
     post(CHECK_TURN_URL, new PostCheckTurn(gson,gameCenter));
     post(BACKUP_URL, new PostBackupMove(gson));
     get(SPECTATE_URL, new GetSpectate(templateEngine,gameCenter));
+    get(EXIT_URL, new GetExitRoute(gson));
     post(SPECTATE_CHECKTURN_URL, new PostSpectateCheckTurn(gson,gameCenter));
 
 
