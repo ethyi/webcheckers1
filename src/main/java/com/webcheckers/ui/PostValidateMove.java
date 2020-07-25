@@ -32,7 +32,7 @@ public class PostValidateMove implements Route {
         final String color = request.queryParams("activeColor");
 
         System.out.println(data);
-        Validator v = gameCenter.getGame("1").getValidator();
+        Validator v = gameCenter.getGame(player.getGameID()).getValidator();
         //System.out.println("id is " + id);
         //System.out.println(gameCenter.getGame("1").toString());
 

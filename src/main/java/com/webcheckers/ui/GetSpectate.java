@@ -49,10 +49,13 @@ public class GetSpectate implements Route {
         final Session session = request.session();
         String gameId = session.attribute("gameId");
         session.attribute(GetHomeRoute.IN_GAME, null);
-        final CheckersGame checkers = gameCenter.getGame(gameId);
+        final CheckersGame checkers = gameCenter.getGame((gameCenter.getGameId()));
         Player player = checkers.getRedPlayer();
         Player otherPlayer = checkers.getWhitePlayer();
-
+        boolean GameOver = false;
+        if(GameOver){
+            response.redirect(WebServer.HOME_URL);
+        }
         //TODO make gameView synchronous, figure out iterator
         player.setID(gameId);
         otherPlayer.setID(gameId);

@@ -16,7 +16,7 @@ public class GameCenter {
 
     private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
-    int gameId;
+    String gameId;
     public GameCenter(){
         this.games = new HashMap<>();
         this.lobby = new PlayerLobby();
@@ -33,11 +33,11 @@ public class GameCenter {
         return this.games;
     }
 
-    public int getGameId() {
+    public String getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(String gameId) {
         this.gameId = gameId;
     }
 
