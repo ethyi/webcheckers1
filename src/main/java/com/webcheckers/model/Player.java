@@ -74,6 +74,7 @@ public class Player {
         }
         Player object = (Player) obj;
         return getName().equals(object.getName());
+
     }
 
     @Override
