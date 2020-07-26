@@ -4,7 +4,7 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 /**
- * GameBoard entity that holds board view data.\
+ * BoardView entity that holds board view for template engine
  * @author Tony Jiang
  * @author Ethan Yi
  * @author Aubrey Tarmu
@@ -15,7 +15,7 @@ public class BoardView implements Iterable<Row>{
     private Piece.Color bottomColor;
 
     /**
-     * Creates a board that can be iterated through
+     * Creates a boardView that can be iterated through
      * @param board checkers board
      * @param bottomColor board perspective
      */
@@ -37,7 +37,7 @@ public class BoardView implements Iterable<Row>{
     }
 
     /**
-     * creates an inverse board that maintains row and space indexes
+     * creates an inverse board that maintains row and space index data
      * @return inverse board as List of rows
      */
     public List<Row> inverseBoard(){
@@ -56,6 +56,9 @@ public class BoardView implements Iterable<Row>{
     }
 
     @Override
+    /**
+     * creates an iterator depending on player perspective
+     */
     public Iterator<Row> iterator() {
         if (bottomColor.equals(Piece.Color.RED)){
             return board.iterator();

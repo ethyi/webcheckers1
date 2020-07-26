@@ -1,7 +1,10 @@
 package com.webcheckers.model;
 
 /**
- * Checkers Entity that holds each game session's data
+ * Checkers Entity that holds each game's attribute data
+ *  * @author Tony Jiang
+ *  * @author Ethan Yi
+ *  * @author Aubrey Tarmu
  */
 public class CheckersGame {
 
@@ -16,7 +19,6 @@ public class CheckersGame {
      * @param id game id
      * @param red red Player
      * @param white white Player
-//     * @param bottomColor color that wil be at the bottom of this board
      */
     public CheckersGame(String id, Player red, Player white){
         this.id = id;

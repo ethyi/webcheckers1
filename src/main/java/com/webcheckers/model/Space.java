@@ -11,15 +11,17 @@ public class Space {
     private int cellIdx;
     private Piece piece;
     private boolean valid;
-    private Row row;
 
-    public Space(int cellIdx,Piece piece,boolean valid,Row row) {
+    /**
+     * creates a space with specific attributes
+     * @param cellIdx index within row
+     * @param piece piece placed on space
+     * @param valid boolean if space is black
+     */
+    public Space(int cellIdx,Piece piece,boolean valid) {
         this.cellIdx = cellIdx;
         this.piece = piece;
         this.valid = valid;
-        if(this.piece!=null)
-            this.piece.setSpace(this);
-        this.row = row;
     }
 
     public boolean isValid() {
@@ -38,19 +40,28 @@ public class Space {
         return this.piece ==  null;
     }
 
-    public Row getRow() {
-        return row;
-    }
-
-    /**
-     * This will set the piece that is in this space if there is any, w// also set the piece in this space to this
-     * @param piece
-     */
     public void setPiece(Piece piece){
         this.piece = piece;
-        piece.setSpace(this);
     }
-    void setSpaceEmpty(){
-        this.piece = null;
+
+    @Override
+    public boolean equals( Object obj){
+        if(obj==this) {
+            return true;
+        }
+        else if (obj == null){
+            return false;
+        }
+        Space object = (Space) obj;
+
+        if (this.piece==null && object.piece==null){
+            return true;
+        }
+
+        Boolean idx = (this.cellIdx ==object.cellIdx);
+        Boolean piece = (this.piece.equals(object.piece));
+        Boolean valid = (this.valid == object.valid);
+
+        return idx && piece && valid;
     }
 }

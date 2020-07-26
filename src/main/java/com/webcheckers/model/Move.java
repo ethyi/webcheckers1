@@ -3,14 +3,22 @@ package com.webcheckers.model;
 //import javafx.geometry.Pos;
 
 import java.util.List;
-
+/**
+ * Move entity that holds a move being made
+ *  * @author Tony Jiang
+ *  * @author Ethan Yi
+ *  * @author Aubrey Tarmu
+ */
 public class Move {
     private Position start;
     private Position end;
-
     private Piece.Color color;
     private Player player;
 
+    /**
+     * creates positions based on move data by player
+     * @param data move data as a string
+     */
     public Move(String data) {
         String[] temp = data.split(":");
         int start_row = Character.getNumericValue(temp[2].charAt(0));
@@ -43,6 +51,18 @@ public class Move {
 
     public Piece.Color getColor() {
         return this.color;
+    }
+
+    /**
+     * reverses the Move by switching start and ending positions
+     */
+    public void reverseMove(){
+        int start_row = this.start.getRow();
+        int start_col = this.start.getCell();
+        int end_row = this.end.getRow();
+        int end_col = this.end.getCell();
+        this.end = new Position(start_row,start_col);
+        this.start = new Position(end_row, end_col);
     }
 
     public boolean moveOnBoard() {
