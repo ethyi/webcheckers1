@@ -66,12 +66,6 @@ public class GetGameRoute implements Route {
                 gameID = Integer.toString(totalGames);
 
             }
-            if(player.getGameID()=="null") {
-                gameID = player.getName();
-                System.out.println(WebServer.loremImpsum);
-
-
-            }
 
             if (otherPlayer.isChallenged()){
                 session.attribute("gameId",gameID);
