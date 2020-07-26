@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.*;
 import spark.*;
@@ -26,16 +27,20 @@ public class GetGameRoute implements Route {
     private final TemplateEngine templateEngine;
     private final PlayerLobby lobby;
     private final GameCenter gameCenter;
+    private final Gson gson;
     private BoardView boardView;
+    private final Map<String, Object> modeOptions = new HashMap<>(2);
+
     String gameID;
     static int totalGames=1;
-    public GetGameRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
+    public GetGameRoute(final TemplateEngine templateEngine, final Gson gson, final GameCenter gameCenter) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        this.gson = gson;
         this.gameCenter = gameCenter;
         this.lobby = gameCenter.getLobby();
         LOG.config("GetGameRoute is initialized.");
-
     }
+
 
     public enum mode {
         PLAY,
@@ -96,6 +101,16 @@ public class GetGameRoute implements Route {
             boardView = new BoardView(checkers.getBoard(), Piece.Color.WHITE);
 
         }
+        final Player opponent = player.getChallenger();
+        if (opponent.isResign()) {
+            modeOptions.put("isGameOver", true);
+            modeOptions.put("gameOverMessage", opponent.getName() + " has resigned");
+            gameCenter.removeGame(player.getGameID());
+            opponent.setResign(false);
+            player.setChallenged(false,null);
+            player.setID(null);
+        }
+
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
@@ -103,6 +118,7 @@ public class GetGameRoute implements Route {
         vm.put("currentUser",player);
         vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);
+        vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
         vm.put("redPlayer",checkers.getRedPlayer());
         vm.put("whitePlayer",checkers.getWhitePlayer());
         vm.put("activeColor",checkers.getActiveColor());
