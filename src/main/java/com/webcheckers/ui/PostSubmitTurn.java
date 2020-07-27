@@ -3,9 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.CheckersGame;
-import com.webcheckers.model.Move;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
 import spark.*;
 
@@ -32,11 +30,22 @@ public class PostSubmitTurn implements Route {
         if (turnValidity){
             m = Message.info("VALID TURN");
             CheckersGame game = gameCenter.getGame(player.getGameID());
-
             Move lastMove = game.getBoard().getLastMove();
+            Position end = lastMove.getEnd();
+
+            Space endSpace = game.getBoard().getSpace(lastMove.getEnd());
+
+            Piece piece = endSpace.getPiece();
+
+            if (end.getRow() == 0 && piece.getColor() == Piece.Color.RED ||
+                    end.getCell() == 7 && piece.getColor() == Piece.Color.WHITE) {
+                piece.promote();
+            }
+
             if(lastMove.isJumpMove()) {
                 game.getBoard().removePiece(lastMove.getJumped());
             }
+
             game.switchActiveColor();
         }
         else{// more conditions of invalid turns
