@@ -88,6 +88,11 @@ public class Board {
 
     }
 
+    public void placePiece(Position position, Piece piece) {
+        Space space = getSpace(position);
+        space.setPiece(piece);
+    }
+
     @Override
     public boolean equals( Object obj){
         if(obj==this) {

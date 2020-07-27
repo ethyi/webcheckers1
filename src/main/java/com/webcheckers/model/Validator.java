@@ -16,7 +16,7 @@ public class Validator {
         this.board = board.getBoard();
     }
     public enum moveType {
-        VALID, INVALID, WRONG_DIRECTION, NEED_TO_JUMP
+        VALID, INVALID, WRONG_DIRECTION, NEED_TO_JUMP, MULTI_JUMP;
     }
 
     public void switchActiveColor() {
@@ -153,6 +153,29 @@ public class Validator {
         boolean legalMove;
 
         if(move.isJumpMove()) {
+
+            Position start = move.getStart();
+            Position end = move.getEnd();
+            Space startSpace = boardObj.getSpace(start);
+            Space endSpace = boardObj.getSpace(end);
+
+            Piece piece = startSpace.getPiece();
+            System.out.println(piece);
+            Piece ghost = new Piece(piece.getType(), piece.getColor());
+
+            boardObj.placePiece(end, ghost);
+            boardObj.removePiece(start);
+
+            if(boardObj.canJump(move.getEnd())) {
+                boardObj.removePiece(end);
+                boardObj.placePiece(start, piece);
+                System.out.println("multi jump");
+                return moveType.MULTI_JUMP;
+            }
+
+            boardObj.removePiece(end);
+            boardObj.placePiece(start, piece);
+
             legalMove = isJumpingOpponentPiece(move) && isMoveEmptySpace(move);
 
 
