@@ -39,7 +39,7 @@ public class PostSubmitTurn implements Route {
             Piece piece = endSpace.getPiece();
 
             if (end.getRow() == 0 && piece.getColor() == Piece.Color.RED ||
-                    end.getCell() == 7 && piece.getColor() == Piece.Color.WHITE) {
+                    end.getRow() == 7 && piece.getColor() == Piece.Color.WHITE) {
                 piece.promote();
             }
 
