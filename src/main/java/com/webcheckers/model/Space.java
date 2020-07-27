@@ -44,6 +44,8 @@ public class Space {
         this.piece = piece;
     }
 
+
+
     @Override
     public boolean equals( Object obj){
         if(obj==this) {
@@ -64,4 +66,8 @@ public class Space {
 
         return idx && piece && valid;
     }
+    void setSpaceEmpty(){
+        this.piece = null;
+    }
+
 }

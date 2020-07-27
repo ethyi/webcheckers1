@@ -63,6 +63,11 @@ public class Piece {
         return type&&color;
     }
 
+    @Override
+    public String toString() {
+        return this.type.toString() + ", " +  this.getColor().toString();
+    }
+
     /**
      public  void jumpMove(Position endPos, Piece targetPiece){
      normalMove(endPos);

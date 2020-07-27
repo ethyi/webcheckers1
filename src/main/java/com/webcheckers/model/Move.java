@@ -100,6 +100,7 @@ public class Move {
         }
     }
 
+
     public String toString() {
         return String.format("Player wants to move piece from (%d, %d) to (%d, %d)", start.getRow(),
                 start.getCell(), end.getRow(), end.getCell());

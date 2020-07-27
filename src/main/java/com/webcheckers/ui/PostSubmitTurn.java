@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.CheckersGame;
+import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -31,6 +32,11 @@ public class PostSubmitTurn implements Route {
         if (turnValidity){
             m = Message.info("VALID TURN");
             CheckersGame game = gameCenter.getGame(player.getGameID());
+
+            Move lastMove = game.getBoard().getLastMove();
+            if(lastMove.isJumpMove()) {
+                game.getBoard().removePiece(lastMove.getJumped());
+            }
             game.switchActiveColor();
         }
         else{// more conditions of invalid turns

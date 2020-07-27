@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.CheckersGame;
 import com.webcheckers.model.Move;
+import com.webcheckers.model.Piece;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.Request;
@@ -27,9 +28,10 @@ public class PostBackupMove implements Route {
         Session session = request.session();
         Player player = session.attribute("currentPlayer");
         CheckersGame game = gameCenter.getGame(player.getGameID());
-        Move reverseMove = game.getBoard().getLastMove();
-        reverseMove.reverseMove();
-        game.getBoard().MovePiece(reverseMove);
+        Move lastMove = game.getBoard().getLastMove();
+        lastMove.reverseMove();
+        game.getBoard().MovePiece(lastMove);
+
 
         Boolean backupSuccess = true;
         if (backupSuccess){
