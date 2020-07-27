@@ -44,27 +44,33 @@ public class PostValidateMove implements Route {
         Enum Validity = v.validateMove(move);// pass move into validity object
 
         if (Validity == Validator.moveType.INVALID){ //invalid cases with appropriate message
-            Message m = Message.error("INVALID MOVE");
+            Message m = Message.error("Invalid Move");
             return gson.toJson(m);
         }
 
 
         if (Validity == Validator.moveType.NEED_TO_JUMP){ //invalid cases with appropriate message
-            Message m = Message.error("NEED TO JUMP");
+            Message m = Message.error("Jump available");
             return gson.toJson(m);
         }
 
 
         if (Validity == Validator.moveType.WRONG_DIRECTION) { //invalid cases with appropriate message
-            Message m = Message.error("WRONG DIRECTION");
+            Message m = Message.error("Wrong direction");
             return gson.toJson(m);
         }
 
-
         CheckersGame game = gameCenter.getGame(player.getGameID());
         game.getBoard().MovePiece(move);
+        if (Validity == Validator.moveType.MULTI_JUMP){
+            move.setMultiJump(true);
+            Message m = Message.info("Multiple jump");
+            return gson.toJson(m);
+        }
+        return gson.toJson(Message.info("Valid Move"));
 
-        return gson.toJson(Message.info("VALID MOVE"));
+
+
 
 
     }

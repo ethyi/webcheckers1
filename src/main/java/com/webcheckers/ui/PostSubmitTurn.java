@@ -30,6 +30,7 @@ public class PostSubmitTurn implements Route {
         if (turnValidity){
             m = Message.info("VALID TURN");
             CheckersGame game = gameCenter.getGame(player.getGameID());
+            Validator Validity = game.getValidator();
             Move lastMove = game.getBoard().getLastMove();
             Position end = lastMove.getEnd();
 
@@ -46,7 +47,9 @@ public class PostSubmitTurn implements Route {
                 game.getBoard().removePiece(lastMove.getJumped());
             }
 
-            game.switchActiveColor();
+            if (!lastMove.isMultiJump()) {
+                game.switchActiveColor();
+            }
         }
         else{// more conditions of invalid turns
             m = Message.error("INVALID TURN");

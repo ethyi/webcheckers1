@@ -14,6 +14,7 @@ public class Move {
     private Position end;
     private Piece.Color color;
     private Player player;
+    private boolean multiJump = false;
 
     /**
      * creates positions based on move data by player
@@ -51,6 +52,13 @@ public class Move {
 
     public Piece.Color getColor() {
         return this.color;
+    }
+
+    public boolean isMultiJump(){
+        return this.multiJump;
+    }
+    public void setMultiJump(boolean b){
+        this.multiJump = b;
     }
 
     /**
