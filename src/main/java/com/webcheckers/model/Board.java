@@ -179,6 +179,12 @@ public class Board {
             }
 
         } else {
+            System.out.println(p);
+            System.out.println(jumpHelperTest(lowerLeftSpace, lowerLeftMiddle, pieceColor));
+            System.out.println(jumpHelperTest(upperLeftSpace, upperLeftMiddle, pieceColor));
+            System.out.println(jumpHelperTest(lowerRightSpace, lowerRightMiddle, pieceColor));
+            System.out.println(jumpHelperTest(upperRightSpace, upperRightMiddle, pieceColor));
+
             return jumpHelperTest(lowerLeftSpace, lowerLeftMiddle, pieceColor) ||
                     jumpHelperTest(upperLeftSpace, upperLeftMiddle, pieceColor) ||
                     jumpHelperTest(lowerRightSpace, lowerRightMiddle, pieceColor) ||

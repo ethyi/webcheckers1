@@ -155,26 +155,35 @@ public class Validator {
         if(move.isJumpMove()) {
 
             Position start = move.getStart();
+            Position jumped = move.getJumped();
             Position end = move.getEnd();
             Space startSpace = boardObj.getSpace(start);
-            Space endSpace = boardObj.getSpace(end);
+            Space jumpedSpace = boardObj.getSpace(jumped);
 
             Piece piece = startSpace.getPiece();
             System.out.println(piece);
             Piece ghost = new Piece(piece.getType(), piece.getColor());
+            System.out.println(ghost);
+            Piece jumpedPiece = jumpedSpace.getPiece();
 
             boardObj.placePiece(end, ghost);
             boardObj.removePiece(start);
+            boardObj.removePiece(jumped);
+
 
             if(boardObj.canJump(move.getEnd())) {
                 boardObj.removePiece(end);
                 boardObj.placePiece(start, piece);
+                boardObj.placePiece(jumped, jumpedPiece);
+
                 System.out.println("multi jump");
                 return moveType.MULTI_JUMP;
             }
 
             boardObj.removePiece(end);
             boardObj.placePiece(start, piece);
+            boardObj.placePiece(jumped, jumpedPiece);
+
 
             legalMove = isJumpingOpponentPiece(move) && isMoveEmptySpace(move);
 
