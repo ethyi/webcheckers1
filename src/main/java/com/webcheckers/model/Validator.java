@@ -48,11 +48,21 @@ public class Validator {
 
     }
 
+    /**
+     * Checks if the move is placed on an empty space
+     * @param move
+     * @return
+     */
     private static boolean isMoveEmptySpace(Move move){
         Space valid = board.get(move.getEnd().getRow()).getSpaces().get(move.getEnd().getCell()) ;
         return valid.isEmpty() ;
     }
 
+    /**
+     * Checks if the move is going in the right condition
+     * @param move
+     * @return
+     */
     private static boolean isRightDirection(Move move) {
         Piece piece = board.get(move.getStart().getRow()).getSpaces().get(move.getStart().getCell()).getPiece();
         boolean valid = false;
@@ -70,6 +80,12 @@ public class Validator {
         }
         return valid;
     }
+
+    /**
+     * Checks if the jump move is jumping an opponents piece and not an empty space/your own piece
+     * @param move
+     * @return
+     */
     private static boolean isJumpingOpponentPiece(Move move) {
         boolean valid = false;
         if(move.isJumpMove()) {
@@ -88,6 +104,10 @@ public class Validator {
 
     }
 
+    /**
+     * Checks if the player has a jump available.
+     * @return
+     */
     public boolean forceJump() {
         for(int row = 0; row <= 7; row++) {
             for(int col = 0; col <= 7; col++) {
@@ -107,7 +127,11 @@ public class Validator {
     }
 
 
-
+    /**
+     * Checks all the conditions.
+     * @param move
+     * @return
+     */
     public moveType validateMove(Move move) {
         //boolean valid = hasPiecesLeft(board, Piece.Color.RED) && move.moveOnBoard() && isRightDirection(board, move) && isMoveEmptySpace(board, move) &&
         // (move.isRegularMove() || (move.isJumpMove() && isJumpingOpponentPiece(board, move)));

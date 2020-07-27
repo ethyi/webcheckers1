@@ -101,6 +101,13 @@ public class Board {
         return list;
     }
 
+    /**
+     * Checks if the destination is clear and the jumped piece is an opposing piece.
+     * @param destination the destination Space
+     * @param jumped the piece that's jumped
+     * @param color the color that the jumped piece has to be different from.
+     * @return
+     */
     public boolean jumpHelperTest(Space destination, Space jumped, Piece.Color color) {
 
         if (destination == null || jumped ==  null) {
@@ -111,6 +118,11 @@ public class Board {
 
     }
 
+    /**
+     * Checks if there as a jump at a position.
+     * @param p Position to be checked
+     * @return is there a jump available?
+     */
     public boolean canJump(Position p) {
         Space startSpace = getSpace(p);
         int row = p.getRow();
