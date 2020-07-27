@@ -30,6 +30,9 @@ public class CheckersGame {
         this.validator = new Validator(this.board);
 
     }
+    public enum GameOver {
+        ONGOING, RED_WIN, RED_LOSS
+    }
 
     public Board getBoard(){
         return board;
@@ -60,7 +63,18 @@ public class CheckersGame {
         }
         validator.switchActiveColor();
     }
+    public GameOver gameState(){
+        if (!board.hasPiecesLeft(Piece.Color.RED)){
+            return GameOver.RED_LOSS;
+        }
+        else if(!board.hasPiecesLeft(Piece.Color.WHITE)){
+            return GameOver.RED_WIN;
+        }
+        else{
+            return GameOver.ONGOING;
+        }
 
+    }
 
     @Override
     public boolean equals( Object obj){
