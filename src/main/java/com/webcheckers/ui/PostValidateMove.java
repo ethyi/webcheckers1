@@ -33,13 +33,10 @@ public class PostValidateMove implements Route {
 
         System.out.println(data);
         Validator v = gameCenter.getGame(player.getGameID()).getValidator();
-        //System.out.println("id is " + id);
-        //System.out.println(gameCenter.getGame("1").toString());
+
 
         Move move = new Move(data);
 
-        //Piece piece = BoardView.getSpace(move.getStart()).getPiece();
-        //piece.normalMove(move.getEnd());
 
         Enum Validity = v.validateMove(move);// pass move into validity object
 

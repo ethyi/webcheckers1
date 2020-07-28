@@ -31,6 +31,7 @@ public class PostBackupMove implements Route {
         CheckersGame game = gameCenter.getGame(player.getGameID());
         Board board = game.getBoard();
         Move lastMove = board.getLastMove();
+
         if(!lastMove.isJumpMove()) {
             lastMove.reverseMove();
             board.MovePiece(lastMove);
@@ -50,16 +51,21 @@ public class PostBackupMove implements Route {
 
             positions.remove(positions.size() - 1);
             captured.remove(captured.size() - 1);
+            if(captured.size() == 0) {
+                board.setLastReplaced(null);
+            }
 
             if(captured.size() == 0) {
                 board.setLastReplaced(null);
             }
+            board.setFlag(true);
         }
 
 
 
         Boolean backupSuccess = true;
         if (backupSuccess){
+            board.printBoard();
             m = Message.info("Backup successful");
         }
         else{

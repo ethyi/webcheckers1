@@ -197,6 +197,7 @@ public class Validator {
         }
          */
         if(legalMove) {
+            boardObj.setFlag(false);
             return moveType.VALID;
         } else {
             return moveType.INVALID;

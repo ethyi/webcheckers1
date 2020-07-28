@@ -16,6 +16,7 @@ public class GameCenter {
     private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
 
+
     /**
      * Creates gamecenter which holds a map of all games and playerLobby
      */

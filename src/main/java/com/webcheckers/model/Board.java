@@ -18,6 +18,7 @@ public class Board {
     private Piece lastMovedPiece;
     private Position lastReplaced = null;
     private List<PiecePair> captured = new ArrayList<>();
+    private boolean multiFlag = false;
 
     /**
      * creates a new checkers board by calling setupBoard()
@@ -236,8 +237,55 @@ public class Board {
                     jumpHelperTest(upperLeftSpace, upperLeftMiddle, pieceColor) ||
                     jumpHelperTest(lowerRightSpace, lowerRightMiddle, pieceColor) ||
                     jumpHelperTest(upperRightSpace, upperRightMiddle, pieceColor);
+             }
         }
-    }
+
+        public void canRegularMove(Position p) {
+            Space startSpace = getSpace(p);
+            Piece piece = startSpace.getPiece();
+            int row = p.getRow();
+            int cell = p.getCell();
+
+            Space upperLeftMiddle = null;
+            Space upperRightMiddle = null;
+            Space lowerLeftMiddle = null;
+            Space lowerRightMiddle = null;
+
+            if (row - 1 >= 0 && cell - 1 >= 0) {
+                upperLeftMiddle = getSpace(new Position(row - 1, cell - 1));
+            }
+            if (row - 1 >= 0 && cell + 1 <= 7) {
+                upperRightMiddle = getSpace(new Position(row - 1, cell + 1));
+            }
+            if (row + 1 <= 7 && cell - 1 >= 0) {
+                lowerLeftMiddle = getSpace(new Position(row + 1, cell - 1));
+            }
+            if (row + 1 <= 7 && cell + 1 <= 7) {
+                lowerRightMiddle = getSpace(new Position(row + 1, cell + 1));
+            }
+
+            if(!piece.isAKing()) {
+
+            }
+
+        }
+
+        public boolean regHelperTest(Space space) {
+            if(space == null) {
+                return false;
+            }
+            return space.isEmpty();
+        }
+
+        public boolean getFlag() {
+            return this.multiFlag;
+        }
+
+        public void setFlag(boolean b) {
+            multiFlag = b;
+        }
+
+
 
         public void removePiece(Position position) {
             int row = position.getRow();
@@ -251,7 +299,32 @@ public class Board {
             return board.get(row).getASpace(col).getPiece();
         }
 
-
+        public void printBoard() {
+            for(int i = 0; i <= 7; i++) {
+                for(int j = 0; j <= 7; j++) {
+                    Space space = getSpace(new Position(i, j));
+                    if(space.isEmpty()) {
+                        System.out.print("[ ]");
+                    } else {
+                        Piece piece = space.getPiece();
+                        if(!piece.isAKing()) {
+                            if(piece.getColor() == Piece.Color.RED) {
+                                System.out.print("[R]");
+                            } else {
+                                System.out.print("[W]");
+                            }
+                        } else {
+                            if(piece.getColor() == Piece.Color.RED) {
+                                System.out.print("[K]");
+                            } else {
+                                System.out.print("[k]");
+                            }
+                        }
+                    }
+                 }
+                System.out.println();
+            }
+        }
 
     }
 
