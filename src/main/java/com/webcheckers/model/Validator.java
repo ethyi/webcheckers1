@@ -136,6 +136,21 @@ public class Validator {
         return false;
     }
 
+    public boolean hasRegularMove() {
+        for(int row = 0; row <= 7; row++) {
+            for(int col = 0; col <= 7; col++) {
+                Position p = new Position(row, col);
+                if (!boardObj.getSpace(p).isEmpty() && boardObj.getSpace(p).getPiece().getColor() == activeColor) {
+                    if (boardObj.canRegularMove(p)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+
+    }
+
 
     /**
      * Checks all the conditions.
