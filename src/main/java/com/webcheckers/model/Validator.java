@@ -112,8 +112,6 @@ public class Validator {
                 if (space.getPiece().getColor() != piece.getColor()) {
                     valid = true;
                 }
-            } else {
-                System.out.println("jumping air!");
             }
         }
         return valid;

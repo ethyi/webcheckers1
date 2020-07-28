@@ -154,7 +154,7 @@ public class Board {
         for(int row = 0; row <= 7; row++) {
             for(int col = 0; col <= 7; col++) {
                 Position p = new Position(row, col);
-                if (getSpace(p).isEmpty() && getSpace(p).getPiece().getColor() == color) {
+                if (!getSpace(p).isEmpty() && getSpace(p).getPiece().getColor() == color) {
                     if (canRegularMove(p)) {
                         return true;
                     }
