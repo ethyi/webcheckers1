@@ -67,9 +67,6 @@ public class PostValidateMove implements Route {
         return gson.toJson(Message.info("Valid Move"));
 
 
-
-
-
     }
 
 }

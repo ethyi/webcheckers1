@@ -103,16 +103,27 @@ public class Validator {
                 Position p = new Position(row, col);
                 if (!boardObj.getSpace(p).isEmpty() && boardObj.getSpace(p).getPiece().getColor() == activeColor) {
                     if (boardObj.canJump(p)) {
-                        //System.out.println(row + ", " + col + " can jump!");
                         return true;
-                    } else {
-                        //System.out.println(row + ", " + col + " cant jump!");
-
                     }
                 }
             }
         }
         return false;
+    }
+
+    public boolean hasRegularMove() {
+        for(int row = 0; row <= 7; row++) {
+            for(int col = 0; col <= 7; col++) {
+                Position p = new Position(row, col);
+                if (!boardObj.getSpace(p).isEmpty() && boardObj.getSpace(p).getPiece().getColor() == activeColor) {
+                    if (boardObj.canRegularMove(p)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+
     }
 
 
