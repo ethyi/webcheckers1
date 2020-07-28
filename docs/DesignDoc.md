@@ -52,7 +52,7 @@ Creating a spectator mode, where others can spectate other ongoing games.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](swen261adomain.png)
+![The WebCheckers Domain Model](swen261adomainmodel.png)
 
 > The domain model shows the relationship between the application domain and player behavior.
 From sign in, the webcheckers mainly revolves around the relationship between the player, server, and the checkerboard.
@@ -86,13 +86,14 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](swen261astatechart.png)
+![The WebCheckers Web Interface Statechart](swen261astatechart (2).png)
 
 > This statechart shows all possible states that the user web interface can be in. From no connection to signin, to playing games,
 the HTTP verbs between states show how each view interacts with eachother. The flow of states clearly indicate predictive and deterministic
 manners of players, accounting for potential errors when navigating the pages.
 
 ### UI Tier
+![GetGameRoute Sequence Diagram](swen261asequence.png)
 The UI tier is majorly comprised of routes and their functionality dependent on the route handlers. 
 The majority of the time spent in the application will be on the Gethomeroute which handles situations where the home page is triggered.
 From homepage, getsigninroute will render a sign in page with a text prompt which is sent to postsigninroute to see if user successfully logged
