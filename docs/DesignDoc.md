@@ -52,7 +52,7 @@ Creating a spectator mode, where others can spectate other ongoing games.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](swen261adomainanalysis.png)
+![The WebCheckers Domain Model](Swen261adomainanalysis.png)
 
 > The domain model shows the relationship between the application domain and player behavior.
 From sign in, the webcheckers mainly revolves around the relationship between the player, server, and the checkerboard.
@@ -86,7 +86,7 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](swen261astatechart(2).png)
+![The WebCheckers Web Interface Statechart](swen261statechart.png)
 
 > This statechart shows all possible states that the user web interface can be in. From no connection to signin, to playing games,
 the HTTP verbs between states show how each view interacts with eachother. The flow of states clearly indicate predictive and deterministic
