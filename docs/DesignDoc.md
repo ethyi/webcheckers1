@@ -123,9 +123,7 @@ Move is created to parse user input on the board and is essential for checking f
 Lastly, checkersGame holds the necesarry attributes for the GameView, and is the highest level entity that holds the Board. Thus, in acoordance to its hierarchy, it is stored in GameCenter.
 
 ### Design Improvement
-The most important design improvement we need to make is to have lower coupling. There are too many dependencies between classes especially in the model tier.
-Too many higher level classes are being passed in the constructor of lower level classes. If a more rigid hierarchy is established, there will be lower coupling,
-and more classes with higher cohesion. 
+The most important design improvement we could've made was information expert. Too much information and functionality in the model tier was passed into the UI tiers and thus, there would be too many dependencies. Better implementation of information expert would've created more cohesive classes which would've been easier to unit test in the long run.
 
 ## Testing
 
@@ -136,5 +134,5 @@ and more classes with higher cohesion.
 
 For each class in each of the tiers, we created unit tests. Each of these tests have seams and mock dependencies so that the unit tests could be written 
 without having to instantiate many new objects. 
-Unfortunately because our classes didn't obey information expert well, our unit tests were hard to write since it was difficult to keep track of the information the classes depended on. Due to this, our coverage in the UI was poor, likely because that was the focus of sprint 2. Otherwise, model and application tier hit their targets
+Unfortunately because our classes didn't obey information expert well, our unit tests were hard to write since it was difficult to keep track of the information the classes depended on. Due to this, our coverage in the UI was poor since information from the model tiers were present there. Otherwise, model and application tier hit their targets
 of at least 85%.
