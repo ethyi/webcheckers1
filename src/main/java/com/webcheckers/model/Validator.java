@@ -121,6 +121,7 @@ public class Validator {
      * @return is there a forced jump?
      */
     public boolean forceJump() {
+        /**
         for(int row = 0; row <= 7; row++) {
             for(int col = 0; col <= 7; col++) {
                 Position p = new Position(row, col);
@@ -132,22 +133,10 @@ public class Validator {
             }
         }
         return false;
+         */
+        return boardObj.hasJump(activeColor);
     }
 
-    public boolean hasRegularMove() {
-        for(int row = 0; row <= 7; row++) {
-            for(int col = 0; col <= 7; col++) {
-                Position p = new Position(row, col);
-                if (!boardObj.getSpace(p).isEmpty() && boardObj.getSpace(p).getPiece().getColor() == activeColor) {
-                    if (boardObj.canRegularMove(p)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-
-    }
 
 
     /**

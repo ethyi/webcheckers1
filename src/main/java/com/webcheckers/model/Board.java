@@ -110,6 +110,21 @@ public class Board {
 
     }
 
+    public boolean hasJump(Piece.Color color) {
+        for(int row = 0; row <= 7; row++) {
+            for(int col = 0; col <= 7; col++) {
+                Position p = new Position(row, col);
+                if (!getSpace(p).isEmpty() && getSpace(p).getPiece().getColor() == color) {
+                    if (canJump(p)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
     /**
      * Changes board according to move being made.
      *

@@ -64,11 +64,13 @@ public class CheckersGame {
         validator.switchActiveColor();
     }
     public GameOver gameState(){
-        if (!board.hasPiecesLeft(Piece.Color.RED) || !board.hasRegularMove(Piece.Color.RED)){
+        if (!board.hasPiecesLeft(Piece.Color.RED) || (!board.hasRegularMove(Piece.Color.RED) &&
+        !board.hasJump(Piece.Color.RED) && activeColor == Piece.Color.RED)) {
             isGameOver =true;
             return GameOver.RED_LOSS;
         }
-        else if(!board.hasPiecesLeft(Piece.Color.WHITE) || !board.hasRegularMove(Piece.Color.WHITE)){
+        else if(!board.hasPiecesLeft(Piece.Color.WHITE) || (!board.hasRegularMove(Piece.Color.WHITE) &&
+                !board.hasJump(Piece.Color.WHITE) && activeColor == Piece.Color.WHITE)) {
             isGameOver =true;
             return GameOver.RED_WIN;
         }
