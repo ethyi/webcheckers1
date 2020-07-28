@@ -94,11 +94,35 @@ public class GetGameRoute implements Route {
         if (opponent.isResign()) {
             modeOptions.put("isGameOver", true);
             modeOptions.put("gameOverMessage", opponent.getName() + " has resigned");
-            gameCenter.removeGame(player.getGameID());
+            //gameCenter.removeGame(player.getGameID());
             opponent.setResign(false);
             player.setChallenged(false,null);
             player.setID(null);
         }
+
+        if (checkersGame.gameState()!= CheckersGame.GameOver.ONGOING){
+            modeOptions.put("isGameOver", true);
+            if (checkersGame.gameState()== CheckersGame.GameOver.RED_WIN){
+                if (checkersGame.getRedPlayer().equals(player)){
+                    modeOptions.put("gameOverMessage", "You have won!");
+                }
+                else{
+                    modeOptions.put("gameOverMessage", "You have lost.");
+                }
+            }
+            else{
+                if (checkersGame.getRedPlayer().equals(player)){
+                    modeOptions.put("gameOverMessage", "You have lost.");
+                }
+                else{
+                    modeOptions.put("gameOverMessage", "You have won!");
+                }
+            }
+            // HAVENT REMOVED GAME FROM GAMECENTER
+            player.setChallenged(false,null);
+            player.setID(null);
+        }
+
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");

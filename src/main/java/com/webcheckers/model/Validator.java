@@ -35,18 +35,7 @@ public class Validator {
         return boardObj;
     }
 
-    public static boolean hasPiecesLeft(Piece.Color color) {
-        for (int i = 0; i <= 7; i++) {
-            for (int j = 0; j <= 7; j++) {
-                if (!board.get(i).getSpaces().get(j).isEmpty() && board.get(i)
-                        .getSpaces().get(j).getPiece().getColor() == color) {
-                    return true;
-                }
-            }
-        }
-        return false;
 
-    }
 
     /**
      * Checks if the move is placed on an empty space

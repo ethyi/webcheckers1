@@ -93,6 +93,18 @@ public class Board {
         return lastMove;
     }
 
+    public boolean hasPiecesLeft(Piece.Color color) {
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j <= 7; j++) {
+                if (!board.get(i).getSpaces().get(j).isEmpty() && board.get(i)
+                        .getSpaces().get(j).getPiece().getColor() == color) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
     /**
      * Changes board according to move being made.
      * @param move Move to be made
