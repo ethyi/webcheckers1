@@ -14,6 +14,7 @@ public class CheckersGame {
     private Piece.Color activeColor;
     private Board board;
     private Validator validator;
+
     /**
      * Create checkers data object
      * @param id game id
@@ -26,12 +27,13 @@ public class CheckersGame {
         this.whitePlayer = white;
         this.activeColor = Piece.Color.RED;
         this.board = new Board();
-        this.validator = new Validator(this.board.getBoard());
+        this.validator = new Validator(this.board);
+
+    }
+    public enum GameOver {
+        ONGOING, RED_WIN, RED_LOSS
     }
 
-    public Validator getValidator() {
-        return this.validator;
-    }
     public Board getBoard(){
         return board;
     }
@@ -48,6 +50,10 @@ public class CheckersGame {
         return activeColor;
     }
 
+    public Validator getValidator() {
+        return validator;
+    }
+
     public void switchActiveColor(){
         if (activeColor.equals(Piece.Color.RED)){
             activeColor = Piece.Color.WHITE;
@@ -55,8 +61,20 @@ public class CheckersGame {
         else{
             activeColor = Piece.Color.RED;
         }
+        validator.switchActiveColor();
     }
+    public GameOver gameState(){
+        if (!board.hasPiecesLeft(Piece.Color.RED)){
+            return GameOver.RED_LOSS;
+        }
+        else if(!board.hasPiecesLeft(Piece.Color.WHITE)){
+            return GameOver.RED_WIN;
+        }
+        else{
+            return GameOver.ONGOING;
+        }
 
+    }
 
     @Override
     public boolean equals( Object obj){

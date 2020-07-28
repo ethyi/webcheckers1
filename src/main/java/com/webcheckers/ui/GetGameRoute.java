@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.*;
+import com.webcheckers.util.Message;
 import spark.*;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import com.webcheckers.model.Player;
 import com.webcheckers.appl.PlayerLobby;
+import com.google.gson.Gson;
 
 import static spark.Spark.halt;
 
@@ -40,7 +42,6 @@ public class GetGameRoute implements Route {
         this.lobby = gameCenter.getLobby();
         LOG.config("GetGameRoute is initialized.");
     }
-
 
     public enum mode {
         PLAY,
@@ -91,22 +92,45 @@ public class GetGameRoute implements Route {
             otherPlayer.setChallenged(true,player);
 
         }
-        final CheckersGame checkers = gameCenter.getGame(gameID);
+        final CheckersGame checkersGame = gameCenter.getGame(gameID);
 
-        if (checkers.getRedPlayer().equals(player)){
-            boardView = new BoardView(checkers.getBoard(), Piece.Color.RED);
+        if (checkersGame.getRedPlayer().equals(player)){
+            boardView = new BoardView(checkersGame.getBoard(), Piece.Color.RED);
 
         }
         else{
-            boardView = new BoardView(checkers.getBoard(), Piece.Color.WHITE);
+            boardView = new BoardView(checkersGame.getBoard(), Piece.Color.WHITE);
 
         }
         final Player opponent = player.getChallenger();
         if (opponent.isResign()) {
             modeOptions.put("isGameOver", true);
             modeOptions.put("gameOverMessage", opponent.getName() + " has resigned");
-            gameCenter.removeGame(player.getGameID());
+            //gameCenter.removeGame(player.getGameID());
             opponent.setResign(false);
+            player.setChallenged(false,null);
+            player.setID(null);
+        }
+
+        if (checkersGame.gameState()!= CheckersGame.GameOver.ONGOING){
+            modeOptions.put("isGameOver", true);
+            if (checkersGame.gameState()== CheckersGame.GameOver.RED_WIN){
+                if (checkersGame.getRedPlayer().equals(player)){
+                    modeOptions.put("gameOverMessage", "You have won!");
+                }
+                else{
+                    modeOptions.put("gameOverMessage", "You have lost.");
+                }
+            }
+            else{
+                if (checkersGame.getRedPlayer().equals(player)){
+                    modeOptions.put("gameOverMessage", "You have lost.");
+                }
+                else{
+                    modeOptions.put("gameOverMessage", "You have won!");
+                }
+            }
+            // HAVENT REMOVED GAME FROM GAMECENTER
             player.setChallenged(false,null);
             player.setID(null);
         }
@@ -119,9 +143,9 @@ public class GetGameRoute implements Route {
         vm.put("board", boardView);
         vm.put("viewMode",mode.PLAY);
         vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
-        vm.put("redPlayer",checkers.getRedPlayer());
-        vm.put("whitePlayer",checkers.getWhitePlayer());
-        vm.put("activeColor",checkers.getActiveColor());
+        vm.put("redPlayer", checkersGame.getRedPlayer());
+        vm.put("whitePlayer", checkersGame.getWhitePlayer());
+        vm.put("activeColor", checkersGame.getActiveColor());
 
         return templateEngine.render(new ModelAndView(vm , "game.ftl"));
 

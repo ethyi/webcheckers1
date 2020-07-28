@@ -3,14 +3,16 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.CheckersGame;
-import com.webcheckers.model.Move;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.Session;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class PostBackupMove implements Route {
 
@@ -27,9 +29,30 @@ public class PostBackupMove implements Route {
         Session session = request.session();
         Player player = session.attribute("currentPlayer");
         CheckersGame game = gameCenter.getGame(player.getGameID());
-        Move reverseMove = game.getBoard().getLastMove();
-        reverseMove.reverseMove();
-        game.getBoard().MovePiece(reverseMove);
+        Board board = game.getBoard();
+        Move lastMove = board.getLastMove();
+        if(!lastMove.isJumpMove()) {
+            lastMove.reverseMove();
+            board.MovePiece(lastMove);
+        } else {
+            List<Position> positions = board.getPositions();
+            List<PiecePair> captured = board.getCaptured();
+            Position lastPosition = positions.get(positions.size() - 1);
+
+            if (board.getLastReplaced() != null) {
+                board.removePiece(board.getLastReplaced());
+            }
+
+            Piece lastPiece = board.getLastMovedPiece();
+            board.removePiece(lastMove.getEnd());
+            board.placePiece(lastPosition, lastPiece);
+            board.setLastReplaced(lastPosition);
+
+            positions.remove(positions.size() - 1);
+            captured.remove(captured.size() - 1);
+
+        }
+
 
         Boolean backupSuccess = true;
         if (backupSuccess){
