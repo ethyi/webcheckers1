@@ -1,6 +1,7 @@
 package com.webcheckers.appl;
 
 import com.webcheckers.model.CheckersGame;
+import com.webcheckers.model.Validator;
 
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ public class GameCenter {
 
     private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
+    String gameId;
 
 
     /**
@@ -33,6 +35,14 @@ public class GameCenter {
 
     public synchronized   HashMap<String, CheckersGame> getGames() {
         return this.games;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
     public synchronized boolean contains(String id) {

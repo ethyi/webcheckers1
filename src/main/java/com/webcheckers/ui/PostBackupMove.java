@@ -10,10 +10,11 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * The UI controller that allows the user to backup their moves.
+ */
 public class PostBackupMove implements Route {
 
     private final Gson gson;
@@ -24,6 +25,12 @@ public class PostBackupMove implements Route {
         this.gameCenter = gameCenter;
     }
 
+    /**
+     *
+     * @param request Object used to pass state.
+     * @param response Object used to pass state.
+     * @return
+     */
     @Override
     public Object handle(Request request, Response response){
         Session session = request.session();

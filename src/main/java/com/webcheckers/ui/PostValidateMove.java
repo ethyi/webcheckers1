@@ -1,3 +1,9 @@
+/**
+ * Route that tests a move for validity before deciding whether to accept or reject the move.
+ * @author Ethan Yi
+ * @author Tony Jiang
+ * @author Aubrey Tarmu
+ */
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
@@ -10,18 +16,28 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 
-import java.util.List;
 
 public class PostValidateMove implements Route {
 
     private final Gson gson;
     private final GameCenter gameCenter;
 
+    /**
+     * Creates a new PostValidateMove route
+     * @param gson
+     * @param gameCenter
+     */
     public PostValidateMove(final Gson gson, final GameCenter gameCenter){
         this.gson = gson;
         this.gameCenter = gameCenter;
     }
 
+    /**
+     * Handles the move validation.
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     public Object handle(Request request, Response response){
         Session session = request.session();

@@ -62,7 +62,8 @@ define(function(require){
    */
   StartingSpectatorModeState.prototype._initializeView = function _initializeView() {
     // Create helper text
-    let helperText = `${this._gameState.getRedPlayer()}, Red, is playing ${this._gameState.getWhitePlayer()}. <br/><br/>`;
+    let helperText = `${this._gameState.getRedPlayer()}, Red, is already playing ${this._gameState.getWhitePlayer()}.
+ You are now spectating. <br/><br/>`;
     if (this._gameState.isGameOver()) {
       helperText += `<b> ${this._gameState.getGameOverMessage()} </b>`;
     } else {

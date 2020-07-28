@@ -1,8 +1,17 @@
+
+/**
+ * Validator class that checks moves made for validity
+ * @author Tony Jiang
+ * @author Ethan Yi
+ * @author Aubrey Tarmu
+ */
+
 package com.webcheckers.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
 
 public class Validator {
 
@@ -11,14 +20,25 @@ public class Validator {
     public static List<Row> board;
 
 
+    /**
+     * Creates a new validator
+     * @param board The board object necessary for validation checks
+     */
     public Validator(Board board) {
         this.boardObj = board;
         this.board = board.getBoard();
     }
+
+    /**
+     * Types of moves the validator catches
+     */
     public enum moveType {
         VALID, INVALID, WRONG_DIRECTION, NEED_TO_JUMP, MULTI_JUMP;
     }
 
+    /**
+     * Sets the active color to the other player's color.
+     */
     public void switchActiveColor() {
         if (this.activeColor == Piece.Color.RED) {
             this.activeColor = Piece.Color.WHITE;
@@ -27,10 +47,17 @@ public class Validator {
         }
     }
 
+    /**
+     * Gets the current player's color
+     * @return The current player's color
+     */
     public Piece.Color getActiveColor() {
         return this.activeColor;
     }
 
+    /**
+     * @return The Board object associated with the game this validator is a part of.
+     */
     public Board getBoard() {
         return boardObj;
     }
@@ -85,8 +112,6 @@ public class Validator {
                 if (space.getPiece().getColor() != piece.getColor()) {
                     valid = true;
                 }
-            } else {
-                System.out.println("jumping air!");
             }
         }
         return valid;
@@ -95,7 +120,7 @@ public class Validator {
 
     /**
      * Checks if the player has a jump available.
-     * @return
+     * @return is there a forced jump?
      */
     public boolean forceJump() {
         for(int row = 0; row <= 7; row++) {
@@ -126,10 +151,11 @@ public class Validator {
 
     }
 
+
     /**
      * Checks all the conditions.
      * @param move
-     * @return
+     * @return the type of move that was made.
      */
     public moveType validateMove(Move move) {
         //boolean valid = hasPiecesLeft(board, Piece.Color.RED) && move.moveOnBoard() && isRightDirection(board, move) && isMoveEmptySpace(board, move) &&
@@ -197,15 +223,7 @@ public class Validator {
                 return moveType.NEED_TO_JUMP;
             }
         }
-        /**
-        if(legalMove) {
-            if (activeColor == Piece.Color.RED) {
-                activeColor = Piece.Color.WHITE;
-            } else {
-                activeColor = Piece.Color.RED;
-            }
-        }
-         */
+
         if(legalMove) {
             boardObj.setFlag(false);
             return moveType.VALID;

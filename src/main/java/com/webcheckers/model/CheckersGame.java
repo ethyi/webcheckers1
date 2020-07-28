@@ -13,8 +13,7 @@ public class CheckersGame {
     private Piece.Color activeColor;
     private Board board;
     private Validator validator;
-    private boolean multiFlag = false;
-
+    private boolean isGameOver;
     /**
      * Create checkers data object
      * @param id game id
@@ -34,6 +33,7 @@ public class CheckersGame {
         ONGOING, RED_WIN, RED_LOSS
     }
 
+    /**Getters/Setters for the CheckersGame attributes */
     public Board getBoard(){
         return board;
     }
@@ -54,8 +54,6 @@ public class CheckersGame {
         return validator;
     }
 
-
-
     public void switchActiveColor(){
         if (activeColor.equals(Piece.Color.RED)){
             activeColor = Piece.Color.WHITE;
@@ -66,16 +64,22 @@ public class CheckersGame {
         validator.switchActiveColor();
     }
     public GameOver gameState(){
-        if (!board.hasPiecesLeft(Piece.Color.RED)){
+        if (!board.hasPiecesLeft(Piece.Color.RED) || !board.hasRegularMove(Piece.Color.RED)){
+            isGameOver =true;
             return GameOver.RED_LOSS;
         }
-        else if(!board.hasPiecesLeft(Piece.Color.WHITE)){
+        else if(!board.hasPiecesLeft(Piece.Color.WHITE) || !board.hasRegularMove(Piece.Color.WHITE)){
+            isGameOver =true;
             return GameOver.RED_WIN;
         }
         else{
             return GameOver.ONGOING;
         }
 
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
     }
 
     @Override

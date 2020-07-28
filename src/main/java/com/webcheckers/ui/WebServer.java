@@ -72,7 +72,11 @@ public class WebServer {
   public static final String CHECK_TURN_URL = "/checkTurn";
 
   public static final String RESIGN_URL = "/resignGame";
+  public static final String SPECTATE_URL = "/spectator/game";
 
+  public static final String SPECTATE_CHECKTURN_URL = "/spectator/checkTurn";
+  public static  final String loremImpsum ="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at eros felis. Suspendisse enim ipsum, semper ac pharetra id, blandit at nulla. Sed et commodo justo, sit amet euismod odio. Mauris nec leo vel nulla egestas congue at id dui. Fusce imperdiet ipsum vitae erat sodales placerat. Morbi consequat non orci at hendrerit. Praesent id euismod felis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed urna nulla, gravida ut enim vel, gravida placerat ipsum. Sed metus sem, porttitor eu sem eu, bibendum lobortis enim.";
+  private static final String EXIT_URL = "/spectator/stopWatching";
   //
   // Attributes
   //
@@ -162,12 +166,16 @@ public class WebServer {
     get(SIGNIN_URL, new GetSigninRoute(templateEngine));
     post(SIGNIN_URL, new PostSigninRoute(templateEngine, gameCenter));
     post(SIGNOUT_URL, new PostSignOutRoute(templateEngine,gameCenter));
-    get(GAME_URL, new GetGameRoute(templateEngine, gson, gameCenter));
+    get(GAME_URL, new GetGameRoute(templateEngine,gson, gameCenter));
     post(VALIDATE_URL, new PostValidateMove(gson, gameCenter));
-    post(RESIGN_URL, new PostResignGame(gson, gameCenter));
+    post(RESIGN_URL, new PostResignGame(gson,gameCenter));
     post(SUBMIT_URL, new PostSubmitTurn(gson, gameCenter));
     post(CHECK_TURN_URL, new PostCheckTurn(gson,gameCenter));
-    post(BACKUP_URL, new PostBackupMove(gson, gameCenter));
+    post(BACKUP_URL, new PostBackupMove(gson,gameCenter));
+    get(SPECTATE_URL, new GetSpectate(templateEngine,gameCenter));
+    get(EXIT_URL, new GetExitRoute(gson));
+    post(SPECTATE_CHECKTURN_URL, new PostSpectateCheckTurn(gson,gameCenter));
+
 
     LOG.config("WebServer is initialized.");
   }

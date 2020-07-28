@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+
 /**
  * Board entity that holds board data.
+ *
  * @author Tony Jiang
  * @author Ethan Yi
  * @author Aubrey Tarmu
- *
  */
 public class Board {
     private List<Row> board;
@@ -49,17 +50,17 @@ public class Board {
      */
     public void setupBoard() {
         boolean valid = false;
-        for(int i =0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             board.add(new Row(i, valid, Piece.Color.WHITE));
             valid = !valid;
         }
 
-        for(int j = 3; j < 5; j++) {
+        for (int j = 3; j < 5; j++) {
             board.add(new Row(j, valid));
             valid = !valid;
         }
 
-        for(int i =5; i<8; i++) {
+        for (int i = 5; i < 8; i++) {
             board.add(new Row(i, valid, Piece.Color.RED));
             valid = !valid;
         }
@@ -67,10 +68,11 @@ public class Board {
 
     /**
      * this will get a piece at a specific Position
+     *
      * @param position
      * @return
      */
-    public Space getSpace(Position position){
+    public Space getSpace(Position position) {
         return board.get(position.getRow()).getASpace(position.getCell());
     }
 
@@ -80,6 +82,7 @@ public class Board {
 
     /**
      * returns Iterable board
+     *
      * @return board as List of rows
      */
     public List<Row> getBoard() {
@@ -88,9 +91,10 @@ public class Board {
 
     /**
      * returns the last move made
+     *
      * @return the last move
      */
-    public Move getLastMove(){
+    public Move getLastMove() {
         return lastMove;
     }
 
@@ -106,8 +110,10 @@ public class Board {
         return false;
 
     }
+
     /**
      * Changes board according to move being made.
+     *
      * @param move Move to be made
      */
     public void MovePiece(Move move) {
@@ -120,7 +126,7 @@ public class Board {
         this.lastMovedPiece = startSpace.getPiece();
         Space endSpace = getSpace(end);
 
-        if(move.isJumpMove()) {
+        if (move.isJumpMove()) {
             captured.add(new PiecePair(move.getJumped(), getSpace(move.getJumped()).getPiece()));
         }
         endSpace.setPiece(startSpace.getPiece());
@@ -140,13 +146,31 @@ public class Board {
         this.lastReplaced = null;
     }
 
+    /**
+     * Checks if there's a regular move available.
+     * @return is there a regular move?
+     */
+    public boolean hasRegularMove(Piece.Color color) {
+        for(int row = 0; row <= 7; row++) {
+            for(int col = 0; col <= 7; col++) {
+                Position p = new Position(row, col);
+                if (!getSpace(p).isEmpty() && getSpace(p).getPiece().getColor() == color) {
+                    if (canRegularMove(p)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+
+    }
+
 
     @Override
-    public boolean equals( Object obj){
-        if(obj==this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
-        }
-        else if (obj == null){
+        } else if (obj == null) {
             return false;
         }
         Board object = (Board) obj;
@@ -156,23 +180,25 @@ public class Board {
 
     /**
      * Checks if the destination is clear and the jumped piece is an opposing piece.
+     *
      * @param destination the destination Space
-     * @param jumped the piece that's jumped
-     * @param color the color that the jumped piece has to be different from.
+     * @param jumped      the piece that's jumped
+     * @param color       the color that the jumped piece has to be different from.
      * @return
      */
     public boolean jumpHelperTest(Space destination, Space jumped, Piece.Color color) {
 
-        if (destination == null || jumped ==  null) {
+        if (destination == null || jumped == null) {
             return false;
         }
-        return(destination.isEmpty() && !jumped.isEmpty()
+        return (destination.isEmpty() && !jumped.isEmpty()
                 && jumped.getPiece().getColor() != color);
 
     }
 
     /**
      * Checks if there as a jump at a position.
+     *
      * @param p Position to be checked
      * @return is there a jump available?
      */
@@ -181,7 +207,7 @@ public class Board {
         int row = p.getRow();
         int cell = p.getCell();
         Piece piece = startSpace.getPiece();
-        Piece.Color pieceColor = startSpace.getPiece().getColor();
+        Piece.Color pieceColor = piece.getColor();
 
         Space upperLeftSpace = null;
         Space upperLeftMiddle = null;
@@ -237,104 +263,123 @@ public class Board {
                     jumpHelperTest(upperLeftSpace, upperLeftMiddle, pieceColor) ||
                     jumpHelperTest(lowerRightSpace, lowerRightMiddle, pieceColor) ||
                     jumpHelperTest(upperRightSpace, upperRightMiddle, pieceColor);
-             }
+        }
+    }
+
+    /**
+     * Checks if there's a regular jump available at a position p
+     *
+     * @param p The position being tested
+     * @return Is there a regular move available?
+     */
+    public boolean canRegularMove(Position p) {
+        Space startSpace = getSpace(p);
+        Piece piece = startSpace.getPiece();
+        int row = p.getRow();
+        int cell = p.getCell();
+
+        Space upperLeftMiddle = null;
+        Space upperRightMiddle = null;
+        Space lowerLeftMiddle = null;
+        Space lowerRightMiddle = null;
+
+        if (row - 1 >= 0 && cell - 1 >= 0) {
+            upperLeftMiddle = getSpace(new Position(row - 1, cell - 1));
+        }
+        if (row - 1 >= 0 && cell + 1 <= 7) {
+            upperRightMiddle = getSpace(new Position(row - 1, cell + 1));
+        }
+        if (row + 1 <= 7 && cell - 1 >= 0) {
+            lowerLeftMiddle = getSpace(new Position(row + 1, cell - 1));
+        }
+        if (row + 1 <= 7 && cell + 1 <= 7) {
+            lowerRightMiddle = getSpace(new Position(row + 1, cell + 1));
         }
 
-        public boolean canRegularMove(Position p) {
-            Space startSpace = getSpace(p);
-            Piece piece = startSpace.getPiece();
-            int row = p.getRow();
-            int cell = p.getCell();
-
-            Space upperLeftMiddle = null;
-            Space upperRightMiddle = null;
-            Space lowerLeftMiddle = null;
-            Space lowerRightMiddle = null;
-
-            if (row - 1 >= 0 && cell - 1 >= 0) {
-                upperLeftMiddle = getSpace(new Position(row - 1, cell - 1));
-            }
-            if (row - 1 >= 0 && cell + 1 <= 7) {
-                upperRightMiddle = getSpace(new Position(row - 1, cell + 1));
-            }
-            if (row + 1 <= 7 && cell - 1 >= 0) {
-                lowerLeftMiddle = getSpace(new Position(row + 1, cell - 1));
-            }
-            if (row + 1 <= 7 && cell + 1 <= 7) {
-                lowerRightMiddle = getSpace(new Position(row + 1, cell + 1));
-            }
-
-            if(!piece.isAKing()) {
-                if(piece.getColor() == Piece.Color.RED) {
-                    return (regHelperTest(upperLeftMiddle) || regHelperTest(upperRightMiddle));
-                } else {
-                    return (regHelperTest(lowerLeftMiddle) || regHelperTest(lowerRightMiddle));
-                }
-
+        if (!piece.isAKing()) {
+            if (piece.getColor() == Piece.Color.RED) {
+                return (regHelperTest(upperLeftMiddle) || regHelperTest(upperRightMiddle));
             } else {
-                return(regHelperTest(upperLeftMiddle) || regHelperTest(upperRightMiddle) ||
-                        regHelperTest(lowerLeftMiddle) || regHelperTest(lowerRightMiddle));
+                return (regHelperTest(lowerLeftMiddle) || regHelperTest(lowerRightMiddle));
             }
 
-        }
-
-        public boolean regHelperTest(Space space) {
-            if(space == null) {
-                return false;
-            }
-            return space.isEmpty();
-        }
-
-        public boolean getFlag() {
-            return this.multiFlag;
-        }
-
-        public void setFlag(boolean b) {
-            multiFlag = b;
-        }
-
-
-
-        public void removePiece(Position position) {
-            int row = position.getRow();
-            int col = position.getCell();
-            board.get(row).getASpace(col).setSpaceEmpty();
-        }
-
-        public Piece getPiece(Position position) {
-            int row = position.getRow();
-            int col = position.getCell();
-            return board.get(row).getASpace(col).getPiece();
-        }
-
-        public void printBoard() {
-            for(int i = 0; i <= 7; i++) {
-                for(int j = 0; j <= 7; j++) {
-                    Space space = getSpace(new Position(i, j));
-                    if(space.isEmpty()) {
-                        System.out.print("[ ]");
-                    } else {
-                        Piece piece = space.getPiece();
-                        if(!piece.isAKing()) {
-                            if(piece.getColor() == Piece.Color.RED) {
-                                System.out.print("[R]");
-                            } else {
-                                System.out.print("[W]");
-                            }
-                        } else {
-                            if(piece.getColor() == Piece.Color.RED) {
-                                System.out.print("[K]");
-                            } else {
-                                System.out.print("[k]");
-                            }
-                        }
-                    }
-                 }
-                System.out.println();
-            }
+        } else {
+            return (regHelperTest(upperLeftMiddle) || regHelperTest(upperRightMiddle) ||
+                    regHelperTest(lowerLeftMiddle) || regHelperTest(lowerRightMiddle));
         }
 
     }
+
+    /**
+     * Helper function to check if a space is empty
+     *
+     * @param space the space being checked
+     * @return Is the space empty?
+     */
+    public boolean regHelperTest(Space space) {
+        if (space == null) {
+            return false;
+        }
+        return space.isEmpty();
+    }
+
+    /**
+     * Flag to check if backup was made
+     * @return Was a backup made?
+     */
+    public boolean getFlag() {
+        return this.multiFlag;
+    }
+
+    /**
+     * Sets the backup flag
+     * @param b the boolean the backup flag is being set to
+     */
+    public void setFlag(boolean b) {
+        multiFlag = b;
+    }
+
+    /**
+     * Removes a piece from the board at a given position
+     * @param position The position at which the piece is being removed from
+     */
+    public void removePiece(Position position) {
+        int row = position.getRow();
+        int col = position.getCell();
+        board.get(row).getASpace(col).setSpaceEmpty();
+    }
+
+    /**
+     * Prints the board to the console. Used for testing purposes.
+     */
+    public void printBoard() {
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j <= 7; j++) {
+                Space space = getSpace(new Position(i, j));
+                if (space.isEmpty()) {
+                    System.out.print("[ ]");
+                } else {
+                    Piece piece = space.getPiece();
+                    if (!piece.isAKing()) {
+                        if (piece.getColor() == Piece.Color.RED) {
+                            System.out.print("[R]");
+                        } else {
+                            System.out.print("[W]");
+                        }
+                    } else {
+                        if (piece.getColor() == Piece.Color.RED) {
+                            System.out.print("[K]");
+                        } else {
+                            System.out.print("[k]");
+                        }
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+
+}
 
 
 

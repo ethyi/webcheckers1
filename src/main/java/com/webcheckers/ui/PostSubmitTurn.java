@@ -1,3 +1,6 @@
+/**
+ * Class used to handle submitting a turn.
+ */
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
@@ -23,6 +26,7 @@ public class PostSubmitTurn implements Route {
         this.gson = gson;
         this.gameCenter = gameCenter;
     }
+
 
     @Override
     public Object handle(Request request, Response response){
