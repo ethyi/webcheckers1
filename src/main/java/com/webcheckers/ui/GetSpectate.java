@@ -16,6 +16,13 @@ import java.util.logging.Logger;
 
 import static spark.Spark.halt;
 
+/**
+ * The UI controller to get the spectate route
+ * @author Aubrey Tarmu
+ * @author Tony Jiang
+ * @author Ethan Yi
+ */
+
 public class GetSpectate implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;

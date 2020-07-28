@@ -33,6 +33,7 @@ public class CheckersGame {
         ONGOING, RED_WIN, RED_LOSS
     }
 
+    /**Getters/Setters for the CheckersGame attributes */
     public Board getBoard(){
         return board;
     }
@@ -63,11 +64,11 @@ public class CheckersGame {
         validator.switchActiveColor();
     }
     public GameOver gameState(){
-        if (!board.hasPiecesLeft(Piece.Color.RED)){
+        if (!board.hasPiecesLeft(Piece.Color.RED) || !board.hasRegularMove(Piece.Color.RED)){
             isGameOver =true;
             return GameOver.RED_LOSS;
         }
-        else if(!board.hasPiecesLeft(Piece.Color.WHITE)){
+        else if(!board.hasPiecesLeft(Piece.Color.WHITE) || !board.hasRegularMove(Piece.Color.WHITE)){
             isGameOver =true;
             return GameOver.RED_WIN;
         }

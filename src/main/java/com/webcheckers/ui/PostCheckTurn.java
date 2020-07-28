@@ -17,8 +17,14 @@ public class PostCheckTurn implements Route {
     public PostCheckTurn(final Gson gson, final GameCenter gameCenter){
             this.gson = gson;
             this.gameCenter = gameCenter;
-        }
+    }
 
+    /**
+     *
+      * @param request An object used to handle state
+     * @param response Another object used to handle state.
+     * @return An object representing a move.
+     */
     @Override
     public Object handle(Request request, Response response) {
         Session session = request.session();

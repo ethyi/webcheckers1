@@ -11,6 +11,11 @@ import spark.Response;
 import spark.Route;
 import spark.Session;
 
+/**
+ * The UI Controller that lets you resign a game
+ *
+ */
+
 public class PostResignGame implements Route {
 
     private final Gson gson;

@@ -3,18 +3,15 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.*;
-import com.webcheckers.util.Message;
 import spark.*;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 import com.webcheckers.model.Player;
 import com.webcheckers.appl.PlayerLobby;
-import com.google.gson.Gson;
-
 import static spark.Spark.halt;
+
 
 /**
  *The UI controller to post the game route.
@@ -23,7 +20,6 @@ import static spark.Spark.halt;
  * @author Aubrey Tarmu
  *
  */
-
 public class GetGameRoute implements Route {
     private static final Logger LOG = Logger.getLogger(com.webcheckers.ui.PostSigninRoute.class.getName());
     private final TemplateEngine templateEngine;
