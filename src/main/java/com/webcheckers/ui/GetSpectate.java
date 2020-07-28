@@ -33,7 +33,6 @@ public class GetSpectate implements Route {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = gameCenter;
         this.lobby = gameCenter.getLobby();
-        System.out.println("Game center id: "+gameCenter.getGameId());
         LOG.config("GetGameRoute is initialized.");
     }
 
@@ -59,9 +58,6 @@ public class GetSpectate implements Route {
 
         session.attribute(GetHomeRoute.IN_GAME, null);
 
-        System.out.println();
-        System.out.println(player.getName());
-        System.out.println(player.getGameID());
         final CheckersGame checkers = gameCenter.getGame(player.getGameID());
 
 

@@ -49,7 +49,6 @@ class GetSpectateTest {
         Player c =session.attribute(CURRENT_PLAYER);
 
 
-        System.out.println(c);
         CuT = new GetSpectate(engine, gameCenter);
         assertEquals(request.session(),session);
 

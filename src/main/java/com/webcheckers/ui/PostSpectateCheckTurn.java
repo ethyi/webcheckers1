@@ -21,7 +21,6 @@ public class PostSpectateCheckTurn implements Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        System.out.println(WebServer.loremImpsum);
         Session session = request.session();
         Player player = session.attribute("currentPlayer");
         CheckersGame game = gameCenter.getGame(player.getGameID());

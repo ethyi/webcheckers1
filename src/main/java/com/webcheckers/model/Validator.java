@@ -164,14 +164,11 @@ public class Validator {
         move.setColor(activeColor);
         boolean validMoveType = move.isJumpMove() || move.isRegularMove();
         if(!validMoveType) {
-            System.out.println("flying!");
             return moveType.INVALID;
         }
 
         boolean validDirection = isRightDirection(move);
         if(!validDirection) {
-            System.out.println(this.activeColor);
-            System.out.println("Wrong direction");
             return moveType.WRONG_DIRECTION;
         }
 
@@ -186,9 +183,7 @@ public class Validator {
             Space jumpedSpace = boardObj.getSpace(jumped);
 
             Piece piece = startSpace.getPiece();
-            System.out.println(piece);
             Piece ghost = new Piece(piece.getType(), piece.getColor());
-            System.out.println(ghost);
             Piece jumpedPiece = jumpedSpace.getPiece();
 
             boardObj.placePiece(end, ghost);
@@ -200,8 +195,6 @@ public class Validator {
                 boardObj.removePiece(end);
                 boardObj.placePiece(start, piece);
                 boardObj.placePiece(jumped, jumpedPiece);
-
-                System.out.println("multi jump");
                 return moveType.MULTI_JUMP;
             }
 
@@ -219,7 +212,6 @@ public class Validator {
 
         if(!move.isJumpMove()) {
             if(forceJump()) {
-                System.out.println("NEED TO JUMP");
                 return moveType.NEED_TO_JUMP;
             }
         }

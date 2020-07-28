@@ -68,25 +68,6 @@ public class Piece {
         return this.type.toString() + ", " +  this.getColor().toString();
     }
 
-    /**
-     public  void jumpMove(Position endPos, Piece targetPiece){
-     normalMove(endPos);
-     targetPiece.removePiece();
-     }
-     */
-
-    /**
-     public  void normalMove(Position endPos){
-     Space nextSpace = gameboard.getSpace(endPos.getRow(),endPos.getCell());
-     space.setSpaceEmpty();
-     nextSpace.setPiece(this);
-     //  System.out.println(nextSpace.getPiece());
-     if(endPos.getRow()==0){
-     promote();
-     }
-
-     }
-     */
 
 
 

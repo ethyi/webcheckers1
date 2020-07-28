@@ -11,11 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class RowTest {
     private List<Space> space = new ArrayList<>();
     Row CuT= new Row(0,false, Piece.Color.RED);
+    
     @BeforeEach
     void setUp(){
-//        for(int i= 0;i<8;i++) {
-//              space.add(new Space(i,null,false,CuT));
-//        }
+        for(int i= 0;i<8;i++) {
+            space.add(new Space(i,null,false));
+        }
     }
     @Test
     void iterator() {
