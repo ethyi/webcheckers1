@@ -18,7 +18,6 @@ public class PostSubmitTurn implements Route {
     private final Gson gson;
     private final GameCenter gameCenter;
     private Message m;
-    private boolean turnValidity;
 
     public PostSubmitTurn(final Gson gson, final GameCenter gameCenter){
         this.gson = gson;
@@ -29,17 +28,19 @@ public class PostSubmitTurn implements Route {
     public Object handle(Request request, Response response){
         Session session = request.session();
         Player player = session.attribute("currentPlayer");
+        CheckersGame game = gameCenter.getGame(player.getGameID());
 
-        turnValidity = true;
-        if (turnValidity){
-            m = Message.info("VALID TURN");
-            CheckersGame game = gameCenter.getGame(player.getGameID());
-            Validator Validity = game.getValidator();
-            Move lastMove = game.getBoard().getLastMove();
+        Move lastMove = game.getBoard().getLastMove();
+
+
+        if (lastMove.isMultiJump()){
+            m = Message.error("You cannot stop in the middle of a multiple jump");
+        }
+        else{
+            m = Message.info("Valid Turn");
+
             Position end = lastMove.getEnd();
-
             Space endSpace = game.getBoard().getSpace(lastMove.getEnd());
-
             Piece piece = endSpace.getPiece();
 
             if (end.getRow() == 0 && piece.getColor() == Piece.Color.RED ||
@@ -56,15 +57,11 @@ public class PostSubmitTurn implements Route {
                 }
                 captured.clear();
             }
+            game.switchActiveColor();
             game.getBoard().reset();
+        }
 
-            if (!lastMove.isMultiJump()) {
-                game.switchActiveColor();
-            }
-        }
-        else{// more conditions of invalid turns
-            m = Message.error("INVALID TURN");
-        }
+
 
         return gson.toJson(m);
     }
