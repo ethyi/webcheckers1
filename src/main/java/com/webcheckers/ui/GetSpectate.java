@@ -65,12 +65,13 @@ public class GetSpectate implements Route {
         final CheckersGame checkers = gameCenter.getGame(player.getGameID());
 
 
-        Player redPlayer = checkers.getRedPlayer();
-        Player otherPlayer = checkers.getWhitePlayer();
         if(checkers.isGameOver()){
             response.redirect(WebServer.HOME_URL);
         }
-        //TODO make gameView synchronous, figure out iterator
+        if(!checkers.getRedPlayer().isChallenged()){
+            response.redirect(WebServer.HOME_URL);
+        }
+
         boardView =  new BoardView(checkers.getBoard(), Piece.Color.RED);
 
         Map<String, Object> vm = new HashMap<>();
