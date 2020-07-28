@@ -126,7 +126,6 @@ public class Validator {
 
     }
 
-
     /**
      * Checks all the conditions.
      * @param move
