@@ -51,7 +51,11 @@ public class PostBackupMove implements Route {
             positions.remove(positions.size() - 1);
             captured.remove(captured.size() - 1);
 
+            if(captured.size() == 0) {
+                board.setLastReplaced(null);
+            }
         }
+
 
 
         Boolean backupSuccess = true;
