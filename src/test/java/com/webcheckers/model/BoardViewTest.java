@@ -24,6 +24,13 @@ public class BoardViewTest {
         assertNotNull(CuT);
     }
 
+    @Test
+    public void inverseBoard() {
+        CuT.inverseBoard();
+        assertEquals(CuT.getBoard().size(), 8);
+        assertEquals(CuT.getBoard().get(1).getSpaces().size(), 8);
+
+    }
 
 
     @Test

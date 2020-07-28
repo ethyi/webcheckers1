@@ -45,10 +45,10 @@ public class BoardTest {
         assertTrue(CuT.hasPiecesLeft(Piece.Color.RED));
     }
 
-    /*@Test
-    void canJump(){
-        assertFalse(CuT.canJump(p));
-    }*/
+    @Test
+    void hasRegularMove(){
+        assertTrue(CuT.hasRegularMove(Piece.Color.RED));
+    }
 
     @Test
     void iteratorTest(){

@@ -9,8 +9,6 @@ class MoveTest {
     private Position start;
     private Position end;
 
-    private Piece.Color color;
-    private Player player;
     Move move;
     @BeforeEach
     void setUp(){

@@ -42,6 +42,12 @@ public class PlayerTester {
         assertEquals("x",Cut.getName());
     }
 
+    @Test
+    public void testResign() {
+        Cut.setResign(true);
+        assertEquals(Cut.isResign(), true);
+    }
+
 
     @Test
     public void hashCodeTest(){
