@@ -240,7 +240,7 @@ public class Board {
              }
         }
 
-        public void canRegularMove(Position p) {
+        public boolean canRegularMove(Position p) {
             Space startSpace = getSpace(p);
             Piece piece = startSpace.getPiece();
             int row = p.getRow();
@@ -265,7 +265,15 @@ public class Board {
             }
 
             if(!piece.isAKing()) {
+                if(piece.getColor() == Piece.Color.RED) {
+                    return (regHelperTest(upperLeftMiddle) || regHelperTest(upperRightMiddle));
+                } else {
+                    return (regHelperTest(lowerLeftMiddle) || regHelperTest(lowerRightMiddle));
+                }
 
+            } else {
+                return(regHelperTest(upperLeftMiddle) || regHelperTest(upperRightMiddle) ||
+                        regHelperTest(lowerLeftMiddle) || regHelperTest(lowerRightMiddle));
             }
 
         }

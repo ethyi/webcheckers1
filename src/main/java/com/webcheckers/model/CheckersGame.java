@@ -7,7 +7,6 @@ package com.webcheckers.model;
  *  * @author Aubrey Tarmu
  */
 public class CheckersGame {
-
     private String id;
     private Player redPlayer;
     private Player whitePlayer;
