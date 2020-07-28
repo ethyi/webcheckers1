@@ -1,8 +1,5 @@
 package com.webcheckers.model;
 
-//import javafx.geometry.Pos;
-
-import java.util.List;
 
 /**
  * Piece entity that holds each piece data

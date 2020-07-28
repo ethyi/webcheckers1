@@ -1,8 +1,5 @@
 package com.webcheckers.model;
 
-//import javafx.geometry.Pos;
-
-import java.util.List;
 /**
  * Move entity that holds a move being made
  *  * @author Tony Jiang

@@ -1,6 +1,5 @@
 package com.webcheckers.model;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 /**
