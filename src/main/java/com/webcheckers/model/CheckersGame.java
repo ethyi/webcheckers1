@@ -7,13 +7,13 @@ package com.webcheckers.model;
  *  * @author Aubrey Tarmu
  */
 public class CheckersGame {
-
     private String id;
     private Player redPlayer;
     private Player whitePlayer;
     private Piece.Color activeColor;
     private Board board;
     private Validator validator;
+    private boolean multiFlag = false;
 
     /**
      * Create checkers data object
@@ -53,6 +53,8 @@ public class CheckersGame {
     public Validator getValidator() {
         return validator;
     }
+
+
 
     public void switchActiveColor(){
         if (activeColor.equals(Piece.Color.RED)){

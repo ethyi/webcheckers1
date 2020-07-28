@@ -33,7 +33,7 @@ public class PostSubmitTurn implements Route {
         Move lastMove = game.getBoard().getLastMove();
 
 
-        if (lastMove.isMultiJump()){
+        if (lastMove.isMultiJump() || game.getBoard().getFlag()){
             m = Message.error("You cannot stop in the middle of a multiple jump");
         }
         else{
