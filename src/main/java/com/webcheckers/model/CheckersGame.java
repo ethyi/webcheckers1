@@ -14,7 +14,7 @@ public class CheckersGame {
     private Piece.Color activeColor;
     private Board board;
     private Validator validator;
-
+    boolean isGameOver;
     /**
      * Create checkers data object
      * @param id game id
@@ -65,15 +65,21 @@ public class CheckersGame {
     }
     public GameOver gameState(){
         if (!board.hasPiecesLeft(Piece.Color.RED)){
+            isGameOver =true;
             return GameOver.RED_LOSS;
         }
         else if(!board.hasPiecesLeft(Piece.Color.WHITE)){
+            isGameOver =true;
             return GameOver.RED_WIN;
         }
         else{
             return GameOver.ONGOING;
         }
 
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
     }
 
     @Override

@@ -47,27 +47,27 @@ public class GetSpectate implements Route {
     public Object handle(Request request, Response response) {
         LOG.finer("GetGameRoute is invoked.");
         final Session session = request.session();
-        String gameId = session.attribute("gameId");
+        Player player = session.attribute(GetHomeRoute.CURRENT_PLAYER);
+
+
         session.attribute(GetHomeRoute.IN_GAME, null);
-        final CheckersGame checkers = gameCenter.getGame((gameCenter.getGameId()));
-        Player player = checkers.getRedPlayer();
+
+        System.out.println();
+        System.out.println(player.getName());
+        System.out.println(player.getGameID());
+        final CheckersGame checkers = gameCenter.getGame(player.getGameID());
+
+        Player redPlayer = checkers.getRedPlayer();
         Player otherPlayer = checkers.getWhitePlayer();
-        boolean GameOver = false;
-        if(GameOver){
+        if(checkers.isGameOver()){
             response.redirect(WebServer.HOME_URL);
         }
         //TODO make gameView synchronous, figure out iterator
-        player.setID(gameId);
-        otherPlayer.setID(gameId);
-        player.setChallenged(true, otherPlayer);
-        otherPlayer.setChallenged(true,player);
         boardView =  new BoardView(checkers.getBoard(), Piece.Color.RED);
-
-
 
         Map<String, Object> vm = new HashMap<>();
         vm.put("title","Checkers");
-        vm.put("gameID", gameId);
+        vm.put("gameID", gameCenter.getGameId());
         vm.put("currentUser",player);
         vm.put("board", boardView);
         vm.put("viewMode", GetGameRoute.mode.SPECTATOR);

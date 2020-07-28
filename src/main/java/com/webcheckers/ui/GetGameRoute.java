@@ -67,20 +67,20 @@ public class GetGameRoute implements Route {
             String otherString = request.queryParams("challenger");
             final Player otherPlayer = lobby.getPlayer(otherString);
             session.attribute(GetHomeRoute.IN_GAME, null);
-            if(player.getGameID()==null) {
-                totalGames++;
-                gameID = Integer.toString(totalGames);
 
-            }
 
             if (otherPlayer.isChallenged()){
-                session.attribute("gameId",gameID);
+                player.setID(otherPlayer.getGameID());
                 session.attribute(GetHomeRoute.IN_GAME,"true");
                 response.redirect(WebServer.SPECTATE_URL);
                 halt();
                 return null;
             }
+            if(player.getGameID()==null) {
+                totalGames++;
+                gameID = Integer.toString(totalGames);
 
+            }
             CheckersGame temp = new CheckersGame(gameID,player, otherPlayer);
 
             gameCenter.addGame(temp);
