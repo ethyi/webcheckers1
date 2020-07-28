@@ -57,6 +57,7 @@ public class GetSpectate implements Route {
         System.out.println(player.getGameID());
         final CheckersGame checkers = gameCenter.getGame(player.getGameID());
 
+
         Player redPlayer = checkers.getRedPlayer();
         Player otherPlayer = checkers.getWhitePlayer();
         if(checkers.isGameOver()){
