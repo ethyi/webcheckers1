@@ -103,11 +103,7 @@ public class Validator {
                 Position p = new Position(row, col);
                 if (!boardObj.getSpace(p).isEmpty() && boardObj.getSpace(p).getPiece().getColor() == activeColor) {
                     if (boardObj.canJump(p)) {
-                        //System.out.println(row + ", " + col + " can jump!");
                         return true;
-                    } else {
-                        //System.out.println(row + ", " + col + " cant jump!");
-
                     }
                 }
             }
@@ -122,8 +118,6 @@ public class Validator {
                 if (!boardObj.getSpace(p).isEmpty() && boardObj.getSpace(p).getPiece().getColor() == activeColor) {
                     if (boardObj.canRegularMove(p)) {
                         return true;
-                    } else {
-
                     }
                 }
             }
