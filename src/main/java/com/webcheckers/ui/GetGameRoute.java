@@ -94,7 +94,7 @@ public class GetGameRoute implements Route {
         if (opponent.isResign()) {
             modeOptions.put("isGameOver", true);
             modeOptions.put("gameOverMessage", opponent.getName() + " has resigned");
-            gameCenter.removeGame(player.getGameID());
+            //gameCenter.removeGame(player.getGameID());
             opponent.setResign(false);
             player.setChallenged(false,null);
             player.setID(null);
@@ -118,7 +118,7 @@ public class GetGameRoute implements Route {
                     modeOptions.put("gameOverMessage", "You have won!");
                 }
             }
-            gameCenter.removeGame(player.getGameID());
+            // HAVENT REMOVED GAME FROM GAMECENTER
             player.setChallenged(false,null);
             player.setID(null);
         }
