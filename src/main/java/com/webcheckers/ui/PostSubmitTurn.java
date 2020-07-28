@@ -7,6 +7,10 @@ import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
 import spark.*;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static spark.Spark.halt;
 
 public class PostSubmitTurn implements Route {
@@ -44,8 +48,15 @@ public class PostSubmitTurn implements Route {
             }
 
             if(lastMove.isJumpMove()) {
-                game.getBoard().removePiece(lastMove.getJumped());
+                List<PiecePair> captured = game.getBoard().getCaptured();
+                for(int i = 0; i < captured.size(); i++) {
+                    PiecePair pair = captured.get(i);
+                    Position position = pair.getPosition();
+                    game.getBoard().removePiece(position);
+                }
+                captured.clear();
             }
+            game.getBoard().reset();
 
             if (!lastMove.isMultiJump()) {
                 game.switchActiveColor();
