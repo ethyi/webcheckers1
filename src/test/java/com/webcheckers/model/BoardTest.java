@@ -15,8 +15,7 @@ public class BoardTest {
 
     final Board CuT = new Board();
     private List<Position> positions = new ArrayList<>();
-    //private Positions
-
+    private Position p = new Position(1,1);
 
     /**
      * Checks if the board is null
@@ -31,10 +30,25 @@ public class BoardTest {
         assertEquals(positions, CuT.getPositions());
     }
 
-    //@Test
-    //void getLastReplaced(){
-    //    assertEquals();
-    //}
+    @Test
+    void getLastReplaced(){
+        CuT.setLastReplaced(p);
+        assertEquals(p, CuT.getLastReplaced());
+    }
+    @Test
+    void setLastReplaced(){
+        CuT.setLastReplaced(p);
+        assertEquals(p, CuT.getLastReplaced());
+    }
+    @Test
+    void hasPiecesLeft(){
+        assertTrue(CuT.hasPiecesLeft(Piece.Color.RED));
+    }
+
+    /*@Test
+    void canJump(){
+        assertFalse(CuT.canJump(p));
+    }*/
 
     @Test
     void iteratorTest(){

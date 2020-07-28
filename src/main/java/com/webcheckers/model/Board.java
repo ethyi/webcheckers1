@@ -207,7 +207,7 @@ public class Board {
         int row = p.getRow();
         int cell = p.getCell();
         Piece piece = startSpace.getPiece();
-        Piece.Color pieceColor = startSpace.getPiece().getColor();
+        Piece.Color pieceColor = piece.getColor();
 
         Space upperLeftSpace = null;
         Space upperLeftMiddle = null;

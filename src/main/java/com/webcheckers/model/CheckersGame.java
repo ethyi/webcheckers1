@@ -13,7 +13,7 @@ public class CheckersGame {
     private Piece.Color activeColor;
     private Board board;
     private Validator validator;
-    boolean isGameOver;
+    private boolean isGameOver;
     /**
      * Create checkers data object
      * @param id game id
