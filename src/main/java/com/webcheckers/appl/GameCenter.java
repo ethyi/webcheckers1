@@ -17,6 +17,11 @@ public class GameCenter {
     private HashMap<String, CheckersGame> games;
     private PlayerLobby lobby;
     String gameId;
+
+
+    /**
+     * Creates gamecenter which holds a map of all games and playerLobby
+     */
     public GameCenter(){
         this.games = new HashMap<>();
         this.lobby = new PlayerLobby();
@@ -27,7 +32,6 @@ public class GameCenter {
     public CheckersGame getGame(String id){
         return games.get(id);
     }
-
 
     public synchronized   HashMap<String, CheckersGame> getGames() {
         return this.games;
